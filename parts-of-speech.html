@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parts of Speech - Naija Study Hub</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f5f5;
+    color: #1E2723;
+}
+
+header {
+    background: linear-gradient(135deg, #123524 0%, #00814A 100%);
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+nav {
+    background: #0C2A1C;
+    padding: 15px 0;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 500;
+}
+
+nav a:hover {
+    color: #C88A2E;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.article-header {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.article-meta {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.article-tag {
+    background: #C88A2E;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.article-level {
+    background: #00814A;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.article-header h1 {
+    color: #123524;
+    font-size: 2em;
+    margin: 20px 0;
+}
+
+.article-content {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    line-height: 1.8;
+}
+
+.article-content h2 {
+    color: #00814A;
+    margin: 30px 0 15px 0;
+    font-size: 1.5em;
+    border-bottom: 3px solid #C88A2E;
+    padding-bottom: 10px;
+}
+
+.article-content h3 {
+    color: #123524;
+    margin: 25px 0 15px 0;
+    font-size: 1.2em;
+}
+
+.article-content p {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.article-content ul, .article-content ol {
+    margin: 20px 0 20px 30px;
+    color: #333;
+}
+
+.article-content li {
+    margin-bottom: 10px;
+}
+
+.highlight-box {
+    background: #EFE6D2;
+    padding: 20px;
+    border-left: 5px solid #C88A2E;
+    margin: 25px 0;
+    border-radius: 5px;
+}
+
+.example-box {
+    background: #f0f8f0;
+    padding: 20px;
+    border-left: 5px solid #00814A;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.example-box strong {
+    color: #00814A;
+}
+
+.part-of-speech {
+    background: white;
+    padding: 20px;
+    margin: 20px 0;
+    border-left: 5px solid #123524;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.part-of-speech h4 {
+    color: #00814A;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.revision-questions {
+    background: #f0f8f0;
+    padding: 25px;
+    border-radius: 10px;
+    margin: 30px 0;
+}
+
+.revision-questions h3 {
+    color: #00814A;
+    margin-bottom: 15px;
+}
+
+.revision-questions ol {
+    margin-left: 20px;
+}
+
+.revision-questions li {
+    margin-bottom: 12px;
+}
+
+.key-points {
+    background: #fff3cd;
+    padding: 20px;
+    border-left: 5px solid #C88A2E;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.key-points strong {
+    color: #856404;
+}
+
+footer {
+    background: #0C2A1C;
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 60px;
+}
+
+.back-link {
+    color: #00814A;
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 30px;
+    display: inline-block;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .article-content {
+        padding: 20px;
+    }
+    
+    .article-header h1 {
+        font-size: 1.4em;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>📚 Naija Study Hub</h1>
+    <p>Learn, Practice, Succeed</p>
+</header>
+
+<nav>
+    <a href="../index.html">Home</a>
+    <a href="../blog.html">All Articles</a>
+</nav>
+
+<div class="container">
+
+    <a href="../blog.html" class="back-link">← Back to All Articles</a>
+
+    <div class="article-header">
+        <div class="article-meta">
+            <span class="article-tag">Grammar</span>
+            <span class="article-level">Primary School</span>
+        </div>
+        <h1>Parts of Speech Explained</h1>
+        <p><strong>Master the Eight Parts of Speech with Examples and Exercises</strong></p>
+    </div>
+
+    <div class="article-content">
+
+        <h2>What are Parts of Speech?</h2>
+        <p>Parts of speech are the different types of words used in a sentence. Each word serves a specific purpose or function. Understanding parts of speech helps us write and speak correctly.</p>
+
+        <div class="highlight-box">
+            <strong>There are 8 main parts of speech:</strong> Nouns, Verbs, Adjectives, Adverbs, Pronouns, Prepositions, Conjunctions, and Interjections.
+        </div>
+
+        <h2>1. NOUNS</h2>
+        <div class="part-of-speech">
+            <h4>Definition:</h4>
+            <p>A word that names a person, place, thing, or idea.</p>
+            <p><strong>Examples:</strong> girl, Lagos, book, love, happiness, teacher, river, elephant</p>
+            <p><strong>In a sentence:</strong> <em>Chioma is a student.</em></p>
+        </div>
+
+        <h3>Types of Nouns:</h3>
+        <ul>
+            <li><strong>Proper Nouns:</strong> Names specific people or places (Always capitalized) - Nigeria, Lagos, Chike, Monday</li>
+            <li><strong>Common Nouns:</strong> General names - girl, country, day</li>
+            <li><strong>Collective Nouns:</strong> Names a group - family, team, class</li>
+            <li><strong>Abstract Nouns:</strong> Names ideas or feelings - love, courage, freedom</li>
+        </ul>
+
+        <h2>2. VERBS</h2>
+        <div class="part-of-speech">
+            <h4>Definition:</h4>
+            <p>A word that shows action or a state of being.</p>
+            <p><strong>Examples:</strong> run, walk, eat, sleep, is, are, become, seem</p>
+            <p><strong>In a sentence:</strong> <em>She runs to school.</em></p>
+        </div>
+
+        <div class="example-box">
+            <strong>Action Verbs:</strong> jump, dance, write, read<br>
+            <strong>Linking Verbs:</strong> is, are, am, was, were, be, become, seem
+        </div>
+
+        <h2>3. ADJECTIVES</h2>
+        <div class="part-of-speech">
+            <h4>Definition:</h4>
+            <p>A word that describes or modifies a noun. It tells us more about the noun.</p>
+            <p><strong>Examples:</strong> big, small, beautiful, red, happy, cold, lazy</p>
+            <p><strong>In a sentence:</strong> <em>She wore a blue dress.</em></p>
+        </div>
+
+        <div class="example-box">
+            <strong>Adjectives answering:</strong><br>
+            • What kind? → beautiful, big, small, sad<br>
+            • Which one? → this, that, these, those<br>
+            • How many? → many, few, some, several
+        </div>
+
+        <h2>4. ADVERBS</h2>
+        <div class="part-of-speech">
+            <h4>Definition:</h4>
+            <p>A word that describes or modifies a verb, adjective, or another adverb. It tells us how, when, where, or why something happens.</p>
+            <p><strong>Examples:</strong> quickly, slowly, today, yesterday, here, there, very, really</p>
+            <p><strong>In a sentence:</strong> <em>She ran quickly down the street.</em></p>
+        </div>
+
+        <div class="example-box">
+            <strong>Adverbs answering:</strong><br>
+            • How? → quickly, slowly, carefully, happily<br>
+            • When? → today, yesterday, tomorrow, now<br>
+            • Where? → here, there, outside, inside<br>
+            • To what extent? → very, really, quite, too
+        </div>
+
+        <h2>5. PRONOUNS</h2>
+        <div class="part-of-speech">
+            <h4>Definition:</h4>
+            <p>A word that takes the place of a noun to avoid repetition.</p>
+            <p><strong>Examples:</strong> I, you, he, she, it, we, they, me, him, her, us, them</p>
+            <p><strong>In a sentence:</strong> <em>Kofi is smart. He is smart.</em> (He replaces Kofi)</p>
+        </div>
+
+        <div class="example-box">
+            <strong>Personal Pronouns:</strong><br>
+            • Subject: I, you, he, she, it, we, they<br>
+            • Object: me, you, him, her, it, us, them
+        </div>
+
+        <h2>6. PREPOSITIONS</h2>
+        <div class="part-of-speech">
+            <h4>Definition:</h4>
+            <p>A word that shows the relationship between a noun and other words in the sentence. It shows position or direction.</p>
+            <p><strong>Examples:</strong> in, on, at, by, to, from, under, over, between, during</p>
+            <p><strong>In a sentence:</strong> <em>The book is on the table.</em></p>
+        </div>
+
+        <div class="example-box">
+            <strong>Common Prepositions:</strong><br>
+            in, on, at, by, to, from, under, over, between, through, during, before, after, above, below, beside, near, behind
+        </div>
+
+        <h2>7. CONJUNCTIONS</h2>
+        <div class="part-of-speech">
+            <h4>Definition:</h4>
+            <p>A word that joins words, phrases, or clauses together.</p>
+            <p><strong>Examples:</strong> and, but, or, because, if, while, although</p>
+            <p><strong>In a sentence:</strong> <em>I like football and basketball.</em></p>
+        </div>
+
+        <div class="example-box">
+            <strong>Common Conjunctions:</strong><br>
+            • And (adds ideas)<br>
+            • But (shows contrast)<br>
+            • Or (shows choice)<br>
+            • Because (shows reason)<br>
+            • If (shows condition)<br>
+            • Although (shows contrast)
+        </div>
+
+        <h2>8. INTERJECTIONS</h2>
+        <div class="part-of-speech">
+            <h4>Definition:</h4>
+            <p>A word or phrase that expresses strong emotion or surprise. It stands alone or is loosely connected to the sentence.</p>
+            <p><strong>Examples:</strong> Oh!, Wow!, Hey!, Ouch!, Yay!, Alas!, Help!</p>
+            <p><strong>In a sentence:</strong> <em>Oh! I didn't see you there.</em></p>
+        </div>
+
+        <h2>Identifying Parts of Speech - Practice Sentence</h2>
+        <div class="example-box">
+            <strong>Sentence:</strong> "Yesterday, the beautiful girl walked quickly to the market."<br><br>
+            • Yesterday = Adverb<br>
+            • the = Article<br>
+            • beautiful = Adjective<br>
+            • girl = Noun<br>
+            • walked = Verb<br>
+            • quickly = Adverb<br>
+            • to = Preposition<br>
+            • the = Article<br>
+            • market = Noun
+        </div>
+
+        <div class="key-points">
+            <strong>Quick Tips:</strong>
+            <ul>
+                <li>Nouns name things</li>
+                <li>Verbs show action or state of being</li>
+                <li>Adjectives describe nouns</li>
+                <li>Adverbs describe verbs or adjectives</li>
+                <li>Pronouns replace nouns</li>
+                <li>Prepositions show relationships and position</li>
+                <li>Conjunctions join words or clauses</li>
+                <li>Interjections express emotion</li>
+            </ul>
+        </div>
+
+        <div class="revision-questions">
+            <h3>Practice Questions</h3>
+            <ol>
+                <li>Identify the noun in: "The cat sleeps on the bed."</li>
+                <li>What is the verb in: "She sings beautifully"?</li>
+                <li>Find the adjective: "I like cold water."</li>
+                <li>Which word is an adverb? "The quick fox jumps high over the wall."</li>
+                <li>Replace the noun with a pronoun: "Ade is tall. _____ is tall."</li>
+                <li>Identify the preposition: "The pen is under the chair."</li>
+                <li>What conjunction is used? "I wanted to go, but it rained."</li>
+                <li>Is "Ouch!" an interjection? (Yes/No)</li>
+            </ol>
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    <p>© 2026 Naija Study Hub. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

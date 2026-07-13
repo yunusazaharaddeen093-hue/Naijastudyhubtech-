@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog - Naija Study Hub | All Educational Articles</title>
+<meta name="description" content="Browse all educational articles from Naija Study Hub for Primary, JSS and SSS students.">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f5f5;
+    color: #1E2723;
+}
+
+header {
+    background: linear-gradient(135deg, #123524 0%, #00814A 100%);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+nav {
+    background: #0C2A1C;
+    padding: 15px 0;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 20px;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #C88A2E;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.page-title {
+    color: #123524;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 2em;
+}
+
+.filter-buttons {
+    text-align: center;
+    margin: 30px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.filter-btn {
+    background: white;
+    color: #123524;
+    padding: 10px 20px;
+    border: 2px solid #123524;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.filter-btn.active {
+    background: #123524;
+    color: white;
+}
+
+.filter-btn:hover {
+    background: #123524;
+    color: white;
+}
+
+.articles-list {
+    display: grid;
+    gap: 25px;
+}
+
+.article-item {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    border-left: 5px solid #00814A;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.article-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+.article-meta {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.article-tag {
+    background: #C88A2E;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: bold;
+}
+
+.article-level {
+    background: #EFE6D2;
+    color: #123524;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: bold;
+}
+
+.article-item h3 {
+    color: #123524;
+    margin: 15px 0;
+    font-size: 1.4em;
+}
+
+.article-item p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.read-more {
+    color: #00814A;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.read-more:hover {
+    color: #123524;
+    text-decoration: underline;
+}
+
+.no-articles {
+    text-align: center;
+    padding: 40px;
+    color: #999;
+}
+
+footer {
+    background: #0C2A1C;
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 60px;
+}
+
+@media (max-width: 768px) {
+    .filter-buttons {
+        flex-direction: column;
+    }
+    
+    .filter-btn {
+        width: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>📚 Naija Study Hub</h1>
+    <p>All Educational Articles</p>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="blog.html">All Articles</a>
+    <a href="index.html#subjects">Subjects</a>
+</nav>
+
+<div class="container">
+
+    <h2 class="page-title">All Articles</h2>
+
+    <div class="filter-buttons">
+        <button class="filter-btn active" onclick="filterArticles('all')">All Articles</button>
+        <button class="filter-btn" onclick="filterArticles('science')">Science</button>
+        <button class="filter-btn" onclick="filterArticles('mathematics')">Mathematics</button>
+        <button class="filter-btn" onclick="filterArticles('english')">English</button>
+        <button class="filter-btn" onclick="filterArticles('social')">Social Studies</button>
+    </div>
+
+    <div class="articles-list" id="articlesList">
+
+        <!-- Science Articles -->
+        <div class="article-item" data-subject="science">
+            <div class="article-meta">
+                <span class="article-tag">Basic Science</span>
+                <span class="article-level">All Levels</span>
+            </div>
+            <h3>Characteristics of Living Things</h3>
+            <p>Learn the seven characteristics that define all living organisms using the MRS GREN acronym. Understand movement, respiration, sensitivity, growth, reproduction, excretion, and nutrition.</p>
+            <a href="articles/characteristics-of-living-things.html" class="read-more">Read Full Article →</a>
+        </div>
+
+        <div class="article-item" data-subject="science">
+            <div class="article-meta">
+                <span class="article-tag">Biology</span>
+                <span class="article-level">Primary</span>
+            </div>
+            <h3>The Human Body Systems</h3>
+            <p>Explore the major systems that make your body work: the skeletal system, muscular system, nervous system, and more. Understand how they work together to keep you healthy and active.</p>
+            <a href="articles/human-body-systems.html" class="read-more">Read Full Article →</a>
+        </div>
+
+        <div class="article-item" data-subject="science">
+            <div class="article-meta">
+                <span class="article-tag">Chemistry</span>
+                <span class="article-level">JSS</span>
+            </div>
+            <h3>States of Matter: Solid, Liquid, Gas</h3>
+            <p>Understand the three states of matter and how substances change from one state to another. Perfect for understanding the physical world around us.</p>
+            <a href="articles/states-of-matter.html" class="read-more">Read Full Article →</a>
+        </div>
+
+        <!-- Mathematics Articles -->
+        <div class="article-item" data-subject="mathematics">
+            <div class="article-meta">
+                <span class="article-tag">Arithmetic</span>
+                <span class="article-level">Primary</span>
+            </div>
+            <h3>Understanding Fractions</h3>
+            <p>A complete guide to fractions, from basics to operations. Learn how to add, subtract, multiply and divide fractions with simple step-by-step examples.</p>
+            <a href="articles/understanding-fractions.html" class="read-more">Read Full Article →</a>
+        </div>
+
+        <div class="article-item" data-subject="mathematics">
+            <div class="article-meta">
+                <span class="article-tag">Algebra</span>
+                <span class="article-level">JSS</span>
+            </div>
+            <h3>Solving Linear Equations</h3>
+            <p>Master the skills needed to solve linear equations step by step. Learn about variables, coefficients, and how to isolate unknowns.</p>
+            <a href="articles/linear-equations.html" class="read-more">Read Full Article →</a>
+        </div>
+
+        <div class="article-item" data-subject="mathematics">
+            <div class="article-meta">
+                <span class="article-tag">Geometry</span>
+                <span class="article-level">JSS/SSS</span>
+            </div>
+            <h3>Area and Perimeter of Shapes</h3>
+            <p>Calculate the area and perimeter of different shapes including triangles, rectangles, circles, and trapezoids. Includes formulas and practical examples.</p>
+            <a href="articles/area-perimeter.html" class="read-more">Read Full Article →</a>
+        </div>
+
+        <div class="article-item" data-subject="mathematics">
+            <div class="article-meta">
+                <span class="article-tag">Statistics</span>
+                <span class="article-level">SSS</span>
+            </div>
+            <h3>Introduction to Probability</h3>
+            <p>Understand the basics of probability and how to calculate the likelihood of events. Learn about sample spaces, outcomes, and probability rules.</p>
+            <a href="articles/probability.html" class="read-more">Read Full Article →</a>
+        </div>
+
+        <!-- English Articles -->
+        <div class="article-item" data-subject="english">
+            <div class="article-meta">
+                <span class="article-tag">Grammar</span>
+                <span class="article-level">Primary</span>
+            </div>
+            <h3>Parts of Speech Explained</h3>
+            <p>Master the eight parts of speech: nouns, verbs, adjectives, adverbs, pronouns, prepositions, conjunctions, and interjections. Includes examples and practice questions.</p>
+            <a href="articles/parts-of-speech.html" class="read-more">Read Full Article →</a>
+        </div>
+
+        <div class="article-item" data-subject="english">
+            <div class="article-meta">
+                <span class="article-tag">Writing Skills</span>
+                <span class="article-level">JSS</span>
+            </div>
+            <h3>How to Write a Good Paragraph</h3>
+            <p>Learn the structure of a good paragraph with topic sentences, supporting details, and conclusions. Includes examples from Nigerian writing.</p>
+            <a href="articles/writing-paragraphs.html" class="read-more">Read Full Article →</a>
+        </div>
+
+        <div class="article-item" data-subject="english">
+            <div class="article-meta">
+                <span class="article-tag">Literature</span>
+                <span class="article-level">SSS</span>
+            </div>
+            <h3>Understanding Literary Devices</h3>
+            <p>Explore metaphors, similes, personification, imagery, and other literary devices. Understand how authors use these tools to create meaning in their writing.</p>
+            <a href="articles/literary-devices.html" class="read-more">Read Full Article →</a>
+        </div>
+
+        <div class="article-item" data-subject="english">
+            <div class="article-meta">
+                <span class="article-tag">Comprehension</span>
+                <span class="article-level">All Levels</span>
+            </div>
+            <h3>WAEC Exam Reading Comprehension Tips</h3>
+            <p>Master strategies for answering reading comprehension questions in WAEC exams. Learn how to identify main ideas, make inferences, and answer different question types.</p>
+            <a href="articles/comprehension-tips.html" class="read-more">Read Full Article →</a>
+        </div>
+
+        <!-- Social Studies Articles -->
+        <div class="article-item" data-subject="social">
+            <div class="article-meta">
+                <span class="article-tag">Civic Education</span>
+                <span class="article-level">Primary</span>
+            </div>
+            <h3>The Three Tiers of Government</h3>
+            <p>Understand how Nigeria's government is organized at Federal, State, and Local levels. Learn about the responsibilities of each tier and how they serve citizens.</p>
+            <a href="articles/three-tiers-of-government.html" class="read-more">Read Full Article →</a>
+        </div>
+
+        <div class="article-item" data-subject="social">
+            <div class="article-meta">
+                <span class="article-tag">History</span>
+                <span class="article-level">JSS</span>
+            </div>
+            <h3>Pre-Colonial Nigeria: The Great Kingdoms</h3>
+            <p>Explore the history of powerful kingdoms like the Yoruba Empires, Benin Kingdom, and Hausa States before European colonization.</p>
+            <a href="articles/pre-colonial-kingdoms.html" class="read-more">Read Full Article →</a>
+        </div>
+
+        <div class="article-item" data-subject="social">
+            <div class="article-meta">
+                <span class="article-tag">Geography</span>
+                <span class="article-level">Primary</span>
+            </div>
+            <h3>Nigeria's Physical Features and Regions</h3>
+            <p>Learn about Nigeria's geography including the Sahel region, the Niger Delta, plateaus, and coastline. Understand how geography affects people and development.</p>
+            <a href="articles/nigeria-geography.html" class="read-more">Read Full Article →</a>
+        </div>
+
+        <div class="article-item" data-subject="social">
+            <div class="article-meta">
+                <span class="article-tag">Civics</span>
+                <span class="article-level">SSS</span>
+            </div>
+            <h3>The Nigerian Constitution and Rights</h3>
+            <p>Understand the Nigerian Constitution, fundamental human rights, and citizen responsibilities. Learn about the legal framework that governs the nation.</p>
+            <a href="articles/nigerian-constitution.html" class="read-more">Read Full Article →</a>
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    <p>© 2026 Naija Study Hub. All Rights Reserved.</p>
+    <p>Making Learning Simple and Accessible for Nigerian Students</p>
+</footer>
+
+<script>
+function filterArticles(subject) {
+    const articles = document.querySelectorAll('.article-item');
+    const buttons = document.querySelectorAll('.filter-btn');
+    
+    // Update button styles
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    // Filter articles
+    articles.forEach(article => {
+        if (subject === 'all' || article.dataset.subject === subject) {
+            article.style.display = 'block';
+        } else {
+            article.style.display = 'none';
+        }
+    });
+}
+</script>
+
+</body>
+</html>

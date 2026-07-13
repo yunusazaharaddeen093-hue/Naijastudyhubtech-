@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Understanding Fractions - Naija Study Hub</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f5f5;
+    color: #1E2723;
+}
+
+header {
+    background: linear-gradient(135deg, #123524 0%, #00814A 100%);
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+nav {
+    background: #0C2A1C;
+    padding: 15px 0;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 500;
+}
+
+nav a:hover {
+    color: #C88A2E;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.article-header {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.article-meta {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.article-tag {
+    background: #C88A2E;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.article-level {
+    background: #00814A;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.article-header h1 {
+    color: #123524;
+    font-size: 2em;
+    margin: 20px 0;
+}
+
+.article-content {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    line-height: 1.8;
+}
+
+.article-content h2 {
+    color: #00814A;
+    margin: 30px 0 15px 0;
+    font-size: 1.5em;
+    border-bottom: 3px solid #C88A2E;
+    padding-bottom: 10px;
+}
+
+.article-content h3 {
+    color: #123524;
+    margin: 25px 0 15px 0;
+    font-size: 1.2em;
+}
+
+.article-content p {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.article-content ul, .article-content ol {
+    margin: 20px 0 20px 30px;
+    color: #333;
+}
+
+.article-content li {
+    margin-bottom: 10px;
+}
+
+.highlight-box {
+    background: #EFE6D2;
+    padding: 20px;
+    border-left: 5px solid #C88A2E;
+    margin: 25px 0;
+    border-radius: 5px;
+}
+
+.example-box {
+    background: #f0f8f0;
+    padding: 20px;
+    border-left: 5px solid #00814A;
+    margin: 20px 0;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+}
+
+.example-box strong {
+    color: #00814A;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table th {
+    background: #123524;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+}
+
+table tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.revision-questions {
+    background: #f0f8f0;
+    padding: 25px;
+    border-radius: 10px;
+    margin: 30px 0;
+}
+
+.revision-questions h3 {
+    color: #00814A;
+    margin-bottom: 15px;
+}
+
+.revision-questions ol {
+    margin-left: 20px;
+}
+
+.revision-questions li {
+    margin-bottom: 12px;
+}
+
+.key-points {
+    background: #fff3cd;
+    padding: 20px;
+    border-left: 5px solid #C88A2E;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.key-points strong {
+    color: #856404;
+}
+
+footer {
+    background: #0C2A1C;
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 60px;
+}
+
+.back-link {
+    color: #00814A;
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 30px;
+    display: inline-block;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .article-content {
+        padding: 20px;
+    }
+    
+    .article-header h1 {
+        font-size: 1.4em;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>📚 Naija Study Hub</h1>
+    <p>Learn, Practice, Succeed</p>
+</header>
+
+<nav>
+    <a href="../index.html">Home</a>
+    <a href="../blog.html">All Articles</a>
+</nav>
+
+<div class="container">
+
+    <a href="../blog.html" class="back-link">← Back to All Articles</a>
+
+    <div class="article-header">
+        <div class="article-meta">
+            <span class="article-tag">Arithmetic</span>
+            <span class="article-level">Primary School</span>
+        </div>
+        <h1>Understanding Fractions</h1>
+        <p><strong>A Complete Guide to Fractions for Primary Students</strong></p>
+    </div>
+
+    <div class="article-content">
+
+        <h2>What is a Fraction?</h2>
+        <p>A fraction is a way of representing a part of a whole number or quantity. When you divide something into equal parts, each part is called a fraction of the whole.</p>
+        
+        <div class="example-box">
+            <strong>Example:</strong> If you have a pizza and cut it into 4 equal slices, each slice is 1/4 (one quarter) of the pizza.
+        </div>
+
+        <h2>Parts of a Fraction</h2>
+        <p>Every fraction has two main parts:</p>
+        
+        <ul>
+            <li><strong>Numerator:</strong> The number on top, showing how many parts you have</li>
+            <li><strong>Denominator:</strong> The number at the bottom, showing how many equal parts the whole is divided into</li>
+        </ul>
+
+        <div class="example-box">
+            <strong>In the fraction 3/5:</strong><br>
+            - 3 is the numerator (you have 3 parts)<br>
+            - 5 is the denominator (the whole is divided into 5 parts)
+        </div>
+
+        <h2>Types of Fractions</h2>
+
+        <h3>1. Proper Fractions</h3>
+        <p>The numerator is smaller than the denominator. The fraction is less than 1.</p>
+        <p><strong>Examples:</strong> 1/2, 2/3, 3/4, 5/8</p>
+
+        <h3>2. Improper Fractions</h3>
+        <p>The numerator is larger than or equal to the denominator. The fraction is 1 or more.</p>
+        <p><strong>Examples:</strong> 5/3, 7/4, 8/8</p>
+
+        <h3>3. Mixed Numbers</h3>
+        <p>A combination of a whole number and a proper fraction.</p>
+        <p><strong>Examples:</strong> 2½, 3¾, 1⅖</p>
+
+        <h2>Comparing Fractions</h2>
+
+        <h3>When Denominators are the Same</h3>
+        <p>Compare the numerators. The fraction with the larger numerator is the larger fraction.</p>
+        <div class="example-box">
+            <strong>Example:</strong> 3/5 > 2/5 (because 3 > 2)
+        </div>
+
+        <h3>When Denominators are Different</h3>
+        <p>Find a common denominator, then compare.</p>
+        <div class="example-box">
+            <strong>Example:</strong> Compare 1/2 and 2/3<br>
+            Common denominator is 6<br>
+            1/2 = 3/6 and 2/3 = 4/6<br>
+            Therefore, 2/3 > 1/2
+        </div>
+
+        <h2>Adding and Subtracting Fractions</h2>
+
+        <h3>Same Denominator</h3>
+        <p>Add or subtract the numerators and keep the denominator the same.</p>
+        <div class="example-box">
+            <strong>Adding:</strong> 2/5 + 1/5 = 3/5<br>
+            <strong>Subtracting:</strong> 4/7 - 2/7 = 2/7
+        </div>
+
+        <h3>Different Denominators</h3>
+        <p>Find a common denominator first, then add or subtract.</p>
+        <div class="example-box">
+            <strong>Example:</strong> 1/2 + 1/4<br>
+            Common denominator = 4<br>
+            1/2 = 2/4, so 2/4 + 1/4 = 3/4
+        </div>
+
+        <h2>Multiplying and Dividing Fractions</h2>
+
+        <h3>Multiplying Fractions</h3>
+        <p>Multiply the numerators together and multiply the denominators together.</p>
+        <div class="example-box">
+            <strong>Example:</strong> 2/3 × 3/4 = (2 × 3)/(3 × 4) = 6/12 = 1/2
+        </div>
+
+        <h3>Dividing Fractions</h3>
+        <p>Keep the first fraction, flip the second fraction, then multiply.</p>
+        <div class="example-box">
+            <strong>Example:</strong> 3/4 ÷ 1/2 = 3/4 × 2/1 = 6/4 = 3/2
+        </div>
+
+        <h2>Simplifying Fractions</h2>
+        <p>A fraction is simplified when the numerator and denominator have no common factors except 1. Divide both by their greatest common factor.</p>
+        <div class="example-box">
+            <strong>Example:</strong> 6/9 can be simplified to 2/3 (divide both by 3)
+        </div>
+
+        <div class="highlight-box">
+            <strong>💡 Tip:</strong> Always simplify your answer to its lowest terms!
+        </div>
+
+        <h2>Converting Between Forms</h2>
+
+        <table>
+            <tr>
+                <th>Improper to Mixed</th>
+                <th>Mixed to Improper</th>
+            </tr>
+            <tr>
+                <td>5/3: Divide 5÷3 = 1 remainder 2<br>Answer: 1⅔</td>
+                <td>1⅔: (1×3) + 2 = 5<br>Answer: 5/3</td>
+            </tr>
+        </table>
+
+        <h2>Real-World Applications</h2>
+        <ul>
+            <li>Cooking (½ cup of flour, ¾ teaspoon of salt)</li>
+            <li>Time (half past = ½ past)</li>
+            <li>Money (25 cents = ¼ of a naira)</li>
+            <li>Sports (winning 3 out of 4 games = ¾ win rate)</li>
+        </ul>
+
+        <div class="revision-questions">
+            <h3>Practice Questions</h3>
+            <ol>
+                <li>What is 1/4 + 2/4?</li>
+                <li>Simplify 8/12</li>
+                <li>Compare: 3/5 or 2/3 (which is larger?)</li>
+                <li>2/3 × 3/4 = ?</li>
+                <li>Convert 7/3 to a mixed number</li>
+                <li>If a pizza has 8 slices and you eat 3, what fraction did you eat?</li>
+                <li>3/4 ÷ 1/2 = ?</li>
+                <li>What is 1/2 + 1/3?</li>
+            </ol>
+        </div>
+
+        <div class="key-points">
+            <strong>Key Points to Remember:</strong>
+            <ul>
+                <li>Numerator = number of parts you have</li>
+                <li>Denominator = total number of equal parts</li>
+                <li>Same denominator → add/subtract numerators only</li>
+                <li>Always simplify your final answer</li>
+                <li>Fractions are all around us in daily life!</li>
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    <p>© 2026 Naija Study Hub. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
