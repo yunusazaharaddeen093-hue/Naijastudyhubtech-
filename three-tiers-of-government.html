@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Three Tiers of Government - Naija Study Hub</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f5f5;
+    color: #1E2723;
+}
+
+header {
+    background: linear-gradient(135deg, #123524 0%, #00814A 100%);
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+nav {
+    background: #0C2A1C;
+    padding: 15px 0;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 500;
+}
+
+nav a:hover {
+    color: #C88A2E;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.article-header {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.article-meta {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.article-tag {
+    background: #C88A2E;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.article-level {
+    background: #00814A;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.article-header h1 {
+    color: #123524;
+    font-size: 2em;
+    margin: 20px 0;
+}
+
+.article-content {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    line-height: 1.8;
+}
+
+.article-content h2 {
+    color: #00814A;
+    margin: 30px 0 15px 0;
+    font-size: 1.5em;
+    border-bottom: 3px solid #C88A2E;
+    padding-bottom: 10px;
+}
+
+.article-content h3 {
+    color: #123524;
+    margin: 25px 0 15px 0;
+    font-size: 1.2em;
+}
+
+.article-content p {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.article-content ul, .article-content ol {
+    margin: 20px 0 20px 30px;
+    color: #333;
+}
+
+.article-content li {
+    margin-bottom: 10px;
+}
+
+.highlight-box {
+    background: #EFE6D2;
+    padding: 20px;
+    border-left: 5px solid #C88A2E;
+    margin: 25px 0;
+    border-radius: 5px;
+}
+
+.tier-box {
+    background: linear-gradient(135deg, rgba(18,53,36,0.1) 0%, rgba(0,129,74,0.1) 100%);
+    padding: 25px;
+    border-left: 5px solid #00814A;
+    margin: 25px 0;
+    border-radius: 5px;
+}
+
+.tier-box h4 {
+    color: #00814A;
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+.example-box {
+    background: #f0f8f0;
+    padding: 20px;
+    border-left: 5px solid #00814A;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.example-box strong {
+    color: #00814A;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table th {
+    background: #123524;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+}
+
+table tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.revision-questions {
+    background: #f0f8f0;
+    padding: 25px;
+    border-radius: 10px;
+    margin: 30px 0;
+}
+
+.revision-questions h3 {
+    color: #00814A;
+    margin-bottom: 15px;
+}
+
+.revision-questions ol {
+    margin-left: 20px;
+}
+
+.revision-questions li {
+    margin-bottom: 12px;
+}
+
+.key-points {
+    background: #fff3cd;
+    padding: 20px;
+    border-left: 5px solid #C88A2E;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.key-points strong {
+    color: #856404;
+}
+
+footer {
+    background: #0C2A1C;
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 60px;
+}
+
+.back-link {
+    color: #00814A;
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 30px;
+    display: inline-block;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .article-content {
+        padding: 20px;
+    }
+    
+    .article-header h1 {
+        font-size: 1.4em;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>📚 Naija Study Hub</h1>
+    <p>Learn, Practice, Succeed</p>
+</header>
+
+<nav>
+    <a href="../index.html">Home</a>
+    <a href="../blog.html">All Articles</a>
+</nav>
+
+<div class="container">
+
+    <a href="../blog.html" class="back-link">← Back to All Articles</a>
+
+    <div class="article-header">
+        <div class="article-meta">
+            <span class="article-tag">Civic Education</span>
+            <span class="article-level">Primary School</span>
+        </div>
+        <h1>The Three Tiers of Government in Nigeria</h1>
+        <p><strong>Understanding How Nigeria's Government Works</strong></p>
+    </div>
+
+    <div class="article-content">
+
+        <h2>What is Government?</h2>
+        <p>Government is the system and group of people that runs a country. Nigeria's government is organized into three levels or "tiers," each responsible for different areas and serving different groups of people.</p>
+
+        <div class="highlight-box">
+            <strong>Nigeria has THREE TIERS OF GOVERNMENT:</strong><br>
+            1. Federal Government<br>
+            2. State Government<br>
+            3. Local Government
+        </div>
+
+        <h2>1. FEDERAL GOVERNMENT</h2>
+        <div class="tier-box">
+            <h4>🏛️ The National Level</h4>
+            <p>The Federal Government is the highest level of government that runs the entire country. It is located in Abuja, Nigeria's capital city.</p>
+        </div>
+
+        <h3>Structure of the Federal Government</h3>
+        <ul>
+            <li><strong>The President:</strong> Head of state and head of government</li>
+            <li><strong>The Vice President:</strong> Assists the President</li>
+            <li><strong>Federal Cabinet:</strong> Ministers who help run different departments</li>
+            <li><strong>National Assembly:</strong> Makes laws (House of Representatives and Senate)</li>
+        </ul>
+
+        <h3>Responsibilities of the Federal Government</h3>
+        <ul>
+            <li>Defense and national security</li>
+            <li>Foreign relations with other countries</li>
+            <li>Currency (money) and banking</li>
+            <li>National highways and major roads</li>
+            <li>Federal taxes and budgets</li>
+            <li>Making national laws</li>
+            <li>Immigration and passports</li>
+        </ul>
+
+        <div class="example-box">
+            <strong>Example:</strong> When Nigeria signs a peace treaty with another country or the President makes a speech to the entire nation, that's the Federal Government at work.
+        </div>
+
+        <h2>2. STATE GOVERNMENT</h2>
+        <div class="tier-box">
+            <h4>🏠 The Regional Level</h4>
+            <p>Nigeria has 36 states, plus the Federal Capital Territory (Abuja). Each state has its own government that looks after matters within that state.</p>
+        </div>
+
+        <h3>Structure of State Government</h3>
+        <ul>
+            <li><strong>The Governor:</strong> Head of the state government</li>
+            <li><strong>Deputy Governor:</strong> Assists the Governor</li>
+            <li><strong>State Cabinet:</strong> Commissioners who help run different departments</li>
+            <li><strong>State House of Assembly:</strong> Makes state laws</li>
+        </ul>
+
+        <h3>Responsibilities of State Governments</h3>
+        <ul>
+            <li>Education (schools)</li>
+            <li>Health (hospitals and clinics)</li>
+            <li>Roads within the state</li>
+            <li>State police and security</li>
+            <li>Local business and commerce</li>
+            <li>Housing and land</li>
+            <li>Water supply within the state</li>
+        </ul>
+
+        <div class="example-box">
+            <strong>Example:</strong> When the Governor of Lagos builds new schools or the Kano State government improves hospital facilities, that's the State Government at work.
+        </div>
+
+        <h2>3. LOCAL GOVERNMENT</h2>
+        <div class="tier-box">
+            <h4>🏘️ The Community Level</h4>
+            <p>Local Government Authorities (LGAs) are the closest to the people. Nigeria has 774 local government areas. Each LGA serves a specific community or group of communities.</p>
+        </div>
+
+        <h3>Structure of Local Government</h3>
+        <ul>
+            <li><strong>The Local Government Chairman:</strong> Head of the LGA</li>
+            <li><strong>Vice Chairman:</strong> Assists the Chairman</li>
+            <li><strong>Local Government Council:</strong> Makes decisions for the community</li>
+            <li><strong>Councillors:</strong> Represent different wards</li>
+        </ul>
+
+        <h3>Responsibilities of Local Governments</h3>
+        <ul>
+            <li>Local roads and streets</li>
+            <li>Markets and trading centers</li>
+            <li>Primary education support</li>
+            <li>Local health centers</li>
+            <li>Community development projects</li>
+            <li>Waste management</li>
+            <li>Local business licenses</li>
+            <li>Community safety and welfare</li>
+        </ul>
+
+        <div class="example-box">
+            <strong>Example:</strong> When the local government repairs your street, cleans up the market, or organizes community events, that's the Local Government at work.
+        </div>
+
+        <h2>How the Three Tiers Work Together</h2>
+
+        <table>
+            <tr>
+                <th>Level</th>
+                <th>Coverage</th>
+                <th>Head</th>
+                <th>Main Focus</th>
+            </tr>
+            <tr>
+                <td><strong>Federal</strong></td>
+                <td>Entire Country</td>
+                <td>President</td>
+                <td>National issues</td>
+            </tr>
+            <tr>
+                <td><strong>State</strong></td>
+                <td>One State</td>
+                <td>Governor</td>
+                <td>State issues</td>
+            </tr>
+            <tr>
+                <td><strong>Local</strong></td>
+                <td>Local Area</td>
+                <td>Chairman</td>
+                <td>Community issues</td>
+            </tr>
+        </table>
+
+        <h2>Checks and Balances</h2>
+        <p>The three tiers are separate but work together. Each tier has the power to check and balance the others:</p>
+        
+        <ul>
+            <li>The Federal Government provides guidelines that States and LGAs must follow</li>
+            <li>States collect taxes and manage their own budgets</li>
+            <li>Local Governments handle day-to-day community needs</li>
+            <li>All three work together to serve Nigerian citizens</li>
+        </ul>
+
+        <h2>Why Three Tiers?</h2>
+        <div class="highlight-box">
+            <strong>Advantages:</strong>
+            <ul>
+                <li><strong>Better representation:</strong> Each community has local leaders</li>
+                <li><strong>Faster decisions:</strong> Local issues are handled locally</li>
+                <li><strong>Shared power:</strong> No single level has too much power</li>
+                <li><strong>Better services:</strong> Leaders understand local needs</li>
+            </ul>
+        </div>
+
+        <h2>How Citizens Participate</h2>
+        <p>As a Nigerian citizen, you can participate in government at all three levels:</p>
+        <ul>
+            <li>Vote for leaders at all levels</li>
+            <li>Attend community meetings</li>
+            <li>Pay taxes that fund government services</li>
+            <li>Follow laws made by each level</li>
+            <li>Voice concerns to your representatives</li>
+        </ul>
+
+        <div class="key-points">
+            <strong>Key Points to Remember:</strong>
+            <ul>
+                <li>Nigeria has THREE TIERS: Federal, State, and Local Government</li>
+                <li>Federal Government handles national issues</li>
+                <li>State Government handles regional issues</li>
+                <li>Local Government handles community issues</li>
+                <li>Each tier has a different head and different responsibilities</li>
+                <li>All three work together for the nation's benefit</li>
+            </ul>
+        </div>
+
+        <div class="revision-questions">
+            <h3>Practice Questions</h3>
+            <ol>
+                <li>What are the three tiers of government in Nigeria?</li>
+                <li>Who is the head of the Federal Government?</li>
+                <li>Which government tier builds national highways?</li>
+                <li>What is the head of state government called?</li>
+                <li>Name three responsibilities of State Government</li>
+                <li>Who is the head of Local Government?</li>
+                <li>How many Local Government Areas are in Nigeria?</li>
+                <li>Which government level handles your local market?</li>
+                <li>Why do we need three tiers of government?</li>
+                <li>Which government handles your state's education system?</li>
+            </ol>
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    <p>© 2026 Naija Study Hub. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
