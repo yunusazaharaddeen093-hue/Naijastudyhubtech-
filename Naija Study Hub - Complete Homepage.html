@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naija Study Hub - Learning Made Simple</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #10B981;
+            --primary-dark: #059669;
+            --accent: #F59E0B;
+            --accent-light: #FCD34D;
+            --dark: #1F2937;
+            --dark-light: #374151;
+            --light: #F9FAFB;
+            --light-gray: #E5E7EB;
+            --text: #111827;
+            --text-muted: #6B7280;
+            --success: #34D399;
+            --error: #F87171;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: var(--text);
+            background: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo::before {
+            content: "📚";
+            font-size: 1.75rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .nav-cta {
+            background: var(--primary);
+            color: white !important;
+            padding: 0.6rem 1.5rem;
+            border-radius: 6px;
+            transition: background 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-dark);
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border-radius: 6px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .trust-badges {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .badge {
+            text-align: center;
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .badge-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 3rem 2rem;
+            max-width: 1400px;
+            margin: -3rem auto 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .stats-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            margin: 3rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            opacity: 0.9;
+        }
+
+        .section {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .how-it-works {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .step-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .step-card h3 {
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-card p {
+            color: var(--text-muted);
+        }
+
+        .tiers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .tier-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .tier-card:nth-child(1) {
+            border-top-color: #3B82F6;
+        }
+
+        .tier-card:nth-child(2) {
+            border-top-color: var(--primary);
+        }
+
+        .tier-card:nth-child(3) {
+            border-top-color: var(--accent);
+        }
+
+        .tier-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .tier-header {
+            padding: 2rem;
+            color: white;
+            text-align: center;
+        }
+
+        .tier-card:nth-child(1) .tier-header {
+            background: linear-gradient(135deg, #3B82F6, #1E40AF);
+        }
+
+        .tier-card:nth-child(2) .tier-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        }
+
+        .tier-card:nth-child(3) .tier-header {
+            background: linear-gradient(135deg, var(--accent), #D97706);
+        }
+
+        .tier-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tier-header p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .tier-content {
+            padding: 2rem;
+        }
+
+        .tier-subjects {
+            margin: 1.5rem 0;
+        }
+
+        .tier-subjects p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .tier-content .btn {
+            width: 100%;
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .quiz-question {
+            margin-bottom: 2rem;
+        }
+
+        .quiz-question h4 {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--text);
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .quiz-btn {
+            padding: 1rem;
+            border: 2px solid var(--light-gray);
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .quiz-btn:hover {
+            border-color: var(--primary);
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .quiz-btn.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .quiz-result {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            display: none;
+        }
+
+        .quiz-result.show {
+            display: block;
+        }
+
+        .quiz-result.correct {
+            background: rgba(52, 211, 153, 0.1);
+            color: #047857;
+            border: 2px solid var(--success);
+        }
+
+        .quiz-result.incorrect {
+            background: rgba(248, 113, 113, 0.1);
+            color: #991b1b;
+            border: 2px solid var(--error);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-card h4 {
+            margin-bottom: 0.75rem;
+            color: var(--text);
+        }
+
+        .blog-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .read-more {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+        }
+
+        .read-more:hover {
+            gap: 0.75rem;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid var(--primary);
+        }
+
+        .testimonial-card p {
+            margin-bottom: 1.5rem;
+            color: var(--text);
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .testimonial-role {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .founder-section {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(245, 158, 11, 0.1));
+            padding: 4rem 2rem;
+        }
+
+        .founder-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .founder-image {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .founder-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .founder-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .founder-content p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        #contact-section {
+            background: var(--dark);
+            color: white;
+        }
+
+        .contact-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-card h4 {
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .contact-card p {
+            margin-bottom: 0.75rem;
+            opacity: 0.9;
+        }
+
+        .contact-card a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-card a:hover {
+            color: var(--accent-light);
+        }
+
+        footer {
+            background: var(--dark-light);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            opacity: 0.8;
+            margin: 0.5rem 0;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .section-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .founder-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .section {
+                padding: 2.5rem 1rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 2rem 1rem;
+            }
+
+            .trust-badges {
+                gap: 1rem;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feature-card,
+        .tier-card,
+        .blog-card,
+        .testimonial-card {
+            animation: slideIn 0.6s ease forwards;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <nav>
+            <a href="#home" class="logo">Naija Study Hub</a>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#how">How It Works</a></li>
+                <li><a href="#tiers">Study Levels</a></li>
+                <li><a href="#blog">Resources</a></li>
+                <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Empowering Nigerian Students to Succeed</h1>
+            <p>Quality learning resources tailored for Primary, JSS, and SSS students. Learn at your own pace with our comprehensive guides, quizzes, and expert content.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="document.getElementById('tiers').scrollIntoView({behavior: 'smooth'})">Start Learning Free</button>
+                <button class="btn btn-secondary" onclick="document.getElementById('how').scrollIntoView({behavior: 'smooth'})">Learn More</button>
+            </div>
+            <div class="trust-badges">
+                <div class="badge">
+                    <div class="badge-icon">✅</div>
+                    <div>100% Free</div>
+                </div>
+                <div class="badge">
+                    <div class="badge-icon">🎓</div>
+                    <div>Curriculum Aligned</div>
+                </div>
+                <div class="badge">
+                    <div class="badge-icon">📱</div>
+                    <div>Mobile Friendly</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features">
+        <div class="feature-card">
+            <div class="feature-icon">📝</div>
+            <h3>Structured Lessons</h3>
+            <p>Clear, step-by-step lessons for every subject and level</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">✅</div>
+            <h3>Interactive Quizzes</h3>
+            <p>Test your knowledge with engaging practice questions</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3>Exam Prep</h3>
+            <p>Targeted resources to help you ace your exams</p>
+        </div>
+    </section>
+
+    <!-- STATS SECTION -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>1000+</h3>
+                <p>Students Learning</p>
+            </div>
+            <div class="stat-item">
+                <h3>4</h3>
+                <p>Main Subjects</p>
+            </div>
+            <div class="stat-item">
+                <h3>50+</h3>
+                <p>Practice Questions</p>
+            </div>
+            <div class="stat-item">
+                <h3>3</h3>
+                <p>Study Levels</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section" id="how">
+        <div class="section-header">
+            <h2>How It Works</h2>
+            <p>Get started in just 3 simple steps</p>
+        </div>
+        <div class="how-it-works">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Choose Your Level</h3>
+                <p>Select Primary, JSS, or SSS to find content that matches your education level</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>Browse Topics</h3>
+                <p>Explore articles across Science, Mathematics, English, and Social Studies</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>Learn & Practice</h3>
+                <p>Read lessons, answer practice questions, and track your understanding</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- STUDY TIERS -->
+    <section class="section" id="tiers">
+        <div class="section-header">
+            <h2>Choose Your Learning Path</h2>
+            <p>Tailored resources for every stage of your education</p>
+        </div>
+        <div class="tiers-grid">
+            <div class="tier-card">
+                <div class="tier-header">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🏫</div>
+                    <h3>Primary School</h3>
+                    <p>Foundation Learning</p>
+                </div>
+                <div class="tier-content">
+                    <p style="color: var(--text); font-weight: 500;">Ages 6-11</p>
+                    <div class="tier-subjects">
+                        <p><strong>Subjects:</strong></p>
+                        <p>• Mathematics • English • Science • Social Studies</p>
+                    </div>
+                    <button class="btn btn-primary">Explore Now</button>
+                </div>
+            </div>
+
+            <div class="tier-card">
+                <div class="tier-header">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📚</div>
+                    <h3>Junior Secondary (JSS)</h3>
+                    <p>Core Subjects & Skills</p>
+                </div>
+                <div class="tier-content">
+                    <p style="color: var(--text); font-weight: 500;">Ages 12-14</p>
+                    <div class="tier-subjects">
+                        <p><strong>Subjects:</strong></p>
+                        <p>• Mathematics • English • Sciences • Languages • Humanities</p>
+                    </div>
+                    <button class="btn btn-primary">Explore Now</button>
+                </div>
+            </div>
+
+            <div class="tier-card">
+                <div class="tier-header">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🎓</div>
+                    <h3>Senior Secondary (SSS)</h3>
+                    <p>Exam Prep & Advanced</p>
+                </div>
+                <div class="tier-content">
+                    <p style="color: var(--text); font-weight: 500;">Ages 15-17</p>
+                    <div class="tier-subjects">
+                        <p><strong>Subjects:</strong></p>
+                        <p>• WAEC Prep • JAMB Guides • Advanced Sciences • Project Topics</p>
+                    </div>
+                    <button class="btn btn-primary">Explore Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUIZ SECTION -->
+    <section class="section" id="quiz">
+        <div class="section-header">
+            <h2>Test Your Knowledge</h2>
+            <p>Quick quizzes to help reinforce what you've learned</p>
+        </div>
+        <div class="quiz-container">
+            <div class="quiz-question">
+                <h4>Which of these is a living thing?</h4>
+                <div class="quiz-options">
+                    <button class="quiz-btn" onclick="answerQuiz('A')">🪨 Stone</button>
+                    <button class="quiz-btn" onclick="answerQuiz('B')">🌿 Plant</button>
+                    <button class="quiz-btn" onclick="answerQuiz('C')">💧 Water</button>
+                </div>
+            </div>
+            <div class="quiz-result" id="quiz-result"></div>
+        </div>
+    </section>
+
+    <!-- BLOG SECTION -->
+    <section class="section" id="blog">
+        <div class="section-header">
+            <h2>Latest Learning Resources</h2>
+            <p>Comprehensive articles and guides across all subjects</p>
+        </div>
+        <div class="blog-grid">
+            <div class="blog-card">
+                <div class="blog-image">🧬</div>
+                <div class="blog-content">
+                    <h4>Characteristics of Living Things</h4>
+                    <p>Learn the 7 essential features that make something a living organism using MRS GREN.</p>
+                    <a href="#" class="read-more">Read Article →</a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <div class="blog-image">📐</div>
+                <div class="blog-content">
+                    <h4>Understanding Fractions</h4>
+                    <p>Master fractions from basics to operations with simple step-by-step examples.</p>
+                    <a href="#" class="read-more">Read Article →</a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <div class="blog-image">✏️</div>
+                <div class="blog-content">
+                    <h4>Parts of Speech</h4>
+                    <p>Learn the 8 parts of speech with real examples and practice questions.</p>
+                    <a href="#" class="read-more">Read Article →</a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <div class="blog-image">🌍</div>
+                <div class="blog-content">
+                    <h4>Three Tiers of Government</h4>
+                    <p>Understand how Nigeria's government is organized at Federal, State, and Local levels.</p>
+                    <a href="#" class="read-more">Read Article →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOUNDER SECTION -->
+    <section class="founder-section" id="about">
+        <div class="founder-container">
+            <div class="founder-image">
+                <img src="https://via.placeholder.com/400x500/10B981/ffffff?text=Zaharaddeen+Yunusa" alt="Founder">
+            </div>
+            <div class="founder-content">
+                <h2>About the Founder</h2>
+                <p>Hi! I'm Zaharaddeen Yunusa, and I founded Naija Study Hub with a simple mission: to make quality education accessible to every Nigerian student, regardless of their background.</p>
+                <p>Growing up, I faced challenges accessing reliable study materials. That's why I built this platform—to ensure no student is left behind. Our platform is dedicated to providing clear, comprehensive, and affordable learning resources aligned with the Nigerian curriculum.</p>
+                <p>Today, thousands of students trust Naija Study Hub for their exam preparation and daily learning. Join us in the mission to transform education in Nigeria!</p>
+                <p style="margin-top: 2rem; font-weight: 600; color: var(--primary);">— Zaharaddeen Yunusa, Founder & CEO</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="section">
+        <div class="section-header">
+            <h2>What Our Users Say</h2>
+            <p>Real feedback from students, teachers, and parents</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p>"Naija Study Hub made studying so much easier. The explanations are clear and the quizzes really help me understand better!"</p>
+                <div class="testimonial-author">— Chioma</div>
+                <div class="testimonial-role">JSS 2 Student</div>
+            </div>
+            <div class="testimonial-card">
+                <p>"As a teacher, I use these resources to prepare my lessons. It's comprehensive, well-organized, and my students love the interactive approach."</p>
+                <div class="testimonial-author">— Mr. Okafor</div>
+                <div class="testimonial-role">Secondary School Teacher</div>
+            </div>
+            <div class="testimonial-card">
+                <p>"My son's grades improved significantly after using Naija Study Hub. It's an affordable way to give him the support he needs."</p>
+                <div class="testimonial-author">— Mrs. Adebayo</div>
+                <div class="testimonial-role">Parent</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="section" id="contact" style="background: transparent; padding-top: 0;">
+        <div id="contact-section">
+            <div class="section-header" style="color: white; margin-bottom: 2rem;">
+                <h2 style="color: white;">Get in Touch</h2>
+                <p style="color: rgba(255,255,255,0.8);">Questions? We're here to help!</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-card">
+                    <h4>📞 Phone</h4>
+                    <p><a href="tel:08148438332">08148438332</a></p>
+                </div>
+                <div class="contact-card">
+                    <h4>✉️ Email</h4>
+                    <p><a href="mailto:yunusazaharaddeen093@gmail.com">yunusazaharaddeen093@gmail.com</a></p>
+                </div>
+                <div class="contact-card">
+                    <h4>💬 WhatsApp</h4>
+                    <p><a href="https://wa.me/2348148438332" target="_blank">Chat With Us</a></p>
+                </div>
+                <div class="contact-card">
+                    <h4>👥 Facebook</h4>
+                    <p><a href="https://www.facebook.com/profile.php?id=100090580205491" target="_blank">Follow Us</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <h3 style="color: var(--accent); margin-bottom: 0.5rem;">📚 Naija Study Hub</h3>
+        <p>Making Learning Simple, Accessible, and Affordable for All Nigerian Students</p>
+        <p style="margin: 1rem 0;">
+            <a href="#">Privacy Policy</a> | 
+            <a href="#">Terms & Conditions</a> | 
+            <a href="#">About Us</a>
+        </p>
+        <p>© 2026 Naija Study Hub. All Rights Reserved. | Empowering Nigerian Students to Succeed</p>
+    </footer>
+
+    <script>
+        function answerQuiz(option) {
+            const resultDiv = document.getElementById('quiz-result');
+            const buttons = document.querySelectorAll('.quiz-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('selected'));
+            event.target.classList.add('selected');
+            
+            if (option === 'B') {
+                resultDiv.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 0.75rem; justify-content: center;">
+                        <span style="font-size: 1.5rem;">✅</span>
+                        <div><strong>Correct!</strong> A plant is indeed a living thing. It grows, reproduces, and responds to its environment.</div>
+                    </div>
+                `;
+                resultDiv.classList.remove('incorrect');
+                resultDiv.classList.add('correct', 'show');
+            } else {
+                resultDiv.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 0.75rem; justify-content: center;">
+                        <span style="font-size: 1.5rem;">❌</span>
+                        <div><strong>Not quite.</strong> Try again! The correct answer is <strong>Plant (B)</strong>.</div>
+                    </div>
+                `;
+                resultDiv.classList.remove('correct');
+                resultDiv.classList.add('incorrect', 'show');
+            }
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
