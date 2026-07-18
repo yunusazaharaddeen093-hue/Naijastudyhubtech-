@@ -3,113 +3,1662 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Naija Study Hub Tech</title>
+<title>Naija Study Hub — WAEC, NECO & JAMB Notes for Primary, JSS & SSS Students</title>
+<meta name="description" content="Free WAEC, NECO, and JAMB-aligned notes, past questions, and revision guides for Primary, JSS, and SSS students in Nigeria — in English and Hausa.">
+<meta name="keywords" content="WAEC notes, NECO past questions, JAMB revision, JSS notes Nigeria, SSS notes Nigeria, Hausa language notes, Nigerian secondary school revision">
 
+<!--
+  SETUP NEEDED: Google Analytics
+  1. Create a free property at https://analytics.google.com and get your Measurement ID (looks like G-XXXXXXXXXX).
+  2. Replace G-XXXXXXXXXX in BOTH places below with your real ID.
+  Until you do this, no analytics data will be collected.
+-->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "Naija Study Hub",
+  "description": "Free WAEC, NECO, and JAMB-aligned notes, past questions, and revision guides for Primary, JSS, and SSS students in Nigeria.",
+  "email": "yunusazaharaddeen093@gmail.com",
+  "telephone": "+2348148438332",
+  "areaServed": "Nigeria",
+  "sameAs": [
+    "https://www.facebook.com/profile.php?id=100090580205491",
+    "https://wa.me/2348148438332"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": [
+    {"@type":"BlogPosting","position":1,"headline":"Characteristics of Living Things","about":"Basic Science","dateModified":"2026-06-01"},
+    {"@type":"BlogPosting","position":2,"headline":"Digestive System in Humans","about":"Basic Science","dateModified":"2026-06-01"},
+    {"@type":"BlogPosting","position":3,"headline":"Parts of Plants and Their Functions","about":"Basic Science","dateModified":"2026-05-01"},
+    {"@type":"BlogPosting","position":4,"headline":"Introduction to Civic Education","about":"Civic Education","dateModified":"2026-05-01"},
+    {"@type":"BlogPosting","position":5,"headline":"Social Studies Lessons","about":"Social Studies","dateModified":"2026-04-01"},
+    {"@type":"BlogPosting","position":6,"headline":"Basic Science Topics","about":"Basic Science","dateModified":"2026-04-01"},
+    {"@type":"BlogPosting","position":7,"headline":"Past Questions & Worked Answers","about":"WAEC / NECO","dateModified":"2026-07-01"}
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;600;700;800&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
-body{
-font-family:Arial,sans-serif;
-margin:0;
-background:#f4f4f4;
-color:#333;
-}
-header{
-background:#0d6efd;
-color:white;
-padding:30px;
-text-align:center;
-}
-nav{
-background:#084298;
-padding:15px;
-text-align:center;
-}
-nav a{
-color:white;
-text-decoration:none;
-margin:0 15px;
-font-weight:bold;
-}
-.hero{
-padding:40px;
-text-align:center;
-background:white;
-}
-.button{
-display:inline-block;
-background:#198754;
-color:white;
-padding:12px 25px;
-text-decoration:none;
-border-radius:5px;
-margin-top:15px;
-}
-section{
-padding:30px;
-}
-.card{
-background:white;
-padding:20px;
-margin:15px;
-border-radius:10px;
-box-shadow:0 2px 8px rgba(0,0,0,.1);
-}
-footer{
-background:#222;
-color:white;
-text-align:center;
-padding:20px;
-margin-top:30px;
-}
+  :root{
+    --ink:#1E2723;
+    --ink-soft:#3B463F;
+    --paper:#EFE6D2;
+    --paper-light:#F8F3E6;
+    --card:#FFFDF8;
+    --chalk:#123524;
+    --chalk-dark:#0C2A1C;
+    --naija:#00814A;
+    --naija-dark:#026A3C;
+    --stamp:#B23A2E;
+    --gold:#C88A2E;
+    --line: rgba(30,39,35,0.14);
+    --shadow: 0 10px 30px rgba(12,42,28,0.14);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+
+  body{
+    margin:0;
+    font-family:'Work Sans', sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.55;
+  }
+
+  h1,h2,h3,h4{
+    font-family:'Bitter', serif;
+    color:var(--chalk);
+    margin:0 0 0.5em 0;
+    line-height:1.15;
+  }
+
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--naija-dark);
+    font-weight:600;
+    display:inline-flex;
+    align-items:center;
+    gap:0.5em;
+    margin-bottom:0.9em;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px; height:2px;
+    background:var(--gold);
+    display:inline-block;
+  }
+
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* Ruled paper texture used behind several sections */
+  .ruled{
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 35px,
+      var(--line) 36px
+    );
+  }
+
+  /* ---------------- HEADER ---------------- */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:var(--chalk);
+    border-bottom:3px solid var(--gold);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 24px;
+    max-width:1120px;
+    margin:0 auto;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Bitter', serif;
+    font-weight:700;
+    font-size:1.15rem;
+    color:#fff;
+    text-decoration:none;
+  }
+  .brand-mark{
+    width:34px; height:34px;
+    border-radius:50%;
+    background:var(--naija);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:700;
+    color:#fff;
+    font-size:0.9rem;
+    flex-shrink:0;
+  }
+  nav ul{
+    list-style:none; display:flex; gap:28px; margin:0; padding:0;
+  }
+  nav a{
+    text-decoration:none;
+    color:#EDE6D3;
+    font-size:0.95rem;
+    font-weight:500;
+    padding:6px 2px;
+    border-bottom:2px solid transparent;
+    transition:border-color .2s ease, color .2s ease;
+  }
+  nav a:hover, nav a:focus-visible{
+    color:#fff;
+    border-bottom-color:var(--gold);
+  }
+  .nav-toggle{
+    display:none;
+    background:none; border:1px solid #EDE6D3; color:#EDE6D3;
+    border-radius:6px; padding:8px 10px; font-size:1rem; cursor:pointer;
+  }
+  .theme-toggle{
+    background:none;
+    border:1px solid rgba(237,230,211,0.4);
+    color:#EDE6D3;
+    width:38px; height:38px;
+    border-radius:50%;
+    font-size:1rem;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    margin-left:14px;
+    flex-shrink:0;
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .theme-toggle:hover{ border-color:var(--gold); transform:rotate(-12deg); }
+  @media (max-width:820px){
+    .theme-toggle{ margin-left:8px; width:34px; height:34px; }
+  }
+  @media (max-width:820px){
+    nav{
+      position:absolute; top:100%; left:0; right:0;
+      background:var(--chalk);
+      border-bottom:3px solid var(--gold);
+      display:none;
+    }
+    nav.open{ display:block; }
+    nav ul{ flex-direction:column; gap:0; padding:8px 24px 18px; }
+    nav ul li{ border-top:1px solid rgba(255,255,255,0.08); }
+    nav ul li a{ display:block; padding:12px 4px; }
+    .nav-toggle{ display:inline-block; }
+  }
+
+  a:focus-visible, button:focus-visible, summary:focus-visible{
+    outline:3px solid var(--gold);
+    outline-offset:2px;
+  }
+
+  /* ---------------- DARK MODE ---------------- */
+  body.dark{
+    --paper:#141C17;
+    --paper-light:#1B2620;
+    --card:#1F2B24;
+    --ink:#E9E4D3;
+    --ink-soft:#B7BFB4;
+    --line: rgba(233,228,211,0.14);
+    --shadow: 0 10px 30px rgba(0,0,0,0.4);
+  }
+  body.dark h1, body.dark h2, body.dark h3, body.dark h4{
+    color:#E9E4D3;
+  }
+  body.dark .subject-row:nth-child(odd){ background:rgba(0,129,74,0.09); }
+  body.dark .resource-card .icon{ background:var(--paper); }
+  body.dark .book-mock::before{ background:rgba(178,58,46,0.5); }
+  body.dark .founder-stamp{ background:var(--paper-light); }
+  .hero h1{ color:#fff !important; }
+  .band-dark h2, .band-dark h3{ color:#fff !important; }
+
+  /* ---------------- HERO ---------------- */
+  .hero{
+    background: radial-gradient(circle at 85% 15%, #17462F 0%, var(--chalk) 55%, var(--chalk-dark) 100%);
+    color:#F3EEDD;
+    padding:76px 0 96px;
+    overflow:hidden;
+    position:relative;
+  }
+  .hero-inner{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:56px;
+    align-items:center;
+  }
+  .hero h1{
+    color:#fff;
+    font-size:clamp(2.1rem, 4.2vw, 3.3rem);
+    max-width:11ch;
+  }
+  .hero p.lede{
+    font-size:1.08rem;
+    color:#D8D0BB;
+    max-width:46ch;
+    margin-bottom:2em;
+  }
+  .btn-row{ display:flex; gap:16px; flex-wrap:wrap; }
+  .syllabus-line{
+    font-size:0.9rem;
+    color:#B7E3C7;
+    margin:-0.8em 0 1.6em;
+    font-weight:500;
+  }
+  .btn{
+    font-family:'Work Sans', sans-serif;
+    font-weight:600;
+    font-size:0.98rem;
+    padding:14px 26px;
+    border-radius:8px;
+    text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px;
+    border:2px solid transparent;
+    cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn-primary{
+    background:var(--naija);
+    color:#fff;
+    box-shadow:0 8px 20px rgba(0,129,74,0.35);
+  }
+  .btn-primary:hover{ background:var(--naija-dark); }
+  .btn-outline{
+    background:transparent;
+    color:#F3EEDD;
+    border-color:rgba(243,238,221,0.45);
+  }
+  .btn-outline:hover{ border-color:#fff; }
+  .btn-cta{
+    background:var(--gold);
+    color:#3A2A05;
+    padding:10px 22px;
+    font-size:0.92rem;
+    box-shadow:0 6px 16px rgba(200,138,46,0.35);
+  }
+  .btn-cta:hover{ background:#B87D26; }
+  @media (max-width:820px){
+    .btn-cta{ padding:8px 16px; font-size:0.85rem; }
+  }
+  .btn-small{
+    padding:9px 18px;
+    font-size:0.85rem;
+    border-radius:6px;
+  }
+
+  /* Exercise-book mock card in hero */
+  .book-mock{
+    position:relative;
+    background:var(--paper-light);
+    border-radius:6px;
+    padding:34px 30px 40px;
+    box-shadow:var(--shadow);
+    transform:rotate(1.4deg);
+    background-image: repeating-linear-gradient(
+      to bottom, transparent, transparent 30px, var(--line) 31px
+    );
+  }
+  .book-mock::before{
+    content:"";
+    position:absolute; left:26px; top:0; bottom:0;
+    width:2px; background:rgba(178,58,46,0.35);
+  }
+  .book-mock h3{
+    font-size:1.25rem; margin-bottom:0.3em;
+  }
+  .book-mock p{ color:var(--ink-soft); margin:0 0 1.1em; font-size:0.95rem;}
+  .book-mock .subject-tag{
+    display:inline-block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    background:var(--gold);
+    color:#3A2A05;
+    padding:4px 10px;
+    border-radius:4px;
+    margin-bottom:14px;
+  }
+
+  /* Stamp — signature element, an ink-stamp seal */
+  .stamp{
+    --size:128px;
+    width:var(--size); height:var(--size);
+    position:absolute;
+    right:-10px; bottom:-18px;
+    transform:rotate(-11deg);
+  }
+  .stamp svg{ width:100%; height:100%; display:block; }
+  .stamp-ring{
+    fill:none; stroke:var(--stamp); stroke-width:2.4;
+  }
+  .stamp-ring-dash{
+    fill:none; stroke:var(--stamp); stroke-width:1.4; stroke-dasharray:3 4;
+  }
+  .stamp-check path{
+    stroke:var(--stamp); stroke-width:5; fill:none; stroke-linecap:round; stroke-linejoin:round;
+  }
+  .stamp text{
+    fill:var(--stamp);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:8.6px;
+    font-weight:600;
+    letter-spacing:2.4px;
+  }
+  .stamp-inline{
+    position:static; transform:rotate(-7deg); right:auto; bottom:auto;
+    --size:92px;
+  }
+
+  /* ---------------- GENERIC SECTION ---------------- */
+  section{ padding:74px 0; }
+  .section-head{ max-width:640px; margin-bottom:44px; }
+  .section-head p{ color:var(--ink-soft); font-size:1.02rem; }
+
+  .band-alt{ background:var(--paper-light); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .band-dark{ background:var(--chalk); color:#EDE6D3; }
+  .band-dark h2, .band-dark h3{ color:#fff; }
+
+  /* ---------------- SUBJECTS: timetable-style grid ---------------- */
+  .level-row{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:18px;
+    margin-bottom:40px;
+  }
+  .level-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:5px solid var(--naija);
+    border-radius:8px;
+    padding:22px 22px;
+    box-shadow:var(--shadow);
+  }
+  .level-card h3{ font-size:1.05rem; margin-bottom:0.25em; }
+  .level-card span.tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem;
+    color:var(--naija-dark);
+    letter-spacing:0.08em;
+  }
+  .level-card .level-desc{
+    color:var(--ink-soft);
+    font-size:0.9rem;
+    margin:0.5em 0 1.1em;
+  }
+
+  .subject-table{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .subject-row{
+    display:grid;
+    grid-template-columns:2.2fr 1fr;
+    align-items:start;
+    padding:20px 26px;
+    border-bottom:1px solid var(--line);
+  }
+  .subject-row:last-child{ border-bottom:none; }
+  .subject-row:nth-child(odd){ background:rgba(0,129,74,0.035); }
+  .subject-name{ font-weight:600; font-size:1.02rem; }
+  .subject-desc{
+    color:var(--ink-soft);
+    font-size:0.87rem;
+    margin:4px 0 0;
+    max-width:52ch;
+  }
+  .subject-row .code{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    justify-self:end;
+    letter-spacing:0.04em;
+    padding-top:2px;
+  }
+
+  /* ---------------- STUDENTS / TEACHERS ---------------- */
+  .lang-band{
+    background:var(--chalk);
+    padding:48px 0;
+  }
+  .lang-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:32px;
+    flex-wrap:wrap;
+  }
+  .lang-inner h2{ color:#fff; margin-bottom:0.35em; font-size:1.5rem; }
+  .lang-inner p{ color:#D8D0BB; max-width:56ch; margin:0; }
+  .lang-inner > div{ flex:1 1 380px; }
+  .split{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:26px;
+  }
+  .panel{
+    background:var(--card);
+    border-radius:10px;
+    padding:32px 30px;
+    box-shadow:var(--shadow);
+    border-top:5px solid var(--gold);
+  }
+  .panel.teacher{ border-top-color:var(--naija); }
+  .panel h3{ font-size:1.3rem; }
+  .panel ul{ padding-left:1.1em; margin:1em 0 0; color:var(--ink-soft); }
+  .panel li{ margin-bottom:0.5em; }
+  .panel li strong{ color:var(--chalk); }
+  body.dark .panel li strong{ color:#8FD9AE; }
+
+  /* ---------------- RESOURCES ---------------- */
+  .resource-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(190px, 1fr));
+    gap:18px;
+  }
+  .resource-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:22px 18px;
+    text-align:left;
+  }
+  .resource-card .icon{
+    width:38px; height:38px;
+    border-radius:50%;
+    background:var(--paper);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:14px;
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:600;
+    color:var(--naija-dark);
+    font-size:0.85rem;
+  }
+  .resource-card h4{ font-size:1rem; margin-bottom:0.2em; color:var(--ink); font-family:'Work Sans'; font-weight:700;}
+  .resource-card p{ color:var(--ink-soft); font-size:0.9rem; margin:0;}
+
+  /* ---------------- ARTICLES ---------------- */
+  .article-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:22px;
+  }
+  .article-card{
+    background:var(--card);
+    border-radius:8px;
+    padding:24px 22px;
+    box-shadow:var(--shadow);
+    border-left:4px solid var(--cat, var(--naija));
+    position:relative;
+  }
+  .article-card .cat{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--cat, var(--naija-dark));
+    margin-bottom:10px;
+    display:inline-block;
+  }
+  .article-card h4{ font-size:1.05rem; color:var(--chalk); margin-bottom:0.4em; font-family:'Bitter'; }
+  .article-card p{ color:var(--ink-soft); font-size:0.9rem; margin:0; }
+  .article-card .updated{
+    display:block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    opacity:0.75;
+    margin-top:14px;
+  }
+
+  /* ---------------- WHY CHOOSE US ---------------- */
+  .why-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:16px 32px;
+  }
+  .why-item{
+    display:flex; gap:14px; align-items:flex-start;
+    padding:18px 0;
+    border-bottom:1px dashed var(--line);
+  }
+  .why-check{
+    flex-shrink:0;
+    width:26px; height:26px; border-radius:50%;
+    background:var(--naija); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-size:0.85rem; font-weight:700;
+  }
+  .why-item p{ margin:0; color:#EDE6D3; }
+  .why-item strong{ color:#fff; display:block; margin-bottom:2px; }
+
+  /* ---------------- TESTIMONIALS ---------------- */
+  .testimonial-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:22px;
+  }
+  .testimonial-card{
+    background:var(--paper-light);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:28px 24px 24px;
+    position:relative;
+  }
+  .testimonial-card .quote-mark{
+    font-family:'Bitter', serif;
+    font-size:2.6rem;
+    color:var(--gold);
+    line-height:1;
+    display:block;
+    margin-bottom:6px;
+  }
+  .testimonial-card p.quote{
+    color:var(--ink-soft);
+    font-size:0.98rem;
+    margin:0 0 18px;
+  }
+  .testimonial-who{
+    display:flex; align-items:center; gap:12px;
+  }
+  .testimonial-avatar{
+    width:42px; height:42px;
+    border-radius:50%;
+    background:var(--naija);
+    color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:600;
+    font-size:0.85rem;
+    flex-shrink:0;
+  }
+  .testimonial-who .name{ font-weight:700; font-size:0.92rem; color:var(--chalk); display:block; }
+  .testimonial-who .role{ font-size:0.8rem; color:var(--ink-soft); }
+
+  /* ---------------- TEAM ---------------- */
+  .team-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:22px;
+  }
+  .team-card{
+    text-align:center;
+  }
+  .team-photo-frame{
+    width:130px; height:130px;
+    border-radius:50%;
+    margin:0 auto 16px;
+    overflow:hidden;
+    border:4px solid var(--paper-light);
+    box-shadow:var(--shadow);
+    background:var(--chalk);
+  }
+  .team-photo-frame img{
+    width:100%; height:100%; object-fit:cover; object-position:center 30%;
+  }
+  .team-initial{
+    width:100%; height:100%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Bitter', serif;
+    font-weight:700;
+    font-size:1.8rem;
+    color:#fff;
+  }
+  .team-card h4{
+    font-family:'Bitter', serif;
+    color:var(--chalk);
+    font-size:1.02rem;
+    margin:0 0 2px;
+  }
+  .team-card .team-role{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    color:var(--naija-dark);
+  }
+
+  /* ---------------- MISSION / VISION ---------------- */
+  .mv-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:26px;
+  }
+  .mv-card{
+    background:var(--paper-light);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:30px 28px;
+  }
+  .mv-card .eyebrow{ margin-bottom:0.6em; }
+  .mv-card p{ color:var(--ink-soft); margin:0; }
+
+  /* ---------------- ABOUT ---------------- */
+  .about-inner{
+    display:grid;
+    grid-template-columns:0.85fr 1.15fr;
+    gap:48px;
+    align-items:center;
+  }
+  .about-stamp-wrap{ display:flex; flex-direction:column; align-items:center; }
+  .about-text p{ color:var(--ink-soft); margin-bottom:1.1em; font-size:1.02rem;}
+  .founder-frame{
+    position:relative;
+    width:220px; height:220px;
+    border-radius:50%;
+    overflow:hidden;
+    border:5px solid var(--card);
+    box-shadow:var(--shadow);
+    background:var(--chalk);
+  }
+  .founder-photo{
+    width:100%; height:100%;
+    object-fit:cover;
+    object-position:center 30%;
+  }
+  .founder-stamp{
+    position:absolute;
+    right:-14px; bottom:-14px;
+    --size:76px;
+    background:var(--paper-light);
+    border-radius:50%;
+    padding:4px;
+  }
+  .founder-caption{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--naija-dark);
+    margin-top:16px;
+  }
+
+  /* ---------------- CONTACT ---------------- */
+  .contact-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:18px;
+  }
+  .contact-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:24px 20px;
+    text-decoration:none;
+    color:var(--ink);
+    transition:border-color .2s ease, transform .15s ease;
+  }
+  .contact-card:hover{ border-color:var(--naija); transform:translateY(-3px); }
+  .contact-card .label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--naija-dark);
+    display:block;
+    margin-bottom:8px;
+  }
+  .contact-card .value{ font-weight:600; word-break:break-word; }
+
+  .contact-form{
+    max-width:560px;
+    margin-top:40px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:30px 28px;
+    box-shadow:var(--shadow);
+  }
+  .form-title{ font-size:1.15rem; margin-bottom:0.9em; }
+  .form-row{ margin-bottom:16px; display:flex; flex-direction:column; gap:6px; }
+  .form-row label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--naija-dark);
+  }
+  .form-row input, .form-row textarea{
+    font-family:'Work Sans', sans-serif;
+    font-size:0.95rem;
+    padding:11px 14px;
+    border-radius:6px;
+    border:1px solid var(--line);
+    background:var(--paper-light);
+    color:var(--ink);
+    resize:vertical;
+  }
+  .form-row input:focus, .form-row textarea:focus{
+    outline:none;
+    border-color:var(--gold);
+    box-shadow:0 0 0 3px rgba(200,138,46,0.18);
+  }
+  .form-status{
+    margin:14px 0 0;
+    font-size:0.9rem;
+    color:var(--naija-dark);
+  }
+
+  /* ---------------- FAQ ---------------- */
+  .faq-list details{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:18px 22px;
+    margin-bottom:14px;
+  }
+  .faq-list summary{
+    cursor:pointer;
+    font-weight:600;
+    font-family:'Bitter', serif;
+    color:var(--chalk);
+    list-style:none;
+    display:flex; justify-content:space-between; align-items:center;
+    gap:12px;
+  }
+  .faq-list summary::-webkit-details-marker{ display:none; }
+  .faq-list summary::after{
+    content:"+";
+    font-family:'IBM Plex Mono', monospace;
+    font-size:1.2rem;
+    color:var(--gold);
+    flex-shrink:0;
+  }
+  .faq-list details[open] summary::after{ content:"–"; }
+  .faq-list p{ color:var(--ink-soft); margin:0.8em 0 0; }
+
+  /* ---------------- LEGAL ---------------- */
+  .legal-list details{
+    border-bottom:1px solid var(--line);
+    padding:16px 0;
+  }
+  .legal-list summary{
+    cursor:pointer;
+    font-weight:600;
+    color:var(--chalk);
+    list-style:none;
+    font-family:'Bitter', serif;
+    font-size:1.05rem;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .legal-list summary::-webkit-details-marker{ display:none; }
+  .legal-list summary::after{ content:"View →"; font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--naija-dark); }
+  .legal-list details[open] summary::after{ content:"Hide ↑"; }
+  .legal-list p{ color:var(--ink-soft); margin:0.9em 0 0; max-width:70ch; }
+
+  /* ---------------- FOOTER ---------------- */
+  footer{
+    background:var(--chalk-dark);
+    color:#C9C2AC;
+    padding:56px 0 26px;
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr;
+    gap:32px;
+    margin-bottom:40px;
+  }
+  footer h4{ color:#fff; font-family:'Bitter'; font-size:1rem; margin-bottom:1em; }
+  footer ul{ list-style:none; margin:0; padding:0; }
+  footer li{ margin-bottom:0.6em; }
+  footer a{ color:#C9C2AC; text-decoration:none; }
+  footer a:hover{ color:#fff; }
+  .footer-brand{ font-family:'Bitter'; color:#fff; font-weight:700; font-size:1.15rem; margin-bottom:0.4em; }
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.1);
+    padding-top:22px;
+    font-size:0.85rem;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+
+  /* ---------------- SCROLL REVEAL ---------------- */
+  .js-ready .level-card,
+  .js-ready .panel,
+  .js-ready .resource-card,
+  .js-ready .article-card,
+  .js-ready .why-item,
+  .js-ready .mv-card,
+  .js-ready .testimonial-card,
+  .js-ready .team-card,
+  .js-ready .contact-card{
+    opacity:0;
+    transform:translateY(18px);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  .js-ready .level-card.in-view,
+  .js-ready .panel.in-view,
+  .js-ready .resource-card.in-view,
+  .js-ready .article-card.in-view,
+  .js-ready .why-item.in-view,
+  .js-ready .mv-card.in-view,
+  .js-ready .testimonial-card.in-view,
+  .js-ready .team-card.in-view,
+  .js-ready .contact-card.in-view{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  /* ---------------- BACK TO TOP ---------------- */
+  .back-to-top{
+    position:fixed;
+    right:22px; bottom:22px;
+    width:46px; height:46px;
+    border-radius:50%;
+    background:var(--naija);
+    color:#fff;
+    border:none;
+    font-size:1.2rem;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(0,0,0,0.25);
+    opacity:0;
+    pointer-events:none;
+    transform:translateY(10px);
+    transition:opacity .25s ease, transform .25s ease, background .2s ease;
+    z-index:90;
+  }
+  .back-to-top.show{
+    opacity:1;
+    pointer-events:auto;
+    transform:translateY(0);
+  }
+  .back-to-top:hover{ background:var(--naija-dark); }
+
+  /* ---------------- SEARCH BAR ---------------- */
+  .search-bar{
+    max-width:480px;
+    margin:0 0 36px;
+    position:relative;
+  }
+  .search-bar input{
+    width:100%;
+    font-family:'Work Sans', sans-serif;
+    font-size:0.95rem;
+    padding:13px 18px;
+    border-radius:24px;
+    border:1px solid var(--line);
+    background:var(--card);
+    color:var(--ink);
+    outline:none;
+  }
+  .search-bar input:focus{ border-color:var(--gold); box-shadow:0 0 0 3px rgba(200,138,46,0.18); }
+  .search-bar input::placeholder{ color:var(--ink-soft); }
+  .no-results{
+    display:none;
+    color:var(--ink-soft);
+    font-size:0.92rem;
+    font-style:italic;
+    padding:14px 4px;
+  }
+  /* ---------------- RESPONSIVE ---------------- */
+  @media (max-width:900px){
+    .hero-inner, .about-inner{ grid-template-columns:1fr; }
+    .about-inner{ text-align:left; }
+    .about-stamp-wrap{ justify-content:flex-start; }
+    .level-row{ grid-template-columns:1fr; }
+    .split{ grid-template-columns:1fr; }
+    .resource-grid{ grid-template-columns:repeat(2,1fr); }
+    .article-grid{ grid-template-columns:1fr; }
+    .why-grid{ grid-template-columns:1fr; }
+    .mv-grid{ grid-template-columns:1fr; }
+    .contact-grid{ grid-template-columns:repeat(2,1fr); }
+    .footer-grid{ grid-template-columns:1fr 1fr; }
+    .testimonial-grid{ grid-template-columns:1fr; }
+    .team-grid{ grid-template-columns:repeat(2,1fr); }
+  }
+  @media (max-width:520px){
+    .resource-grid, .contact-grid{ grid-template-columns:1fr; }
+    .team-grid{ grid-template-columns:1fr; }
+    .subject-row{ padding:16px 18px; }
+    section{ padding:56px 0; }
+    .hero{ padding:56px 0 76px; }
+  }
 </style>
-
 </head>
-
 <body>
 
 <header>
-<h1>Naija Study Hub Tech</h1>
-<p>Making Learning Simple and Accessible</p>
+  <div class="nav-inner">
+    <a class="brand" href="#home">
+      <span class="brand-mark">NSH</span>
+      Naija Study Hub
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="siteNav">☰ Menu</button>
+    <nav id="siteNav">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#subjects">Lesson Materials</a></li>
+        <li><a href="#articles">Blog</a></li>
+        <li><a href="#about">About Us</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-cta" href="#contact">Contact</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+  </div>
 </header>
 
-<nav>
-<a href="index.html">Home</a>
-<a href="blog.html">Blog</a>
-</nav>
+<!-- ================= HERO / HOME ================= -->
+<section class="hero" id="home">
+  <div class="wrap hero-inner">
+    <div>
+      <span class="eyebrow">Primary · JSS · SSS</span>
+      <h1>Making learning simple and accessible</h1>
+      <p class="lede">Naija Study Hub is your trusted online platform for simple, clear, and quality educational materials — lessons, notes, revision guides, and exam prep to help students learn better.</p>
+      <p class="syllabus-line">✓ Aligned with WAEC, NECO &amp; JAMB syllabus — notes available in English and Hausa.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="#subjects">Start Learning</a>
+        <a class="btn btn-outline" href="#subjects">Explore Subjects</a>
+      </div>
+    </div>
+    <div class="book-mock">
+      <span class="subject-tag">Exam Prep</span>
+      <h3>Revision Notes, JSS 3</h3>
+      <p>Clear explanations, past questions, and study guides written the way students actually understand.</p>
+      <span class="subject-tag" style="background:var(--naija); color:#fff;">Updated Weekly</span>
+      <div class="stamp" aria-hidden="true">
+        <svg viewBox="0 0 100 100">
+          <circle class="stamp-ring" cx="50" cy="50" r="44"/>
+          <circle class="stamp-ring-dash" cx="50" cy="50" r="36"/>
+          <path id="stampArc" d="M 50 14 A 36 36 0 0 1 86 50" fill="none"/>
+          <text><textPath href="#stampArc" startOffset="2">QUALITY</textPath></text>
+          <g class="stamp-check" transform="translate(38,44)">
+            <path d="M0 8 L7 15 L22 0"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
 
-<div class="hero">
-<h2>Welcome!</h2>
-<p>Free educational resources for students, teachers, and lifelong learners.</p>
+<!-- ================= SUBJECTS ================= -->
+<section id="subjects">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">What we cover</span>
+      <h2>Our subjects</h2>
+      <p>Learning materials organised by school level and subject — built for Nigerian curricula, from Primary through Senior Secondary.</p>
+    </div>
 
-<a class="button" href="blog.html">Read Articles</a>
-</div>
+    <div class="search-bar">
+      <input type="text" id="siteSearch" placeholder="Search subjects or articles… e.g. Mathematics, Civic" aria-label="Search subjects or articles">
+    </div>
 
+    <div class="level-row">
+      <div class="level-card">
+        <span class="tag">LEVEL 01</span>
+        <h3>Primary School</h3>
+        <p class="level-desc">Fun lessons and activities to build strong foundations.</p>
+        <a class="btn btn-primary btn-small" href="#subjects">Learn More</a>
+      </div>
+      <div class="level-card">
+        <span class="tag">LEVEL 02</span>
+        <h3>Junior Secondary (JSS)</h3>
+        <p class="level-desc">Core subjects and study guides for JSS 1–3.</p>
+        <a class="btn btn-primary btn-small" href="#subjects">Explore Now</a>
+      </div>
+      <div class="level-card">
+        <span class="tag">LEVEL 03</span>
+        <h3>Senior Secondary (SSS)</h3>
+        <p class="level-desc">Exam prep and past questions for SSS 1–3.</p>
+        <a class="btn btn-primary btn-small" href="#subjects">Start Learning</a>
+      </div>
+    </div>
+
+    <div class="subject-table">
+      <div class="subject-row">
+        <div>
+          <span class="subject-name">Mathematics</span>
+          <p class="subject-desc">Numbers, algebra, geometry, and the problem-solving skills used in everyday life and exams.</p>
+        </div>
+        <span class="code">MTH</span>
+      </div>
+      <div class="subject-row">
+        <div>
+          <span class="subject-name">English Language</span>
+          <p class="subject-desc">Grammar, comprehension, essay writing, and communication skills for every level.</p>
+        </div>
+        <span class="code">ENG</span>
+      </div>
+      <div class="subject-row">
+        <div>
+          <span class="subject-name">Basic Science</span>
+          <p class="subject-desc">An introduction to living things, energy, matter, and how the natural world works.</p>
+        </div>
+        <span class="code">BSC</span>
+      </div>
+      <div class="subject-row">
+        <div>
+          <span class="subject-name">Civic Education</span>
+          <p class="subject-desc">Citizenship, rights and duties, government structures, and community values.</p>
+        </div>
+        <span class="code">CIV</span>
+      </div>
+      <div class="subject-row">
+        <div>
+          <span class="subject-name">Social Studies</span>
+          <p class="subject-desc">How people, society, and the environment interact — culture, history, and community life.</p>
+        </div>
+        <span class="code">SOS</span>
+      </div>
+      <div class="subject-row">
+        <div>
+          <span class="subject-name">Hausa Language</span>
+          <p class="subject-desc">Reading, writing, and speaking skills in Hausa, one of Nigeria's major languages.</p>
+        </div>
+        <span class="code">HAU</span>
+      </div>
+    </div>
+    <p class="no-results" id="noSubjectResults">No subjects match your search.</p>
+  </div>
+</section>
+
+<!-- ================= SCIENCE & ARTS TRACKS ================= -->
+<section class="band-alt" id="tracks">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Senior Secondary specialisation</span>
+      <h2>Science &amp; Arts subjects</h2>
+      <p>From SSS 1, students choose a track. Here's a quick look at what each core subject covers.</p>
+    </div>
+    <div class="split">
+      <div class="panel">
+        <h3>Science Subjects</h3>
+        <ul>
+          <li><strong>Physics</strong> — the study of matter, energy, motion, and the laws that govern the physical world.</li>
+          <li><strong>Chemistry</strong> — elements, compounds, and reactions: understanding what things are made of and how they change.</li>
+          <li><strong>Biology</strong> — living organisms, from cells to ecosystems, and how life functions and survives.</li>
+          <li><strong>Further Mathematics</strong> — advanced mathematical concepts for students headed into engineering, technology, or the sciences.</li>
+          <li><strong>Agricultural Science</strong> — crop and animal production, soil science, and modern farming practices.</li>
+        </ul>
+      </div>
+      <div class="panel teacher">
+        <h3>Arts &amp; Commercial Subjects</h3>
+        <ul>
+          <li><strong>Government</strong> — how nations are governed: political systems, institutions, and the rule of law.</li>
+          <li><strong>Economics</strong> — how individuals, businesses, and nations manage resources, trade, and money.</li>
+          <li><strong>Literature in English</strong> — novels, drama, and poetry, building analytical and creative reading skills.</li>
+          <li><strong>CRS / IRS</strong> — moral and religious education rooted in Christian or Islamic teachings.</li>
+          <li><strong>Geography</strong> — landforms, climate, population, and how people relate to their environment.</li>
+          <li><strong>Commerce</strong> — the basics of trade, business operations, and how markets work.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LANGUAGE HIGHLIGHT ================= -->
+<section class="lang-band">
+  <div class="wrap lang-inner">
+    <div>
+      <span class="eyebrow" style="color:#B7E3C7;">A rare feature</span>
+      <h2>Notes in English — and in Hausa</h2>
+      <p>Most study platforms in Nigeria are English-only. We're building out Hausa-language notes and explanations too, so more students can learn in the language they understand best.</p>
+    </div>
+    <a class="btn btn-primary" href="#subjects">See Hausa Language Notes</a>
+  </div>
+</section>
+
+<!-- ================= STUDENTS / TEACHERS ================= -->
+<section class="band-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Who it's for</span>
+      <h2>Built for students and teachers</h2>
+    </div>
+    <div class="split">
+      <div class="panel">
+        <h3>For Students</h3>
+        <ul>
+          <li>Revision notes</li>
+          <li>Past questions and answers</li>
+          <li>Study guides</li>
+          <li>Exam preparation tips</li>
+          <li>Easy explanations of difficult topics</li>
+        </ul>
+      </div>
+      <div class="panel teacher">
+        <h3>For Teachers</h3>
+        <ul>
+          <li>Lesson notes</li>
+          <li>Lesson plans</li>
+          <li>Teaching resources</li>
+          <li>Classroom materials</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FREE RESOURCES ================= -->
 <section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">No cost to start</span>
+      <h2>Free educational resources</h2>
+      <p>Useful learning materials, ready whenever you need them. Notes and articles are free — downloadable PDF packs and full past-question sets are coming soon.</p>
+    </div>
+    <div class="resource-grid">
+      <div class="resource-card">
+        <span class="icon">N</span>
+        <h4>Notes</h4>
+        <p>Clear, well-organised subject notes.</p>
+      </div>
+      <div class="resource-card">
+        <span class="icon">W</span>
+        <h4>Worksheets</h4>
+        <p>Practice sheets to test understanding.</p>
+      </div>
+      <div class="resource-card">
+        <span class="icon">G</span>
+        <h4>Study Guides</h4>
+        <p>Step-by-step guides for revision.</p>
+      </div>
+      <div class="resource-card">
+        <span class="icon">Q</span>
+        <h4>Past Questions</h4>
+        <p>WAEC and NECO questions with worked answers, not just the questions.</p>
+      </div>
+      <div class="resource-card">
+        <span class="icon">A</span>
+        <h4>Articles</h4>
+        <p>Educational articles on key topics.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-<div class="card">
-<h3>Biology</h3>
-<p>Characteristics of Living Things, Digestive System, Planaria, Earthworm and more.</p>
-</div>
+<!-- ================= LATEST ARTICLES ================= -->
+<section class="band-alt" id="articles">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Fresh from the blog</span>
+      <h2>Latest articles</h2>
+    </div>
+    <div class="article-grid">
+      <div class="article-card" style="--cat:#00814A">
+        <span class="cat">Basic Science</span>
+        <h4>Characteristics of Living Things</h4>
+        <p>An easy breakdown of the features every living thing shares.</p>
+        <span class="updated">Updated Jun 2026</span>
+      </div>
+      <div class="article-card" style="--cat:#B23A2E">
+        <span class="cat">Basic Science</span>
+        <h4>Digestive System in Humans</h4>
+        <p>How the body breaks down and absorbs food, explained simply.</p>
+        <span class="updated">Updated Jun 2026</span>
+      </div>
+      <div class="article-card" style="--cat:#00814A">
+        <span class="cat">Basic Science</span>
+        <h4>Parts of Plants and Their Functions</h4>
+        <p>Roots, stems, leaves, and what each one does for the plant.</p>
+        <span class="updated">Updated May 2026</span>
+      </div>
+      <div class="article-card" style="--cat:#C88A2E">
+        <span class="cat">Civic Education</span>
+        <h4>Introduction to Civic Education</h4>
+        <p>Why civic education matters and what it covers in school.</p>
+        <span class="updated">Updated May 2026</span>
+      </div>
+      <div class="article-card" style="--cat:#C88A2E">
+        <span class="cat">Social Studies</span>
+        <h4>Social Studies Lessons</h4>
+        <p>Key topics students meet across the Social Studies curriculum.</p>
+        <span class="updated">Updated Apr 2026</span>
+      </div>
+      <div class="article-card" style="--cat:#B23A2E">
+        <span class="cat">Basic Science</span>
+        <h4>Basic Science Topics</h4>
+        <p>An overview of the core topics covered this term.</p>
+        <span class="updated">Updated Apr 2026</span>
+      </div>
+      <div class="article-card" style="--cat:#123524">
+        <span class="cat">WAEC / NECO</span>
+        <h4>Past Questions &amp; Worked Answers</h4>
+        <p>Real past exam questions with step-by-step answers, not just the questions alone.</p>
+        <span class="updated">Updated Jul 2026</span>
+      </div>
 
-<div class="card">
-<h3>English</h3>
-<p>Parts of Speech, Grammar, Vocabulary and Writing Skills.</p>
-</div>
+    </div>
+    <p class="no-results" id="noArticleResults">No articles match your search.</p>
+  </div>
+</section>
 
-<div class="card">
-<h3>Mathematics</h3>
-<p>Fractions, Algebra, Geometry and Exam Preparation.</p>
-</div>
+<!-- ================= WHY CHOOSE US ================= -->
+<section class="band-dark">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" style="color:#9FE0BE;">Why students stay</span>
+      <h2>Why choose Naija Study Hub?</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-item">
+        <span class="why-check">✓</span>
+        <p><strong>Simple and easy explanations</strong>No confusing grammar — just clear answers.</p>
+      </div>
+      <div class="why-item">
+        <span class="why-check">✓</span>
+        <p><strong>Quality educational materials</strong>Checked and organised for real classroom use.</p>
+      </div>
+      <div class="why-item">
+        <span class="why-check">✓</span>
+        <p><strong>Helpful for students and teachers</strong>Resources built for both sides of the classroom.</p>
+      </div>
+      <div class="why-item">
+        <span class="why-check">✓</span>
+        <p><strong>Regular updates</strong>New notes and articles added often.</p>
+      </div>
+      <div class="why-item">
+        <span class="why-check">✓</span>
+        <p><strong>Learning support anytime</strong>Come back whenever revision calls.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-<div class="card">
-<h3>Civic Education</h3>
-<p>Government, Citizenship, Rights and Responsibilities.</p>
-</div>
+<!-- ================= TESTIMONIALS ================= -->
+<section id="testimonials">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">In their words</span>
+      <h2>What students and teachers say</h2>
+    </div>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote">The notes explain things so simply. I finally understand topics I struggled with all term.</p>
+        <div class="testimonial-who">
+          <div class="testimonial-avatar">CJ</div>
+          <div>
+            <span class="name">Chidinma J.</span>
+            <span class="role">SSS 2 Student</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote">I use the lesson notes to prepare my classes faster. It saves me hours every week.</p>
+        <div class="testimonial-who">
+          <div class="testimonial-avatar">AM</div>
+          <div>
+            <span class="name">Mr. Abubakar M.</span>
+            <span class="role">JSS Teacher</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote">Past questions and study guides helped me revise properly before my exams.</p>
+        <div class="testimonial-who">
+          <div class="testimonial-avatar">TO</div>
+          <div>
+            <span class="name">Tolu O.</span>
+            <span class="role">Primary 6 Student</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- ================= MISSION / VISION ================= -->
+<section>
+  <div class="wrap mv-grid">
+    <div class="mv-card">
+      <span class="eyebrow">Our mission</span>
+      <p>To make education simple, accessible, and useful by providing quality learning resources for students and teachers.</p>
+    </div>
+    <div class="mv-card">
+      <span class="eyebrow">Our vision</span>
+      <p>To become a trusted online educational platform in Nigeria and beyond.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="band-alt" id="about">
+  <div class="wrap about-inner">
+    <div class="about-stamp-wrap">
+      <div class="founder-frame">
+        <img src="assets/founder.jpg" alt="Founder of Naija Study Hub" class="founder-photo">
+        <div class="stamp stamp-inline founder-stamp" aria-hidden="true">
+          <svg viewBox="0 0 100 100">
+            <circle class="stamp-ring" cx="50" cy="50" r="44"/>
+            <circle class="stamp-ring-dash" cx="50" cy="50" r="36"/>
+            <path id="stampArc2" d="M 50 14 A 36 36 0 0 1 86 50" fill="none"/>
+            <text><textPath href="#stampArc2" startOffset="2">TRUSTED</textPath></text>
+            <g class="stamp-check" transform="translate(38,44)">
+              <path d="M0 8 L7 15 L22 0"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <p class="founder-caption">Founder, Naija Study Hub</p>
+    </div>
+    <div class="about-text">
+      <span class="eyebrow">About us</span>
+      <h2>About Naija Study Hub</h2>
+      <p>Naija Study Hub is an educational platform created to support students and teachers with useful learning materials.</p>
+      <p>Our aim is to make learning easier through simple explanations, notes, and educational resources.</p>
+      <p>We believe every learner deserves access to quality education.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TEAM ================= -->
+<section class="band-alt" id="team">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">The people behind it</span>
+      <h2>Meet the team</h2>
+      <p>A small team working to make quality learning materials easy to find.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-photo-frame">
+          <img src="assets/founder.jpg" alt="Founder of Naija Study Hub">
+        </div>
+        <h4>Yunusa Zaharaddeen</h4>
+        <span class="team-role">Founder</span>
+      </div>
+      <div class="team-card">
+        <div class="team-photo-frame">
+          <div class="team-initial">HL</div>
+        </div>
+        <h4>Halima L.</h4>
+        <span class="team-role">Content Writer</span>
+      </div>
+      <div class="team-card">
+        <div class="team-photo-frame">
+          <div class="team-initial">SB</div>
+        </div>
+        <h4>Suleiman B.</h4>
+        <span class="team-role">Subject Editor</span>
+      </div>
+      <div class="team-card">
+        <div class="team-photo-frame">
+          <div class="team-initial">FA</div>
+        </div>
+        <h4>Fatima A.</h4>
+        <span class="team-role">Community Support</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Get in touch</span>
+      <h2>Contact us</h2>
+      <p>We would love to hear from you — questions, suggestions, or support.</p>
+    </div>
+    <div class="contact-grid">
+      <a class="contact-card" href="tel:08148438332">
+        <span class="label">Phone</span>
+        <span class="value">08148438332</span>
+      </a>
+      <a class="contact-card" href="mailto:yunusazaharaddeen093@gmail.com">
+        <span class="label">Email</span>
+        <span class="value">yunusazaharaddeen093@gmail.com</span>
+      </a>
+      <a class="contact-card" href="https://wa.me/2348148438332" target="_blank" rel="noopener">
+        <span class="label">WhatsApp</span>
+        <span class="value">Chat with us</span>
+      </a>
+      <a class="contact-card" href="https://www.facebook.com/profile.php?id=100090580205491" target="_blank" rel="noopener">
+        <span class="label">Facebook</span>
+        <span class="value">Follow our page</span>
+      </a>
+    </div>
+
+    <!-- Contact form connected to Formspree (https://formspree.io/f/xzdndknd) -->
+    <form class="contact-form" id="contactForm" action="https://formspree.io/f/xzdndknd" method="POST">
+      <h3 class="form-title">Send us a message</h3>
+      <div class="form-row">
+        <label for="cf-name">Name</label>
+        <input type="text" id="cf-name" name="name" required>
+      </div>
+      <div class="form-row">
+        <label for="cf-email">Email</label>
+        <input type="email" id="cf-email" name="email" required>
+      </div>
+      <div class="form-row">
+        <label for="cf-message">Message</label>
+        <textarea id="cf-message" name="message" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Send Message</button>
+      <p class="form-status" id="formStatus" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="band-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Common questions</span>
+      <h2>Frequently asked questions</h2>
+    </div>
+    <div class="faq-list">
+      <details>
+        <summary>Are the learning materials free?</summary>
+        <p>Some learning materials are available free to help students improve their knowledge.</p>
+      </details>
+      <details>
+        <summary>Which students can use this website?</summary>
+        <p>Our materials are designed for Primary, JSS, and SSS students.</p>
+      </details>
+      <details>
+        <summary>Can teachers use this website?</summary>
+        <p>Yes. Teachers can use our resources for lesson preparation and teaching support.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LEGAL ================= -->
+<section id="legal">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">The fine print</span>
+      <h2>Legal &amp; policies</h2>
+    </div>
+    <div class="legal-list">
+      <details id="privacy">
+        <summary>Privacy Policy</summary>
+        <p>Naija Study Hub respects the privacy of our visitors. We collect information only when necessary to improve our services and communicate with users. We do not sell users' personal information to third parties.</p>
+      </details>
+      <details id="disclaimer">
+        <summary>Disclaimer</summary>
+        <p>The information on Naija Study Hub is provided for educational purposes. We make efforts to provide accurate information, but users should verify information where necessary.</p>
+      </details>
+      <details id="terms">
+        <summary>Terms and Conditions</summary>
+        <p>By using Naija Study Hub, you agree to use our content responsibly. Copying or distributing our materials without permission is not allowed. We may update our website content when necessary.</p>
+      </details>
+    </div>
+  </div>
 </section>
 
 <footer>
-<p>&copy; 2026 Naija Study Hub Tech. All Rights Reserved.</p>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Naija Study Hub</div>
+        <p style="max-width:32ch;">Making learning simple and accessible.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#team">Team</a></li>
+          <li><a href="#subjects">Subjects</a></li>
+          <li><a href="#tracks">Science &amp; Arts</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#articles">Blog</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Phone: 08148438332</li>
+          <li>Email: yunusazaharaddeen093@gmail.com</li>
+          <li><a href="https://wa.me/2348148438332" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="https://www.facebook.com/profile.php?id=100090580205491" target="_blank" rel="noopener">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Naija Study Hub. All Rights Reserved.</span>
+      <span>Nigeria</span>
+    </div>
+  </div>
 </footer>
 
+<button class="back-to-top" id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
+
+<script>
+  document.body.classList.add('js-ready');
+
+  /* ---- Mobile nav ---- */
+  const navToggle = document.getElementById('navToggle');
+  const siteNav = document.getElementById('siteNav');
+  navToggle.addEventListener('click', () => {
+    const isOpen = siteNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+  siteNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      siteNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  /* ---- Dark / light mode toggle ---- */
+  const themeToggle = document.getElementById('themeToggle');
+  function applyTheme(isDark){
+    document.body.classList.toggle('dark', isDark);
+    themeToggle.textContent = isDark ? '☀️' : '🌙';
+  }
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  applyTheme(prefersDark);
+  themeToggle.addEventListener('click', () => {
+    applyTheme(!document.body.classList.contains('dark'));
+  });
+
+  /* ---- Back to top button ---- */
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('show', window.scrollY > 400);
+  });
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  /* ---- Scroll-triggered reveal animations ---- */
+  const revealTargets = document.querySelectorAll(
+    '.level-card, .panel, .resource-card, .article-card, .why-item, .mv-card, .testimonial-card, .team-card, .contact-card'
+  );
+  if ('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealTargets.forEach(el => io.observe(el));
+  } else {
+    revealTargets.forEach(el => el.classList.add('in-view'));
+  }
+
+  /* ---- Search: filter subjects and articles ---- */
+  const searchInput = document.getElementById('siteSearch');
+  const noSubjectResults = document.getElementById('noSubjectResults');
+  const noArticleResults = document.getElementById('noArticleResults');
+  searchInput.addEventListener('input', () => {
+    const q = searchInput.value.trim().toLowerCase();
+
+    let anySubjectVisible = false;
+    document.querySelectorAll('.subject-row').forEach(row => {
+      const text = row.querySelector('.subject-name').textContent.toLowerCase();
+      const match = text.includes(q);
+      row.style.display = match ? '' : 'none';
+      if (match) anySubjectVisible = true;
+    });
+    noSubjectResults.style.display = (q && !anySubjectVisible) ? 'block' : 'none';
+
+    let anyArticleVisible = false;
+    document.querySelectorAll('.article-card').forEach(card => {
+      const title = card.querySelector('h4').textContent.toLowerCase();
+      const cat = card.querySelector('.cat').textContent.toLowerCase();
+      const match = (title + ' ' + cat).includes(q);
+      card.style.display = match ? '' : 'none';
+      if (match) anyArticleVisible = true;
+    });
+    noArticleResults.style.display = (q && !anyArticleVisible) ? 'block' : 'none';
+  });
+  /* ---- Contact form submission ---- */
+  const contactForm = document.getElementById('contactForm');
+  const formStatus = document.getElementById('formStatus');
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (contactForm.action.includes('YOUR_FORM_ID')){
+      formStatus.textContent = 'Form not connected yet — set up your free Formspree endpoint (see comment in the HTML) to start receiving messages.';
+      return;
+    }
+    formStatus.textContent = 'Sending…';
+    try{
+      const res = await fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok){
+        formStatus.textContent = 'Thank you — your message has been sent!';
+        contactForm.reset();
+      } else {
+        formStatus.textContent = 'Something went wrong. Please try again or use WhatsApp/email above.';
+      }
+    } catch(err){
+      formStatus.textContent = 'Something went wrong. Please try again or use WhatsApp/email above.';
+    }
+  });
+</script>
 </body>
 </html>
