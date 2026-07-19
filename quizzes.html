@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naija Study Hub - Interactive Quizzes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        /* Quiz List View */
+        .quiz-list {
+            display: grid;
+            gap: 20px;
+        }
+
+        .quiz-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .quiz-card h3 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .quiz-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .quiz-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .quiz-card p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+
+        .quiz-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Quiz Question View */
+        .quiz-container {
+            display: none;
+        }
+
+        .quiz-container.active {
+            display: block;
+        }
+
+        .quiz-progress {
+            margin-bottom: 30px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .progress-header h2 {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .question-counter {
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .question-text {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .option {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 15px;
+            color: #333;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            background: #f0f3ff;
+        }
+
+        .option.selected {
+            border-color: #667eea;
+            background: #e8ebff;
+        }
+
+        .option.correct {
+            border-color: #28a745;
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .option.incorrect {
+            border-color: #dc3545;
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .feedback {
+            background: #f0f3ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback h4 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .feedback p {
+            color: #333;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .quiz-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: #e9ecef;
+            color: #333;
+            flex: 1;
+        }
+
+        .btn-secondary:hover {
+            background: #dee2e6;
+        }
+
+        /* Results View */
+        .results-container {
+            display: none;
+            text-align: center;
+        }
+
+        .results-container.active {
+            display: block;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .score-circle .score-number {
+            font-size: 48px;
+            font-weight: 700;
+        }
+
+        .score-circle .score-text {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .results-message {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .results-details {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            text-align: left;
+        }
+
+        .detail-item h4 {
+            color: #667eea;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-item p {
+            color: #333;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-group .btn {
+            flex: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .content {
+                padding: 20px 15px;
+            }
+
+            .question-text {
+                font-size: 16px;
+            }
+
+            .results-details {
+                grid-template-columns: 1fr;
+            }
+
+            .quiz-meta {
+                flex-wrap: wrap;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Interactive Quizzes</h1>
+            <p>Test your knowledge and track your progress</p>
+        </div>
+
+        <div class="content">
+            <!-- Quiz List -->
+            <div class="quiz-list" id="quizList"></div>
+
+            <!-- Quiz Question Container -->
+            <div class="quiz-container" id="quizContainer">
+                <div class="quiz-progress">
+                    <div class="progress-header">
+                        <h2 id="quizTitle"></h2>
+                        <span class="question-counter"><span id="currentQuestion">1</span>/<span id="totalQuestions">10</span></span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="question-text" id="questionText"></div>
+
+                <div class="feedback" id="feedback">
+                    <h4 id="feedbackTitle"></h4>
+                    <p id="feedbackText"></p>
+                </div>
+
+                <div class="options" id="options"></div>
+
+                <div class="quiz-actions">
+                    <button class="btn btn-secondary" onclick="backToQuizList()">← Back</button>
+                    <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">Next →</button>
+                </div>
+            </div>
+
+            <!-- Results Container -->
+            <div class="results-container" id="resultsContainer">
+                <div class="score-circle">
+                    <div class="score-number" id="scorePercentage">0%</div>
+                    <div class="score-text">Score</div>
+                </div>
+
+                <div class="results-message" id="resultMessage"></div>
+
+                <div class="results-details">
+                    <div class="detail-item">
+                        <h4>Correct Answers</h4>
+                        <p id="correctCount">0</p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>Total Questions</h4>
+                        <p id="totalCount">0</p>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="retakeQuiz()">Retake Quiz</button>
+                    <button class="btn btn-secondary" onclick="backToQuizList()">Back to Quizzes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz Data
+        const quizzes = [
+            {
+                id: 1,
+                title: "Basic Science: Living Things",
+                subject: "Basic Science",
+                level: "JSS 1",
+                questions: 5,
+                difficulty: "Beginner",
+                questions_data: [
+                    {
+                        question: "Which of the following is NOT a characteristic of living things?",
+                        options: [
+                            "Respiration",
+                            "Movement",
+                            "Transparency",
+                            "Growth"
+                        ],
+                        correct: 2,
+                        explanation: "Transparency is not a characteristic of all living things. Living things have respiration, movement, and growth as universal features."
+                    },
+                    {
+                        question: "What is the basic unit of life?",
+                        options: [
+                            "Tissue",
+                            "Cell",
+                            "Organ",
+                            "Organism"
+                        ],
+                        correct: 1,
+                        explanation: "The cell is the basic unit of life. All living organisms are made up of one or more cells."
+                    },
+                    {
+                        question: "Which process do plants use to make their own food?",
+                        options: [
+                            "Respiration",
+                            "Photosynthesis",
+                            "Digestion",
+                            "Fermentation"
+                        ],
+                        correct: 1,
+                        explanation: "Plants use photosynthesis to convert sunlight into chemical energy (food). This happens in the chloroplasts of plant cells."
+                    },
+                    {
+                        question: "What do organisms need to survive?",
+                        options: [
+                            "Food only",
+                            "Water only",
+                            "Food, water, and oxygen",
+                            "Sunlight only"
+                        ],
+                        correct: 2,
+                        explanation: "All organisms need food (for energy and growth), water (for cellular functions), and oxygen (for respiration, though some anaerobic organisms don't)."
+                    },
+                    {
+                        question: "Which of these is an example of a unicellular organism?",
+                        options: [
+                            "Dog",
+                            "Bacteria",
+                            "Tree",
+                            "Human"
+                        ],
+                        correct: 1,
+                        explanation: "Bacteria are unicellular organisms (consisting of a single cell). Dogs, trees, and humans are multicellular organisms."
+                    }
+                ]
+            },
+            {
+                id: 2,
+                title: "Mathematics: Basic Algebra",
+                subject: "Mathematics",
+                level: "JSS 2",
+                questions: 5,
+                difficulty: "Intermediate",
+                questions_data: [
+                    {
+                        question: "Solve for x: 2x + 5 = 13",
+                        options: [
+                            "x = 4",
+                            "x = 5",
+                            "x = 6",
+                            "x = 9"
+                        ],
+                        correct: 0,
+                        explanation: "2x + 5 = 13 → 2x = 13 - 5 → 2x = 8 → x = 4. Subtract 5 from both sides, then divide by 2."
+                    },
+                    {
+                        question: "What is the value of 3² + 2³?",
+                        options: [
+                            "13",
+                            "17",
+                            "15",
+                            "19"
+                        ],
+                        correct: 1,
+                        explanation: "3² = 9 and 2³ = 8. So 9 + 8 = 17."
+                    },
+                    {
+                        question: "Simplify: 4a + 3a - 2a",
+                        options: [
+                            "5a",
+                            "7a",
+                            "9a",
+                            "3a"
+                        ],
+                        correct: 0,
+                        explanation: "Combine like terms: 4a + 3a - 2a = (4 + 3 - 2)a = 5a"
+                    },
+                    {
+                        question: "If y = 2x + 1, what is y when x = 3?",
+                        options: [
+                            "5",
+                            "7",
+                            "6",
+                            "8"
+                        ],
+                        correct: 1,
+                        explanation: "Substitute x = 3 into the equation: y = 2(3) + 1 = 6 + 1 = 7"
+                    },
+                    {
+                        question: "What is the solution to x/2 = 6?",
+                        options: [
+                            "x = 3",
+                            "x = 8",
+                            "x = 12",
+                            "x = 4"
+                        ],
+                        correct: 2,
+                        explanation: "x/2 = 6 → x = 6 × 2 → x = 12. Multiply both sides by 2."
+                    }
+                ]
+            },
+            {
+                id: 3,
+                title: "English Language: Parts of Speech",
+                subject: "English Language",
+                level: "JSS 1",
+                questions: 5,
+                difficulty: "Beginner",
+                questions_data: [
+                    {
+                        question: "Which word is a noun in this sentence: 'The cat sleeps peacefully'?",
+                        options: [
+                            "sleeps",
+                            "cat",
+                            "peacefully",
+                            "the"
+                        ],
+                        correct: 1,
+                        explanation: "A noun is a person, place, or thing. 'Cat' is a noun (an animal). 'Sleeps' is a verb, 'peacefully' is an adverb, and 'the' is an article."
+                    },
+                    {
+                        question: "Identify the verb in: 'She writes beautiful poems'",
+                        options: [
+                            "She",
+                            "beautiful",
+                            "writes",
+                            "poems"
+                        ],
+                        correct: 2,
+                        explanation: "A verb is an action word. 'Writes' is the action being performed. 'Beautiful' is an adjective, and 'poems' is a noun."
+                    },
+                    {
+                        question: "Which word is an adjective in this sentence: 'The old house is beautiful'?",
+                        options: [
+                            "is",
+                            "house",
+                            "old",
+                            "the"
+                        ],
+                        correct: 2,
+                        explanation: "An adjective describes a noun. Both 'old' and 'beautiful' are adjectives, but 'old' directly modifies 'house'."
+                    },
+                    {
+                        question: "What part of speech is 'quickly' in 'He ran quickly'?",
+                        options: [
+                            "Adjective",
+                            "Adverb",
+                            "Noun",
+                            "Verb"
+                        ],
+                        correct: 1,
+                        explanation: "An adverb modifies a verb and usually ends in -ly. 'Quickly' describes how he ran, so it's an adverb."
+                    },
+                    {
+                        question: "Which word is a pronoun in: 'I gave her the book'?",
+                        options: [
+                            "gave",
+                            "book",
+                            "her",
+                            "the"
+                        ],
+                        correct: 2,
+                        explanation: "A pronoun replaces a noun. 'I' and 'her' are pronouns. 'Gave' is a verb and 'book' is a noun."
+                    }
+                ]
+            }
+        ];
+
+        // State Management
+        let currentQuizIndex = null;
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
+        let quizStarted = false;
+
+        // Initialize
+        function init() {
+            displayQuizzes();
+            loadFromStorage();
+        }
+
+        // Display Quiz List
+        function displayQuizzes() {
+            const quizList = document.getElementById('quizList');
+            quizList.innerHTML = quizzes.map(quiz => {
+                const saved = localStorage.getItem(`quiz_${quiz.id}`);
+                const data = saved ? JSON.parse(saved) : { score: 0, completed: false };
+                const progress = data.completed ? 100 : (data.attempts || 0) * 20;
+                
+                return `
+                    <div class="quiz-card" onclick="startQuiz(${quiz.id})">
+                        <h3>${quiz.title}</h3>
+                        <div class="quiz-meta">
+                            <span>📖 ${quiz.subject}</span>
+                            <span>📊 ${quiz.level}</span>
+                            <span>❓ ${quiz.questions} Questions</span>
+                            <span>⭐ ${quiz.difficulty}</span>
+                        </div>
+                        <p>${quiz.questions_data.map(q => q.question).slice(0, 2).join(' • ')}...</p>
+                        ${data.completed ? `
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%"></div>
+                            </div>
+                            <div class="quiz-status">
+                                <span>✅ Completed</span>
+                                <span>Score: ${data.score}%</span>
+                            </div>
+                        ` : `
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${progress}%"></div>
+                            </div>
+                            <div class="quiz-status">
+                                <span>Not Started</span>
+                                <button class="start-btn">Start Quiz →</button>
+                            </div>
+                        `}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Start Quiz
+        function startQuiz(id) {
+            currentQuizIndex = id - 1;
+            currentQuestionIndex = 0;
+            userAnswers = [];
+            quizStarted = true;
+
+            document.getElementById('quizList').style.display = 'none';
+            document.getElementById('quizContainer').classList.add('active');
+            document.getElementById('resultsContainer').classList.remove('active');
+
+            displayQuestion();
+        }
+
+        // Display Question
+        function displayQuestion() {
+            const quiz = quizzes[currentQuizIndex];
+            const question = quiz.questions_data[currentQuestionIndex];
+            const progress = ((currentQuestionIndex) / quiz.questions_data.length) * 100;
+
+            document.getElementById('quizTitle').textContent = quiz.title;
+            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+            document.getElementById('totalQuestions').textContent = quiz.questions_data.length;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('questionText').textContent = question.question;
+            document.getElementById('feedback').classList.remove('show');
+
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = question.options.map((option, index) => `
+                <div class="option" onclick="selectOption(${index})" data-index="${index}">
+                    ${option}
+                </div>
+            `).join('');
+
+            document.getElementById('nextBtn').textContent = currentQuestionIndex === quiz.questions_data.length - 1 ? 'Finish Quiz' : 'Next →';
+        }
+
+        // Select Option
+        function selectOption(index) {
+            const quiz = quizzes[currentQuizIndex];
+            const question = quiz.questions_data[currentQuestionIndex];
+            const options = document.querySelectorAll('.option');
+
+            userAnswers[currentQuestionIndex] = index;
+
+            options.forEach((opt, i) => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+                if (i === index) {
+                    opt.classList.add(i === question.correct ? 'correct' : 'incorrect');
+                }
+                if (i === question.correct) {
+                    opt.classList.add('correct');
+                }
+            });
+
+            // Show feedback
+            const feedback = document.getElementById('feedback');
+            document.getElementById('feedbackTitle').textContent = index === question.correct ? '✅ Correct!' : '❌ Incorrect';
+            document.getElementById('feedbackText').textContent = question.explanation;
+            feedback.classList.add('show');
+        }
+
+        // Next Question
+        function nextQuestion() {
+            const quiz = quizzes[currentQuizIndex];
+            
+            if (userAnswers[currentQuestionIndex] === undefined) {
+                alert('Please select an answer before proceeding!');
+                return;
+            }
+
+            if (currentQuestionIndex < quiz.questions_data.length - 1) {
+                currentQuestionIndex++;
+                displayQuestion();
+                window.scrollTo(0, 0);
+            } else {
+                finishQuiz();
+            }
+        }
+
+        // Finish Quiz
+        function finishQuiz() {
+            const quiz = quizzes[currentQuizIndex];
+            let correct = 0;
+
+            quiz.questions_data.forEach((q, index) => {
+                if (userAnswers[index] === q.correct) correct++;
+            });
+
+            const percentage = Math.round((correct / quiz.questions_data.length) * 100);
+
+            // Save to localStorage
+            const saved = localStorage.getItem(`quiz_${quiz.id}`) || '{}';
+            const data = JSON.parse(saved);
+            data.score = percentage;
+            data.completed = true;
+            data.date = new Date().toISOString();
+            data.attempts = (data.attempts || 0) + 1;
+            localStorage.setItem(`quiz_${quiz.id}`, JSON.stringify(data));
+
+            // Show Results
+            document.getElementById('quizContainer').classList.remove('active');
+            document.getElementById('resultsContainer').classList.add('active');
+            document.getElementById('scorePercentage').textContent = percentage + '%';
+            document.getElementById('correctCount').textContent = correct;
+            document.getElementById('totalCount').textContent = quiz.questions_data.length;
+
+            const message = percentage >= 80 ? 'Excellent! You mastered this topic! 🎉' :
+                           percentage >= 60 ? 'Good job! Keep practicing! 👍' :
+                           percentage >= 40 ? 'Good try! Review the material and try again. 📚' :
+                           'Keep learning! Review this topic and retake the quiz. 💪';
+            document.getElementById('resultMessage').textContent = message;
+
+            window.scrollTo(0, 0);
+        }
+
+        // Retake Quiz
+        function retakeQuiz() {
+            startQuiz(quizzes[currentQuizIndex].id);
+        }
+
+        // Back to Quiz List
+        function backToQuizList() {
+            if (confirm('Leave this quiz? Your progress won\'t be saved unless you finish.')) {
+                document.getElementById('quizList').style.display = 'grid';
+                document.getElementById('quizContainer').classList.remove('active');
+                document.getElementById('resultsContainer').classList.remove('active');
+                quizStarted = false;
+                displayQuizzes();
+                window.scrollTo(0, 0);
+            }
+        }
+
+        // Load Progress from Storage
+        function loadFromStorage() {
+            console.log('Quizzes loaded from localStorage');
+        }
+
+        // Initialize on load
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>

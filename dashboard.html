@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naija Study Hub - Student Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+        }
+
+        /* Login Screen */
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .login-box h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .login-box p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 12px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .signup-link {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .signup-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Dashboard */
+        .dashboard {
+            display: none;
+        }
+
+        .dashboard.active {
+            display: block;
+        }
+
+        .top-nav {
+            background: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .user-menu {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .user-name {
+            color: #333;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .logout-btn {
+            background: #f5f7fa;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            color: #666;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: #e9ecef;
+            color: #333;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .welcome-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .welcome-section h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .welcome-section p {
+            font-size: 15px;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .streak-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border: 1px solid #e9ecef;
+        }
+
+        .card h3 {
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Stat Card */
+        .stat-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Progress Card */
+        .progress-section {
+            margin-bottom: 20px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .progress-header h4 {
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .progress-percent {
+            color: #667eea;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+
+        /* Achievement Grid */
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .achievement {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            opacity: 0.5;
+        }
+
+        .achievement.unlocked {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            opacity: 1;
+        }
+
+        .achievement-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .achievement-name {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Recommendations */
+        .recommendation-list {
+            list-style: none;
+        }
+
+        .recommendation-item {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid #667eea;
+        }
+
+        .recommendation-item:hover {
+            background: #e8ebff;
+            transform: translateX(5px);
+        }
+
+        .recommendation-text {
+            color: #333;
+            font-size: 13px;
+        }
+
+        .recommendation-difficulty {
+            background: #667eea;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* Study Calendar */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .calendar-day.studied {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .calendar-day.today {
+            border: 2px solid #667eea;
+        }
+
+        /* Full Width Section */
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .achievement-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .welcome-section h2 {
+                font-size: 22px;
+            }
+
+            .main-content {
+                padding: 20px 15px;
+            }
+
+            .login-box {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div class="login-container" id="loginContainer">
+        <div class="login-box">
+            <h1>Naija Study Hub</h1>
+            <p>Welcome back! Continue your learning journey</p>
+
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Student Name</label>
+                    <input type="text" id="studentName" placeholder="Enter your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email or Phone</label>
+                    <input type="text" id="studentEmail" placeholder="your@email.com or 0803xxxxxxx" required>
+                </div>
+
+                <button type="submit" class="login-btn">Login to Dashboard</button>
+            </form>
+
+            <div class="signup-link">
+                New student? <a onclick="toggleSignup()">Create Account</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="dashboard" id="dashboard">
+        <!-- Top Navigation -->
+        <div class="top-nav">
+            <div class="nav-content">
+                <div class="logo">📚 Naija Study Hub</div>
+                <div class="user-menu">
+                    <div class="user-name" id="navUserName"></div>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+                <h2>Welcome back, <span id="welcomeName"></span>! 👋</h2>
+                <p>You're on a great learning journey. Keep up the momentum!</p>
+                <div class="streak-badge">
+                    🔥 <span id="streakDays">0</span> day study streak
+                </div>
+            </div>
+
+            <!-- Main Grid -->
+            <div class="grid">
+                <!-- Progress Overview -->
+                <div class="card">
+                    <h3>📊 Overall Progress</h3>
+                    <div class="stat-value" id="overallProgress">0%</div>
+                    <div class="stat-label">Completion Rate</div>
+                    <div style="margin-top: 20px;">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="overallProgressBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quizzes Completed -->
+                <div class="card">
+                    <h3>✅ Quizzes Completed</h3>
+                    <div class="stat-value" id="quizzesCompleted">0</div>
+                    <div class="stat-label">This Month</div>
+                </div>
+
+                <!-- Average Score -->
+                <div class="card">
+                    <h3>⭐ Average Score</h3>
+                    <div class="stat-value" id="averageScore">0%</div>
+                    <div class="stat-label">All Quizzes</div>
+                </div>
+
+                <!-- Subject Progress -->
+                <div class="card full-width">
+                    <h3>📚 Subject Progress</h3>
+                    <div id="subjectProgress"></div>
+                </div>
+
+                <!-- Study Streak Calendar -->
+                <div class="card full-width">
+                    <h3>📅 Study Activity (Last 28 Days)</h3>
+                    <div class="calendar-grid" id="calendar"></div>
+                </div>
+
+                <!-- Achievements -->
+                <div class="card full-width">
+                    <h3>🏆 Achievements</h3>
+                    <div class="achievement-grid" id="achievements"></div>
+                </div>
+
+                <!-- Recommended Topics -->
+                <div class="card full-width">
+                    <h3>🎯 Recommended for You</h3>
+                    <ul class="recommendation-list" id="recommendations"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data Management
+        class StudentDashboard {
+            constructor() {
+                this.currentUser = this.loadUser();
+                this.quizData = this.loadQuizData();
+            }
+
+            loadUser() {
+                return JSON.parse(localStorage.getItem('currentStudent')) || null;
+            }
+
+            saveUser(user) {
+                localStorage.setItem('currentStudent', JSON.stringify(user));
+                this.currentUser = user;
+            }
+
+            loadQuizData() {
+                const data = {};
+                for (let i = 1; i <= 3; i++) {
+                    const saved = localStorage.getItem(`quiz_${i}`);
+                    if (saved) {
+                        data[i] = JSON.parse(saved);
+                    }
+                }
+                return data;
+            }
+
+            calculateProgress() {
+                let totalQuizzes = 3;
+                let completedQuizzes = Object.values(this.quizData).filter(q => q.completed).length;
+                return Math.round((completedQuizzes / totalQuizzes) * 100);
+            }
+
+            calculateAverageScore() {
+                const scores = Object.values(this.quizData)
+                    .filter(q => q.completed)
+                    .map(q => q.score);
+                
+                if (scores.length === 0) return 0;
+                return Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
+            }
+
+            getSubjectProgress() {
+                return [
+                    { name: 'Basic Science', progress: this.quizData[1]?.score || 0 },
+                    { name: 'Mathematics', progress: this.quizData[2]?.score || 0 },
+                    { name: 'English Language', progress: this.quizData[3]?.score || 0 }
+                ];
+            }
+
+            getRecommendations() {
+                const subjects = this.getSubjectProgress();
+                return subjects
+                    .filter(s => s.progress === 0)
+                    .map(s => ({
+                        subject: s.name,
+                        reason: 'Start learning this topic',
+                        difficulty: 'Beginner'
+                    }))
+                    .concat(
+                        subjects
+                            .filter(s => s.progress > 0 && s.progress < 80)
+                            .map(s => ({
+                                subject: s.name,
+                                reason: 'Keep practicing to improve',
+                                difficulty: 'Intermediate'
+                            }))
+                    );
+            }
+
+            getStreak() {
+                const lastStudy = localStorage.getItem('lastStudyDate');
+                if (!lastStudy) return 0;
+                
+                const lastDate = new Date(lastStudy);
+                const today = new Date();
+                const diffTime = today - lastDate;
+                const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+                
+                return diffDays <= 1 ? (parseInt(localStorage.getItem('streak')) || 0) + 1 : 0;
+            }
+
+            recordStudyActivity() {
+                const today = new Date().toISOString().split('T')[0];
+                localStorage.setItem('lastStudyDate', today);
+                localStorage.setItem('streak', this.getStreak());
+            }
+        }
+
+        const dashboard = new StudentDashboard();
+
+        // Login Handler
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('studentName').value.trim();
+            const email = document.getElementById('studentEmail').value.trim();
+
+            if (!name || !email) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            const user = {
+                id: Date.now(),
+                name: name,
+                email: email,
+                joinDate: new Date().toISOString()
+            };
+
+            dashboard.saveUser(user);
+            dashboard.recordStudyActivity();
+            showDashboard();
+        }
+
+        function showDashboard() {
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('dashboard').classList.add('active');
+            updateDashboard();
+        }
+
+        function updateDashboard() {
+            const user = dashboard.currentUser;
+            
+            // Update names
+            document.getElementById('welcomeName').textContent = user.name.split(' ')[0];
+            document.getElementById('navUserName').textContent = user.name;
+
+            // Update stats
+            const progress = dashboard.calculateProgress();
+            const avgScore = dashboard.calculateAverageScore();
+            const quizzesCompleted = Object.values(dashboard.quizData).filter(q => q.completed).length;
+
+            document.getElementById('overallProgress').textContent = progress + '%';
+            document.getElementById('overallProgressBar').style.width = progress + '%';
+            document.getElementById('averageScore').textContent = avgScore + '%';
+            document.getElementById('quizzesCompleted').textContent = quizzesCompleted;
+            document.getElementById('streakDays').textContent = dashboard.getStreak();
+
+            // Subject Progress
+            const subjectProgress = dashboard.getSubjectProgress();
+            document.getElementById('subjectProgress').innerHTML = subjectProgress.map(subject => `
+                <div class="progress-section">
+                    <div class="progress-header">
+                        <h4>${subject.name}</h4>
+                        <div class="progress-percent">${subject.progress}%</div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${subject.progress}%"></div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Calendar
+            updateCalendar();
+
+            // Achievements
+            updateAchievements(avgScore);
+
+            // Recommendations
+            const recommendations = dashboard.getRecommendations();
+            document.getElementById('recommendations').innerHTML = recommendations.map(rec => `
+                <li class="recommendation-item">
+                    <span class="recommendation-text">
+                        ${rec.subject} — ${rec.reason}
+                    </span>
+                    <span class="recommendation-difficulty">${rec.difficulty}</span>
+                </li>
+            `).join('');
+        }
+
+        function updateCalendar() {
+            const calendar = document.getElementById('calendar');
+            const today = new Date();
+            const days = [];
+
+            for (let i = 27; i >= 0; i--) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                const dateStr = date.toISOString().split('T')[0];
+                const isToday = dateStr === today.toISOString().split('T')[0];
+                
+                // Simulate some study activity
+                const studied = Math.random() > 0.6;
+                
+                days.push(`
+                    <div class="calendar-day ${studied ? 'studied' : ''} ${isToday ? 'today' : ''}">
+                        ${date.getDate()}
+                    </div>
+                `);
+            }
+
+            calendar.innerHTML = days.join('');
+        }
+
+        function updateAchievements(avgScore) {
+            const achievements = [
+                { name: 'First Quiz', icon: '🎯', unlocked: Object.values(dashboard.quizData).some(q => q.completed) },
+                { name: '5 Day Streak', icon: '🔥', unlocked: dashboard.getStreak() >= 5 },
+                { name: 'High Scorer', icon: '⭐', unlocked: avgScore >= 80 },
+                { name: '3 Topics Done', icon: '📚', unlocked: Object.values(dashboard.quizData).filter(q => q.completed).length >= 3 },
+                { name: 'Perfect Score', icon: '💯', unlocked: Object.values(dashboard.quizData).some(q => q.score === 100) },
+                { name: 'Consistent Learner', icon: '✅', unlocked: dashboard.getStreak() >= 30 }
+            ];
+
+            document.getElementById('achievements').innerHTML = achievements.map(ach => `
+                <div class="achievement ${ach.unlocked ? 'unlocked' : ''}">
+                    <div class="achievement-icon">${ach.icon}</div>
+                    <div class="achievement-name">${ach.name}</div>
+                </div>
+            `).join('');
+        }
+
+        function logout() {
+            if (confirm('Logout from your account?')) {
+                localStorage.removeItem('currentStudent');
+                dashboard.currentUser = null;
+                document.getElementById('loginContainer').style.display = 'flex';
+                document.getElementById('dashboard').classList.remove('active');
+                document.getElementById('studentName').value = '';
+                document.getElementById('studentEmail').value = '';
+            }
+        }
+
+        function toggleSignup() {
+            alert('Sign up: Use the form above to create your account (it will be saved automatically)');
+        }
+
+        // Check if user is logged in
+        window.addEventListener('load', () => {
+            if (dashboard.currentUser) {
+                showDashboard();
+            }
+        });
+    </script>
+</body>
+</html>

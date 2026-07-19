@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naija Study Hub - Premium Study Packs</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .header-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .header-btn:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .filter-group label {
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .filter-group select {
+            padding: 8px 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        .filter-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transform: translate(30%, -30%);
+        }
+
+        .badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #ff6b6b;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .badge.popular {
+            background: #ffd43b;
+            color: #333;
+        }
+
+        .product-content {
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-category {
+            color: #667eea;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .product-title {
+            color: #333;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .product-description {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            flex: 1;
+            line-height: 1.6;
+        }
+
+        .product-includes {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .product-includes h4 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .includes-list {
+            list-style: none;
+            color: #666;
+        }
+
+        .includes-list li {
+            padding: 4px 0;
+            font-size: 12px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .includes-list li:before {
+            content: '✓';
+            color: #28a745;
+            font-weight: 700;
+        }
+
+        .product-footer {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .product-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .product-price-label {
+            font-size: 12px;
+            color: #666;
+            display: block;
+        }
+
+        .buy-btn {
+            flex: 1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .buy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Bundle Grid */
+        .bundle-section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        /* Payment Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            margin-bottom: 25px;
+        }
+
+        .modal-header h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .modal-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .payment-method {
+            border: 2px solid #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .payment-method:hover {
+            border-color: #667eea;
+            background: #f0f3ff;
+        }
+
+        .payment-method.selected {
+            border-color: #667eea;
+            background: #e8ebff;
+            color: #667eea;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .checkout-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .order-summary {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .summary-total {
+            border-top: 2px solid #e9ecef;
+            padding-top: 10px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .success-message {
+            text-align: center;
+            color: #28a745;
+            padding: 20px;
+            background: #d4edda;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-group {
+                width: 100%;
+            }
+
+            .filter-group select {
+                width: 100%;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>📚 Premium Study Packs</h1>
+        <p>Ace your exams with our comprehensive study materials</p>
+        <div class="header-buttons">
+            <a href="#" class="header-btn">← Back to Home</a>
+            <a href="student-dashboard.html" class="header-btn">My Dashboard</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <div class="filter-group">
+                <label>Subject:</label>
+                <select id="subjectFilter" onchange="filterProducts()">
+                    <option value="">All Subjects</option>
+                    <option value="Basic Science">Basic Science</option>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="English">English Language</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Level:</label>
+                <select id="levelFilter" onchange="filterProducts()">
+                    <option value="">All Levels</option>
+                    <option value="Primary">Primary School</option>
+                    <option value="JSS">Junior Secondary</option>
+                    <option value="SSS">Senior Secondary</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Price Range:</label>
+                <select id="priceFilter" onchange="filterProducts()">
+                    <option value="">All Prices</option>
+                    <option value="0-1000">₦0 - ₦1,000</option>
+                    <option value="1000-3000">₦1,000 - ₦3,000</option>
+                    <option value="3000+">₦3,000+</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- JAMBWAEC Section -->
+        <div class="bundle-section">
+            <h2 class="section-title">🎓 JAMB & WAEC Prep Bundles</h2>
+            <p class="section-subtitle">Complete study packages to help you ace major exams</p>
+            <div class="products-grid" id="productsContainer"></div>
+        </div>
+
+        <!-- Subject Packs Section -->
+        <div class="bundle-section">
+            <h2 class="section-title">📖 Subject Study Packs</h2>
+            <p class="section-subtitle">Deep dive into individual subjects with comprehensive notes and past questions</p>
+            <div class="products-grid" id="subjectsContainer"></div>
+        </div>
+
+        <!-- School Packages Section -->
+        <div class="bundle-section">
+            <h2 class="section-title">🏫 School/Bulk Packages</h2>
+            <p class="section-subtitle">For teachers and schools - get licensing for your entire institution</p>
+            <div class="products-grid" id="schoolsContainer"></div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <h2>Complete Your Order</h2>
+                <p>Secure payment via Paystack or Flutterwave</p>
+            </div>
+
+            <div class="success-message" id="successMessage">
+                ✅ Payment successful! Your study pack is being prepared for download.
+            </div>
+
+            <div class="order-summary" id="orderSummary"></div>
+
+            <form onsubmit="processPayment(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="customerName" placeholder="Your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="customerEmail" placeholder="your@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="customerPhone" placeholder="0803xxxxxxx" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <div class="payment-methods">
+                        <div class="payment-method selected" data-method="paystack" onclick="selectPaymentMethod('paystack')">
+                            Paystack
+                        </div>
+                        <div class="payment-method" data-method="flutterwave" onclick="selectPaymentMethod('flutterwave')">
+                            Flutterwave
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="checkout-btn" id="checkoutBtn">
+                    Pay ₦<span id="totalPrice">0</span> Securely
+                </button>
+
+                <p style="text-align: center; font-size: 12px; color: #666; margin-top: 15px;">
+                    🔒 Your payment is 100% secure and encrypted
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Products Data
+        const products = [
+            // JAMB/WAEC
+            {
+                id: 1,
+                category: 'exam-prep',
+                title: 'Complete WAEC Mathematics Bundle',
+                subject: 'Mathematics',
+                level: 'SSS',
+                price: 2500,
+                badge: 'BESTSELLER',
+                description: 'Everything you need to excel in WAEC Mathematics - past papers, worked solutions, and revision notes.',
+                includes: ['5 Years Past Papers', 'Worked Solutions', 'Topic Revision Notes', 'Exam Tips'],
+                popular: true
+            },
+            {
+                id: 2,
+                category: 'exam-prep',
+                title: 'JAMB English Mastery Pack',
+                subject: 'English',
+                level: 'SSS',
+                price: 2000,
+                badge: 'POPULAR',
+                description: 'Master JAMB English with comprehension strategies, grammar rules, and practice tests.',
+                includes: ['50 Practice Tests', 'Grammar Guide', 'Comprehension Tips', 'Sample Questions'],
+                popular: true
+            },
+            {
+                id: 3,
+                category: 'exam-prep',
+                title: 'Science Subjects Triple Pack',
+                subject: 'Basic Science',
+                level: 'SSS',
+                price: 3500,
+                badge: 'BESTSELLER',
+                description: 'Physics, Chemistry & Biology - all in one complete package for WAEC/JAMB.',
+                includes: ['Biology Notes', 'Chemistry Formulas', 'Physics Problems', 'Lab Practicals'],
+                popular: true
+            },
+
+            // Subject Packs
+            {
+                id: 4,
+                category: 'subject',
+                title: 'JSS 1-3 Mathematics Complete',
+                subject: 'Mathematics',
+                level: 'JSS',
+                price: 1500,
+                description: 'All JSS mathematics topics with worked examples and practice problems.',
+                includes: ['All 3 Years Content', '100+ Problems', 'Solutions', 'Topic Tests']
+            },
+            {
+                id: 5,
+                category: 'subject',
+                title: 'Advanced English Language',
+                subject: 'English',
+                level: 'SSS',
+                price: 1800,
+                description: 'Advanced grammar, essay writing, and literature analysis for SSS students.',
+                includes: ['Grammar Rules', 'Essay Templates', 'Sample Essays', 'Literature Guide']
+            },
+            {
+                id: 6,
+                category: 'subject',
+                title: 'Biology: Living Systems',
+                subject: 'Basic Science',
+                level: 'JSS',
+                price: 1200,
+                description: 'Comprehensive biology notes covering cells, organisms, and ecosystems.',
+                includes: ['Cell Biology', 'Genetics', 'Ecology', 'Diagrams & Labels']
+            },
+            {
+                id: 7,
+                category: 'subject',
+                title: 'Chemistry Reactions & Formulas',
+                subject: 'Basic Science',
+                level: 'SSS',
+                price: 2000,
+                description: 'Master chemical reactions, bonding, and calculations with this complete guide.',
+                includes: ['Reaction Types', 'Formulas', 'Calculations', 'Lab Notes']
+            },
+
+            // School Packages
+            {
+                id: 8,
+                category: 'school',
+                title: 'Single School License (50 Students)',
+                subject: 'All Subjects',
+                level: 'All',
+                price: 15000,
+                badge: 'SCHOOL LICENSE',
+                description: 'Full access for up to 50 students in one school for one academic year.',
+                includes: ['All Study Materials', 'Student Accounts', 'Progress Tracking', 'Email Support']
+            },
+            {
+                id: 9,
+                category: 'school',
+                title: 'District License (500 Students)',
+                subject: 'All Subjects',
+                level: 'All',
+                price: 100000,
+                badge: 'BULK DISCOUNT',
+                description: 'Enterprise solution for entire school districts with custom support.',
+                includes: ['Unlimited Students', 'Custom Materials', 'Dedicated Support', 'Admin Dashboard']
+            },
+            {
+                id: 10,
+                category: 'subject',
+                title: 'Primary School Foundation Pack',
+                subject: 'All Subjects',
+                level: 'Primary',
+                price: 1000,
+                description: 'Essential subjects for primary school students - English, Maths, and Basic Science.',
+                includes: ['English Lessons', 'Math Problems', 'Science Activities', 'Worksheets']
+            }
+        ];
+
+        let selectedPaymentMethod = 'paystack';
+        let currentProduct = null;
+
+        // Initialize
+        function init() {
+            renderProducts();
+        }
+
+        // Render Products
+        function renderProducts() {
+            const examPrep = products.filter(p => p.category === 'exam-prep');
+            const subjects = products.filter(p => p.category === 'subject' && p.level !== 'All');
+            const schools = products.filter(p => p.category === 'school');
+
+            document.getElementById('productsContainer').innerHTML = renderProductCards(examPrep);
+            document.getElementById('subjectsContainer').innerHTML = renderProductCards(subjects);
+            document.getElementById('schoolsContainer').innerHTML = renderProductCards(schools);
+        }
+
+        function renderProductCards(items) {
+            return items.map(product => `
+                <div class="product-card">
+                    <div class="product-image">
+                        📄
+                        ${product.badge ? `<div class="badge ${product.popular ? 'popular' : ''}">${product.badge}</div>` : ''}
+                    </div>
+                    <div class="product-content">
+                        <div class="product-category">${product.subject}</div>
+                        <h3 class="product-title">${product.title}</h3>
+                        <p class="product-description">${product.description}</p>
+                        
+                        <div class="product-includes">
+                            <h4>What's Included:</h4>
+                            <ul class="includes-list">
+                                ${product.includes.map(item => `<li>${item}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="product-footer">
+                        <div>
+                            <span class="product-price-label">Price</span>
+                            <span class="product-price">₦${product.price.toLocaleString()}</span>
+                        </div>
+                        <button class="buy-btn" onclick="openPaymentModal(${product.id})">
+                            Buy Now
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterProducts() {
+            // Placeholder for filter logic
+            console.log('Filter applied');
+        }
+
+        // Payment Modal
+        function openPaymentModal(productId) {
+            currentProduct = products.find(p => p.id === productId);
+            
+            const summary = `
+                <div class="summary-item">
+                    <span>${currentProduct.title}</span>
+                    <span>₦${currentProduct.price.toLocaleString()}</span>
+                </div>
+                <div class="summary-item">
+                    <span>Processing Fee</span>
+                    <span>₦${Math.round(currentProduct.price * 0.05)}</span>
+                </div>
+                <div class="summary-item summary-total">
+                    <span>Total Amount</span>
+                    <span>₦${(currentProduct.price + Math.round(currentProduct.price * 0.05)).toLocaleString()}</span>
+                </div>
+            `;
+
+            document.getElementById('orderSummary').innerHTML = summary;
+            document.getElementById('totalPrice').textContent = (currentProduct.price + Math.round(currentProduct.price * 0.05)).toLocaleString();
+            document.getElementById('paymentModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('paymentModal').classList.remove('active');
+            document.getElementById('successMessage').classList.remove('show');
+        }
+
+        function selectPaymentMethod(method) {
+            selectedPaymentMethod = method;
+            document.querySelectorAll('.payment-method').forEach(el => {
+                el.classList.remove('selected');
+            });
+            document.querySelector(`[data-method="${method}"]`).classList.add('selected');
+        }
+
+        // Payment Processing
+        function processPayment(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('customerName').value;
+            const email = document.getElementById('customerEmail').value;
+            const phone = document.getElementById('customerPhone').value;
+
+            const total = currentProduct.price + Math.round(currentProduct.price * 0.05);
+
+            // For demo purposes, simulate payment
+            document.getElementById('checkoutBtn').disabled = true;
+            document.getElementById('checkoutBtn').textContent = 'Processing...';
+
+            setTimeout(() => {
+                // In production, integrate with actual Paystack/Flutterwave API
+                console.log('Processing payment via:', selectedPaymentMethod);
+                console.log({
+                    customer: { name, email, phone },
+                    product: currentProduct.title,
+                    amount: total,
+                    method: selectedPaymentMethod
+                });
+
+                // Simulate successful payment
+                document.getElementById('successMessage').classList.add('show');
+                
+                // Save order to localStorage
+                const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+                orders.push({
+                    id: Date.now(),
+                    customer: { name, email, phone },
+                    product: currentProduct.title,
+                    amount: total,
+                    date: new Date().toISOString(),
+                    method: selectedPaymentMethod
+                });
+                localStorage.setItem('orders', JSON.stringify(orders));
+
+                setTimeout(() => {
+                    closeModal();
+                    document.getElementById('customerName').value = '';
+                    document.getElementById('customerEmail').value = '';
+                    document.getElementById('customerPhone').value = '';
+                    document.getElementById('checkoutBtn').disabled = false;
+                    document.getElementById('checkoutBtn').textContent = 'Pay Securely';
+                    alert(`✅ Thank you! Your ${currentProduct.title} will be sent to ${email} shortly.`);
+                }, 2000);
+            }, 2000);
+        }
+
+        // Paystack Integration (Placeholder)
+        function integratePaystack(email, amount, metadata) {
+            // This is a placeholder. In production:
+            // 1. Get Paystack public key
+            // 2. Initialize Paystack modal
+            // 3. Handle payment verification on backend
+            /*
+            const handler = PaystackPop.setup({
+                key: 'YOUR_PAYSTACK_PUBLIC_KEY',
+                email: email,
+                amount: amount * 100,
+                ref: '' + Math.floor((Math.random() * 1000000000) + 1),
+                onClose: function() { alert('Window closed.'); },
+                callback: function(response) {
+                    alert('Payment successful! Reference: ' + response.reference);
+                    // Verify payment on backend
+                }
+            });
+            handler.openIframe();
+            */
+        }
+
+        // Flutterwave Integration (Placeholder)
+        function integrateFlutterwave(email, amount, phone) {
+            // This is a placeholder. In production:
+            // 1. Get Flutterwave public key
+            // 2. Initialize Flutterwave modal
+            // 3. Handle payment verification
+            /*
+            FlutterwaveCheckout({
+                public_key: "YOUR_FLUTTERWAVE_PUBLIC_KEY",
+                tx_ref: "homelum-" + Date.now(),
+                amount: amount,
+                currency: "NGN",
+                payment_options: "card, banktransfer, ussd",
+                customer: { email: email, phone: phone },
+                customizations: {
+                    title: "Naija Study Hub",
+                    description: "Premium Study Pack"
+                },
+                callback: function(data) {
+                    console.log(data);
+                }
+            });
+            */
+        }
+
+        // Initialize on load
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>
