@@ -132,6 +132,9 @@
   .hero h1{color:var(--chalk); font-size:2rem}
   .card-list{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px}
   .card{background:var(--card); padding:18px; border-radius:8px; box-shadow:var(--shadow)}
+
+  /* small language switch */
+  .lang-switch{background:transparent;border:1px solid rgba(255,255,255,0.08);color:#EDE6D3;padding:6px 8px;border-radius:6px;cursor:pointer}
 </style>
 </head>
 <body>
@@ -139,29 +142,32 @@
   <div class="wrap" style="display:flex; align-items:center; justify-content:space-between; padding:14px 0;">
     <a class="brand" href="index.html">Naija Study Hub</a>
     <nav class="nav" aria-label="Main navigation">
-      <a href="index.html" style="color:#EDE6D3;">Home</a>
-      <a href="blog.html" style="color:#EDE6D3;">All Articles</a>
-      <a href="quizzes.html" style="color:#EDE6D3;">Quizzes</a>
-      <a href="dashboard.html" style="color:#EDE6D3;">Dashboard</a>
-      <a class="premium" href="premium.html">⭐ Premium Packs</a>
+      <a href="index.html" data-i18n="nav.home" style="color:#EDE6D3;">Home</a>
+      <a href="blog.html" data-i18n="nav.articles" style="color:#EDE6D3;">All Articles</a>
+      <a href="quizzes.html" data-i18n="nav.quizzes" style="color:#EDE6D3;">Quizzes</a>
+      <a href="dashboard.html" data-i18n="nav.dashboard" style="color:#EDE6D3;">Dashboard</a>
+      <a class="premium" href="premium.html" data-i18n="nav.premium">⭐ Premium Packs</a>
     </nav>
+    <div>
+      <button class="lang-switch" id="langToggle" aria-label="Switch language">HA</button>
+    </div>
   </div>
 </header>
 
 <main class="wrap">
   <section class="hero">
-    <h1>Naija Study Hub — Quality Notes & Revision Guides</h1>
-    <p class="lede" style="color:var(--ink-soft); max-width:56ch;">Free WAEC, NECO, and JAMB-aligned notes, past questions, and revision guides for Primary, JSS, and SSS students in Nigeria.</p>
+    <h1 data-i18n="hero.title">Naija Study Hub — Quality Notes & Revision Guides</h1>
+    <p class="lede" data-i18n="hero.lede" style="color:var(--ink-soft); max-width:56ch;">Free WAEC, NECO, and JAMB-aligned notes, past questions, and revision guides for Primary, JSS, and SSS students in Nigeria.</p>
     <p>
-      <a class="btn btn-primary" href="blog.html" style="background:var(--naija); color:#fff; padding:10px 16px; border-radius:8px; text-decoration:none;">Browse Articles</a>
-      <a class="btn btn-outline" href="quizzes.html" style="margin-left:12px; color:#fff; padding:10px 16px; border-radius:8px; text-decoration:none; border:1px solid rgba(255,255,255,0.1);">Try Quizzes</a>
+      <a class="btn btn-primary" href="blog.html" data-i18n="hero.browse" style="background:var(--naija); color:#fff; padding:10px 16px; border-radius:8px; text-decoration:none;">Browse Articles</a>
+      <a class="btn btn-outline" href="quizzes.html" data-i18n="hero.quizzes" style="margin-left:12px; color:#fff; padding:10px 16px; border-radius:8px; text-decoration:none; border:1px solid rgba(255,255,255,0.1);">Try Quizzes</a>
     </p>
   </section>
 
   <section style="margin-top:28px;">
     <div class="section-head">
-      <h2>Featured Articles</h2>
-      <p style="color:var(--ink-soft);">Handpicked lessons for quick revision.</p>
+      <h2 data-i18n="featured.title">Featured Articles</h2>
+      <p data-i18n="featured.lede" style="color:var(--ink-soft);">Handpicked lessons for quick revision.</p>
     </div>
     <div class="card-list">
       <article class="card"><h3><a href="articles/characteristics-of-living-things.html">Characteristics of Living Things</a></h3><p style="color:var(--ink-soft)">Basic Science — Primary</p></article>
@@ -177,24 +183,99 @@
   <div class="wrap" style="display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap">
     <div>
       <div class="footer-brand">Naija Study Hub</div>
-      <p style="color:var(--ink-soft); max-width:40ch">Making learning simple and accessible for Nigerian students.</p>
+      <p data-i18n="footer.tagline" style="color:var(--ink-soft); max-width:40ch">Making learning simple and accessible for Nigerian students.</p>
     </div>
     <div>
-      <h4 style="color:#fff">Quick Links</h4>
+      <h4 style="color:#fff" data-i18n="footer.links">Quick Links</h4>
       <ul style="list-style:none; padding:0; margin:0; color:var(--ink-soft)">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="blog.html">Browse All Articles</a></li>
-        <li><a href="quizzes.html">Interactive Quizzes</a></li>
-        <li><a href="premium.html">⭐ Premium Packs</a></li>
+        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+        <li><a href="blog.html" data-i18n="nav.articles">Browse All Articles</a></li>
+        <li><a href="quizzes.html" data-i18n="nav.quizzes">Interactive Quizzes</a></li>
+        <li><a href="premium.html" data-i18n="nav.premium">⭐ Premium Packs</a></li>
       </ul>
     </div>
     <div>
-      <h4 style="color:#fff">Contact</h4>
-      <p style="color:var(--ink-soft)">Email: yunusazaharaddeen093@gmail.com<br>Phone: +2348148438332</p>
+      <h4 style="color:#fff" data-i18n="footer.contact">Contact</h4>
+      <p style="color:var(--ink-soft)"><span data-i18n="contact.email">Email</span>: yunusazaharaddeen093@gmail.com<br><span data-i18n="contact.phone">Phone</span>: +2348148438332</p>
     </div>
   </div>
-  <div style="text-align:center; padding:18px 0; border-top:1px solid rgba(255,255,255,0.06); color:#C9C2AC">&copy; 2026 Naija Study Hub — All Rights Reserved</div>
+  <div style="text-align:center; padding:18px 0; border-top:1px solid rgba(255,255,255,0.06); color:#C9C2AC">&copy; 2026 Naija Study Hub — <span data-i18n="footer.rights">All Rights Reserved</span></div>
 </footer>
+
+<script>
+// Simple i18n: English and Hausa translations
+const translations = {
+  en: {
+    'nav.home': 'Home',
+    'nav.articles': 'All Articles',
+    'nav.quizzes': 'Quizzes',
+    'nav.dashboard': 'Dashboard',
+    'nav.premium': '⭐ Premium Packs',
+    'hero.title': 'Naija Study Hub — Quality Notes & Revision Guides',
+    'hero.lede': 'Free WAEC, NECO, and JAMB-aligned notes, past questions, and revision guides for Primary, JSS, and SSS students in Nigeria.',
+    'hero.browse': 'Browse Articles',
+    'hero.quizzes': 'Try Quizzes',
+    'featured.title': 'Featured Articles',
+    'featured.lede': 'Handpicked lessons for quick revision.',
+    'footer.tagline': 'Making learning simple and accessible for Nigerian students.',
+    'footer.links': 'Quick Links',
+    'footer.contact': 'Contact',
+    'contact.email': 'Email',
+    'contact.phone': 'Phone',
+    'footer.rights': 'All Rights Reserved'
+  },
+  ha: {
+    'nav.home': 'Gida',
+    'nav.articles': 'Dukkan Labarai',
+    'nav.quizzes': 'Gwaje-gwaje',
+    'nav.dashboard': 'Dashboard',
+    'nav.premium': '⭐ Kunshin Premium',
+    'hero.title': 'Naija Study Hub — Ingantattun Takardu & Jagororin Bita',
+    'hero.lede': 'Takardun bita masu dacewa da WAEC, NECO, da JAMB kyauta, tambayoyin baya, da jagororin gyara don Primary, JSS, da SSS a Najeriya.',
+    'hero.browse': 'Duba Labarai',
+    'hero.quizzes': 'Gwada Gwaje-gwaje',
+    'featured.title': 'Labarai Masu Fitowa',
+    'featured.lede': 'Darussan da aka zaɓa don taƙaita bita.',
+    'footer.tagline': 'Sauƙaƙe koyo kuma ana samunsa ga ɗaliban Najeriya.',
+    'footer.links': 'Hanyoyi Masu Sauri',
+    'footer.contact': 'Tuntuɓi',
+    'contact.email': 'Imel',
+    'contact.phone': 'Waya',
+    'footer.rights': 'Dukkannin Haƙƙoƙi An Ajiye'
+  }
+};
+
+function setLanguage(lang) {
+  const elems = document.querySelectorAll('[data-i18n]');
+  elems.forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const text = translations[lang] && translations[lang][key];
+    if (text) {
+      // preserve links inside elements
+      if (el.tagName.toLowerCase() === 'a') el.textContent = text;
+      else el.textContent = text;
+    }
+  });
+  // set html lang attribute
+  document.documentElement.lang = (lang === 'ha') ? 'ha' : 'en';
+  localStorage.setItem('siteLang', lang);
+  // update lang toggle label
+  document.getElementById('langToggle').textContent = (lang === 'ha') ? 'EN' : 'HA';
+}
+
+// toggle handler
+document.getElementById('langToggle').addEventListener('click', () => {
+  const current = localStorage.getItem('siteLang') || 'en';
+  const next = current === 'en' ? 'ha' : 'en';
+  setLanguage(next);
+});
+
+// initialize language on load
+window.addEventListener('load', () => {
+  const saved = localStorage.getItem('siteLang') || 'en';
+  setLanguage(saved);
+});
+</script>
 
 </body>
 </html>
