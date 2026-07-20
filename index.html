@@ -6,19 +6,37 @@
 <title>Naija Study Hub — WAEC, NECO & JAMB Notes for Primary, JSS & SSS Students</title>
 <meta name="description" content="Free WAEC, NECO, and JAMB-aligned notes, past questions, and revision guides for Primary, JSS, and SSS students in Nigeria — in English and Hausa.">
 <meta name="keywords" content="WAEC notes, NECO past questions, JAMB revision, JSS notes Nigeria, SSS notes Nigeria, Hausa language notes, Nigerian secondary school revision">
+<!-- Add your Google Analytics Measurement ID (G-XXXXXXXXXX) here -->
+<meta name="ga-id" content="">
+
+<!-- Payment public keys (leave empty until you add them) -->
+<meta name="paystack-key" content="">
+<meta name="flutterwave-key" content="">
 
 <!--
   SETUP NEEDED: Google Analytics
   1. Create a free property at https://analytics.google.com and get your Measurement ID (looks like G-XXXXXXXXXX).
-  2. Replace G-XXXXXXXXXX in BOTH places below with your real ID.
-  Until you do this, no analytics data will be collected.
+  2. Add the Measurement ID to the meta[name="ga-id"] above.
 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
+// Load Google Analytics only when a GA ID is provided
+(function(){
+  try{
+    const gaMeta = document.querySelector('meta[name="ga-id"]');
+    const gaId = gaMeta && gaMeta.getAttribute('content');
+    if (gaId && gaId.trim()) {
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id='+gaId;
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);} window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', gaId);
+    }
+  } catch(e){ console.warn('GA load failed', e); }
+})();
 </script>
 
 <script type="application/ld+json">
