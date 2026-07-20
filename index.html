@@ -844,7 +844,2010 @@
   }<li><a href="quizzes.html">📚 Interactive Quizzes</a></li>
 <li><a href="dashboard.html">👤 My Dashboard</a></li>
 <li><a href="premium.html">⭐ Premium Packs</a></li>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naija Study Hub - Interactive Quizzes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        /* Quiz List View */
+        .quiz-list {
+            display: grid;
+            gap: 20px;
+        }
+
+        .quiz-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .quiz-card h3 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .quiz-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .quiz-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .quiz-card p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+
+        .quiz-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Quiz Question View */
+        .quiz-container {
+            display: none;
+        }
+
+        .quiz-container.active {
+            display: block;
+        }
+
+        .quiz-progress {
+            margin-bottom: 30px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .progress-header h2 {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .question-counter {
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .question-text {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .option {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 15px;
+            color: #333;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            background: #f0f3ff;
+        }
+
+        .option.selected {
+            border-color: #667eea;
+            background: #e8ebff;
+        }
+
+        .option.correct {
+            border-color: #28a745;
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .option.incorrect {
+            border-color: #dc3545;
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .feedback {
+            background: #f0f3ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback h4 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .feedback p {
+            color: #333;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .quiz-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: #e9ecef;
+            color: #333;
+            flex: 1;
+        }
+
+        .btn-secondary:hover {
+            background: #dee2e6;
+        }
+
+        /* Results View */
+        .results-container {
+            display: none;
+            text-align: center;
+        }
+
+        .results-container.active {
+            display: block;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .score-circle .score-number {
+            font-size: 48px;
+            font-weight: 700;
+        }
+
+        .score-circle .score-text {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .results-message {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .results-details {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            text-align: left;
+        }
+
+        .detail-item h4 {
+            color: #667eea;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-item p {
+            color: #333;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-group .btn {
+            flex: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .content {
+                padding: 20px 15px;
+            }
+
+            .question-text {
+                font-size: 16px;
+            }
+
+            .results-details {
+                grid-template-columns: 1fr;
+            }
+
+            .quiz-meta {
+                flex-wrap: wrap;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Interactive Quizzes</h1>
+            <p>Test your knowledge and track your progress</p>
+        </div>
+
+        <div class="content">
+            <!-- Quiz List -->
+            <div class="quiz-list" id="quizList"></div>
+
+            <!-- Quiz Question Container -->
+            <div class="quiz-container" id="quizContainer">
+                <div class="quiz-progress">
+                    <div class="progress-header">
+                        <h2 id="quizTitle"></h2>
+                        <span class="question-counter"><span id="currentQuestion">1</span>/<span id="totalQuestions">10</span></span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="question-text" id="questionText"></div>
+
+                <div class="feedback" id="feedback">
+                    <h4 id="feedbackTitle"></h4>
+                    <p id="feedbackText"></p>
+                </div>
+
+                <div class="options" id="options"></div>
+
+                <div class="quiz-actions">
+                    <button class="btn btn-secondary" onclick="backToQuizList()">← Back</button>
+                    <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">Next →</button>
+                </div>
+            </div>
+
+            <!-- Results Container -->
+            <div class="results-container" id="resultsContainer">
+                <div class="score-circle">
+                    <div class="score-number" id="scorePercentage">0%</div>
+                    <div class="score-text">Score</div>
+                </div>
+
+                <div class="results-message" id="resultMessage"></div>
+
+                <div class="results-details">
+                    <div class="detail-item">
+                        <h4>Correct Answers</h4>
+                        <p id="correctCount">0</p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>Total Questions</h4>
+                        <p id="totalCount">0</p>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="retakeQuiz()">Retake Quiz</button>
+                    <button class="btn btn-secondary" onclick="backToQuizList()">Back to Quizzes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz Data
+        const quizzes = [
+            {
+                id: 1,
+                title: "Basic Science: Living Things",
+                subject: "Basic Science",
+                level: "JSS 1",
+                questions: 5,
+                difficulty: "Beginner",
+                questions_data: [
+                    {
+                        question: "Which of the following is NOT a characteristic of living things?",
+                        options: [
+                            "Respiration",
+                            "Movement",
+                            "Transparency",
+                            "Growth"
+                        ],
+                        correct: 2,
+                        explanation: "Transparency is not a characteristic of all living things. Living things have respiration, movement, and growth as universal features."
+                    },
+                    {
+                        question: "What is the basic unit of life?",
+                        options: [
+                            "Tissue",
+                            "Cell",
+                            "Organ",
+                            "Organism"
+                        ],
+                        correct: 1,
+                        explanation: "The cell is the basic unit of life. All living organisms are made up of one or more cells."
+                    },
+                    {
+                        question: "Which process do plants use to make their own food?",
+                        options: [
+                            "Respiration",
+                            "Photosynthesis",
+                            "Digestion",
+                            "Fermentation"
+                        ],
+                        correct: 1,
+                        explanation: "Plants use photosynthesis to convert sunlight into chemical energy (food). This happens in the chloroplasts of plant cells."
+                    },
+                    {
+                        question: "What do organisms need to survive?",
+                        options: [
+                            "Food only",
+                            "Water only",
+                            "Food, water, and oxygen",
+                            "Sunlight only"
+                        ],
+                        correct: 2,
+                        explanation: "All organisms need food (for energy and growth), water (for cellular functions), and oxygen (for respiration, though some anaerobic organisms don't)."
+                    },
+                    {
+                        question: "Which of these is an example of a unicellular organism?",
+                        options: [
+                            "Dog",
+                            "Bacteria",
+                            "Tree",
+                            "Human"
+                        ],
+                        correct: 1,
+                        explanation: "Bacteria are unicellular organisms (consisting of a single cell). Dogs, trees, and humans are multicellular organisms."
+                    }
+                ]
+            },
+            {
+                id: 2,
+                title: "Mathematics: Basic Algebra",
+                subject: "Mathematics",
+                level: "JSS 2",
+                questions: 5,
+                difficulty: "Intermediate",
+                questions_data: [
+                    {
+                        question: "Solve for x: 2x + 5 = 13",
+                        options: [
+                            "x = 4",
+                            "x = 5",
+                            "x = 6",
+                            "x = 9"
+                        ],
+                        correct: 0,
+                        explanation: "2x + 5 = 13 → 2x = 13 - 5 → 2x = 8 → x = 4. Subtract 5 from both sides, then divide by 2."
+                    },
+                    {
+                        question: "What is the value of 3² + 2³?",
+                        options: [
+                            "13",
+                            "17",
+                            "15",
+                            "19"
+                        ],
+                        correct: 1,
+                        explanation: "3² = 9 and 2³ = 8. So 9 + 8 = 17."
+                    },
+                    {
+                        question: "Simplify: 4a + 3a - 2a",
+                        options: [
+                            "5a",
+                            "7a",
+                            "9a",
+                            "3a"
+                        ],
+                        correct: 0,
+                        explanation: "Combine like terms: 4a + 3a - 2a = (4 + 3 - 2)a = 5a"
+                    },
+                    {
+                        question: "If y = 2x + 1, what is y when x = 3?",
+                        options: [
+                            "5",
+                            "7",
+                            "6",
+                            "8"
+                        ],
+                        correct: 1,
+                        explanation: "Substitute x = 3 into the equation: y = 2(3) + 1 = 6 + 1 = 7"
+                    },
+                    {
+                        question: "What is the solution to x/2 = 6?",
+                        options: [
+                            "x = 3",
+                            "x = 8",
+                            "x = 12",
+                            "x = 4"
+                        ],
+                        correct: 2,
+                        explanation: "x/2 = 6 → x = 6 × 2 → x = 12. Multiply both sides by 2."
+                    }
+                ]
+            },
+            {
+                id: 3,
+                title: "English Language: Parts of Speech",
+                subject: "English Language",
+                level: "JSS 1",
+                questions: 5,
+                difficulty: "Beginner",
+                questions_data: [
+                    {
+                        question: "Which word is a noun in this sentence: 'The cat sleeps peacefully'?",
+                        options: [
+                            "sleeps",
+                            "cat",
+                            "peacefully",
+                            "the"
+                        ],
+                        correct: 1,
+                        explanation: "A noun is a person, place, or thing. 'Cat' is a noun (an animal). 'Sleeps' is a verb, 'peacefully' is an adverb, and 'the' is an article."
+                    },
+                    {
+                        question: "Identify the verb in: 'She writes beautiful poems'",
+                        options: [
+                            "She",
+                            "beautiful",
+                            "writes",
+                            "poems"
+                        ],
+                        correct: 2,
+                        explanation: "A verb is an action word. 'Writes' is the action being performed. 'Beautiful' is an adjective, and 'poems' is a noun."
+                    },
+                    {
+                        question: "Which word is an adjective in this sentence: 'The old house is beautiful'?",
+                        options: [
+                            "is",
+                            "house",
+                            "old",
+                            "the"
+                        ],
+                        correct: 2,
+                        explanation: "An adjective describes a noun. Both 'old' and 'beautiful' are adjectives, but 'old' directly modifies 'house'."
+                    },
+                    {
+                        question: "What part of speech is 'quickly' in 'He ran quickly'?",
+                        options: [
+                            "Adjective",
+                            "Adverb",
+                            "Noun",
+                            "Verb"
+                        ],
+                        correct: 1,
+                        explanation: "An adverb modifies a verb and usually ends in -ly. 'Quickly' describes how he ran, so it's an adverb."
+                    },
+                    {
+                        question: "Which word is a pronoun in: 'I gave her the book'?",
+                        options: [
+                            "gave",
+                            "book",
+                            "her",
+                            "the"
+                        ],
+                        correct: 2,
+                        explanation: "A pronoun replaces a noun. 'I' and 'her' are pron
+                          <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naija Study Hub - Student Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+        }
+
+        /* Login Screen */
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .login-box h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .login-box p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 12px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .signup-link {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .signup-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Dashboard */
+        .dashboard {
+            display: none;
+        }
+
+        .dashboard.active {
+            display: block;
+        }
+
+        .top-nav {
+            background: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .user-menu {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .user-name {
+            color: #333;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .logout-btn {
+            background: #f5f7fa;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            color: #666;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: #e9ecef;
+            color: #333;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .welcome-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .welcome-section h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .welcome-section p {
+            font-size: 15px;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .streak-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border: 1px solid #e9ecef;
+        }
+
+        .card h3 {
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Stat Card */
+        .stat-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Progress Card */
+        .progress-section {
+            margin-bottom: 20px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .progress-header h4 {
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .progress-percent {
+            color: #667eea;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+
+        /* Achievement Grid */
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .achievement {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            opacity: 0.5;
+        }
+
+        .achievement.unlocked {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            opacity: 1;
+        }
+
+        .achievement-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .achievement-name {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Recommendations */
+        .recommendation-list {
+            list-style: none;
+        }
+
+        .recommendation-item {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid #667eea;
+        }
+
+        .recommendation-item:hover {
+            background: #e8ebff;
+            transform: translateX(5px);
+        }
+
+        .recommendation-text {
+            color: #333;
+            font-size: 13px;
+        }
+
+        .recommendation-difficulty {
+            background: #667eea;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* Study Calendar */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .calendar-day.studied {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .calendar-day.today {
+            border: 2px solid #667eea;
+        }
+
+        /* Full Width Section */
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .achievement-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .welcome-section h2 {
+                font-size: 22px;
+            }
+
+            .main-content {
+                padding: 20px 15px;
+            }
+
+            .login-box {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div class="login-container" id="loginContainer">
+        <div class="login-box">
+            <h1>Naija Study Hub</h1>
+            <p>Welcome back! Continue your learning journey</p>
+
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Student Name</label>
+                    <input type="text" id="studentName" placeholder="Enter your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email or Phone</label>
+                    <input type="text" id="studentEmail" placeholder="your@email.com or 0803xxxxxxx" required>
+                </div>
+
+                <button type="submit" class="login-btn">Login to Dashboard</button>
+            </form>
+
+            <div class="signup-link">
+                New student? <a onclick="toggleSignup()">Create Account</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="dashboard" id="dashboard">
+        <!-- Top Navigation -->
+        <div class="top-nav">
+            <div class="nav-content">
+                <div class="logo">📚 Naija Study Hub</div>
+                <div class="user-menu">
+                    <div class="user-name" id="navUserName"></div>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+                <h2>Welcome back, <span id="welcomeName"></span>! 👋</h2>
+                <p>You're on a great learning journey. Keep up the momentum!</p>
+                <div class="streak-badge">
+                    🔥 <span id="streakDays">0</span> day study streak
+                </div>
+            </div>
+
+            <!-- Main Grid -->
+            <div class="grid">
+                <!-- Progress Overview -->
+                <div class="card">
+                    <h3>📊 Overall Progress</h3>
+                    <div class="stat-value" id="overallProgress">0%</div>
+                    <div class="stat-label">Completion Rate</div>
+                    <div style="margin-top: 20px;">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="overallProgressBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quizzes Completed -->
+                <div class="card">
+                    <h3>✅ Quizzes Completed</h3>
+                    <div class="stat-value" id="quizzesCompleted">0</div>
+                    <div class="stat-label">This Month</div>
+                </div>
+
+                <!-- Average Score -->
+                <div class="card">
+                    <h3>⭐ Average Score</h3>
+                    <div class="stat-value" id="averageScore">0%</div>
+                    <div class="stat-label">All Quizzes</div>
+                </div>
+
+                <!-- Subject Progress -->
+                <div class="card full-width">
+                    <h3>📚 Subject Progress</h3>
+                    <div id="subjectProgress"></div>
+                </div>
+
+                <!-- Study Streak Calendar -->
+                <div class="card full-width">
+                    <h3>📅 Study Activity (Last 28 Days)</h3>
+                    <div class="calendar-grid" id="calendar"></div>
+                </div>
+
+                <!-- Achievements -->
+                <div class="card full-width">
+                    <h3>🏆 Achievements</h3>
+                    <div class="achievement-grid" id="achievements"></div>
+                </div>
+
+                <!-- Recommended Topics -->
+                <div class="card full-width">
+                    <h3>🎯 Recommended for You</h3>
+                    <ul class="recommendation-list" id="recommendations"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data Management
+        class StudentDashboard {
+            constructor() {
+                this.currentUser = this.loadUser();
+                this.quizData = this.loadQuizData();
+            }
+
+            loadUser() {
+                return JSON.parse(localStorage.getItem('currentStudent')) || null;
+            }
+
+            saveUser(user) {
+                localStorage.setItem('currentStudent', JSON.stringify(user));
+                this.currentUser = user;
+            }
+
+            loadQuizData() {
+                const data = {};
+                for (let i = 1; i <= 3; i++) {
+                    const saved = localStorage.getItem(`quiz_${i}`);
+                    if (saved) {
+                        data[i] = JSON.parse(saved);
+                    }
+                }
+                return data;
+            }
+
+            calculateProgress() {
+                let totalQuizzes = 3;
+                let completedQuizzes = Object.values(this.quizData).filter(q => q.completed).length;
+                return Math.round((completedQuizzes / totalQuizzes) * 100);
+            }
+
+            calculateAverageScore() {
+                const scores = Object.values(this.quizData)
+                    .filter(q => q.completed)
+                    .map(q => q.score);
+                
+                if (scores.length === 0) return 0;
+                return Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
+            }
+
+            getSubjectProgress() {
+                return [
+                    { name: 'Basic Science', progress: this.quizData[1]?.score || 0 },
+                    { name: 'Mathematics', progress: this.quizData[2]?.score || 0 },
+                    { name: 'English Language', progress: this.quizData[3]?.score || 0 }
+                ];
+            }
+
+            getRecommendations() {
+                const subjects = this.getSubjectProgress();
+                return subjects
+                    .filter(s => s.progress === 0)
+                    .map(s => ({
+                        subject: s.name,
+                        reason: 'Start learning this topic',
+                        difficulty: 'Beginner'
+                    }))
+                    .concat(
+                        subjects
+                            .filter(s => s.progress > 0 && s.progress < 80)
+                            .map(s => ({
+                                subject: s.name,
+                                reason: 'Keep practicing to improve',
+                                difficulty: 'Intermediate'
+                            }))
+                    );
+            }
+
+            getStreak() {
+                const lastStudy = localStorage.getItem('lastStudyDate');
+                if (!lastStudy) return 0;
+                
+                const lastDate = new Date(lastStudy);
+                const today = new Date();
+                const diffTime = today - lastDate;
+                const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+                
+                return diffDays <= 1 ? (parseInt(localStorage.getItem('streak')) || 0) + 1 : 0;
+            }
+
+            recordStudyActivity() {
+                const today = new Date().toISOString().split('T')[0];
+                localStorage.setItem('lastStudyDate', today);
+                localStorage.setItem('streak', this.getStreak());
+            }
+        }
+
+        const dashboard = new StudentDashboard();
+
+        // Login Handler
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('studentName').value.trim();
+            const email = document.getElementById('studentEmail').value.trim();
+
+            if (!name || !email) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            const user = {
+                id: Date.now(),
+                name: name,
+                email: email,
+                joinDate: new Date().toISOString()
+            };
+
+            dashboard.saveUser(user);
+            dashboard.recordStudyActivity();
+            showDashboard();
+        }
+
+        function showDashboard() {
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('dashboard').classList.add('active');
+            updateDashboard();
+        }
+
+        function updateDashboard() {
+            const user = dashboard.currentUser;
+            
+            // Update names
+            document.getElementById('welcomeName').textContent = user.name.split(' ')[0];
+            document.getElementById('navUserName').textContent = user.name;
+
+            // Update stats
+            const progress = dashboard.calculateProgress();
+            const avgScore = dashboard.calculateAverageScore();
+            const quizzesCompleted = Object.values(dashboard.quizData).filter(q => q.completed).length;
+
+            document.getElementById('overallProgress').textContent = progress + '%';
+            document.getElementById('overallProgressBar').style.width = progress + '%';
+            document.getElementById('averageScore').textContent = avgScore + '%';
+            document.getElementById('quizzesCompleted').textContent = quizzesCompleted;
+            document.getElementById('streakDays').textContent = dashboard.getStreak();
+
+            // Subject Progress
+            const subjectProgress = dashboard.getSubjectProgress();
+            document.getElementById('subjectProgress').innerHTML = subjectProgress.map(subject => `
+                <div class="progress-section">
+                    <div class="progress-header">
+                        <h4>${subject.name}</h4>
+                        <div class="progress-percent">${subject.progress}%</div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${subject.progress}%"></div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Calendar
+            updateCalendar();
+
+            // Achievements
+            updateAchievements(avgScore);
+
+            // Recommendations
+            const recommendations = 
+              <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naija Study Hub - Premium Study Packs</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .header-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .header-btn:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .filter-group label {
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .filter-group select {
+            padding: 8px 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        .filter-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transform: translate(30%, -30%);
+        }
+
+        .badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #ff6b6b;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .badge.popular {
+            background: #ffd43b;
+            color: #333;
+        }
+
+        .product-content {
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-category {
+            color: #667eea;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .product-title {
+            color: #333;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .product-description {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            flex: 1;
+            line-height: 1.6;
+        }
+
+        .product-includes {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .product-includes h4 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .includes-list {
+            list-style: none;
+            color: #666;
+        }
+
+        .includes-list li {
+            padding: 4px 0;
+            font-size: 12px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .includes-list li:before {
+            content: '✓';
+            color: #28a745;
+            font-weight: 700;
+        }
+
+        .product-footer {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .product-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .product-price-label {
+            font-size: 12px;
+            color: #666;
+            display: block;
+        }
+
+        .buy-btn {
+            flex: 1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .buy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Bundle Grid */
+        .bundle-section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        /* Payment Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            margin-bottom: 25px;
+        }
+
+        .modal-header h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .modal-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .payment-method {
+            border: 2px solid #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .payment-method:hover {
+            border-color: #667eea;
+            background: #f0f3ff;
+        }
+
+        .payment-method.selected {
+            border-color: #667eea;
+            background: #e8ebff;
+            color: #667eea;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .checkout-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .order-summary {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .summary-total {
+            border-top: 2px solid #e9ecef;
+            padding-top: 10px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .success-message {
+            text-align: center;
+            color: #28a745;
+            padding: 20px;
+            background: #d4edda;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-group {
+                width: 100%;
+            }
+
+            .filter-group select {
+                width: 100%;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>📚 Premium Study Packs</h1>
+        <p>Ace your exams with our comprehensive study materials</p>
+        <div class="header-buttons">
+            <a href="#" class="header-btn">← Back to Home</a>
+            <a href="student-dashboard.html" class="header-btn">My Dashboard</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <div class="filter-group">
+                <label>Subject:</label>
+                <select id="subjectFilter" onchange="filterProducts()">
+                    <option value="">All Subjects</option>
+                    <option value="Basic Science">Basic Science</option>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="English">English Language</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Level:</label>
+                <select id="levelFilter" onchange="filterProducts()">
+                    <option value="">All Levels</option>
+                    <option value="Primary">Primary School</option>
+                    <option value="JSS">Junior Secondary</option>
+                    <option value="SSS">Senior Secondary</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Price Range:</label>
+                <select id="priceFilter" onchange="filterProducts()">
+                    <option value="">All Prices</option>
+                    <option value="0-1000">₦0 - ₦1,000</option>
+                    <option value="1000-3000">₦1,000 - ₦3,000</option>
+                    <option value="3000+">₦3,000+</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- JAMBWAEC Section -->
+        <div class="bundle-section">
+            <h2 class="section-title">🎓 JAMB & WAEC Prep Bundles</h2>
+            <p class="section-subtitle">Complete study packages to help you ace major exams</p>
+            <div class="products-grid" id="productsContainer"></div>
+        </div>
+
+        <!-- Subject Packs Section -->
+        <div class="bundle-section">
+            <h2 class="section-title">📖 Subject Study Packs</h2>
+            <p class="section-subtitle">Deep dive into individual subjects with comprehensive notes and past questions</p>
+            <div class="products-grid" id="subjectsContainer"></div>
+        </div>
+
+        <!-- School Packages Section -->
+        <div class="bundle-section">
+            <h2 class="section-title">🏫 School/Bulk Packages</h2>
+            <p class="section-subtitle">For teachers and schools - get licensing for your entire institution</p>
+            <div class="products-grid" id="schoolsContainer"></div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <h2>Complete Your Order</h2>
+                <p>Secure payment via Paystack or Flutterwave</p>
+            </div>
+
+            <div class="success-message" id="successMessage">
+                ✅ Payment successful! Your study pack is being prepared for download.
+            </div>
+
+            <div class="order-summary" id="orderSummary"></div>
+
+            <form onsubmit="processPayment(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="customerName" placeholder="Your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="customerEmail" placeholder="your@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="customerPhone" placeholder="0803xxxxxxx" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <div class="payment-methods">
+                        <div class="payment-method selected" data-method="paystack" onclick="selectPaymentMethod('paystack')">
+                            Paystack
+                        </div>
+                        <div class="payment-method" data-method="flutterwave" onclick="selectPaymentMethod('flutterwave')">
+                            Flutterwave
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="checkout-btn" id="checkoutBtn">
+                    Pay ₦<span id="totalPrice">0</span> Securely
+                </button>
+
+                <p style="text-align: center; font-size: 12px; color: #666; margin-top: 15px;">
+                    🔒 Your payment is 100% secure and encrypted
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Products Data
+        const products = [
+            // JAMB/WAEC
+            {
+                id: 1,
+                category: 'exam-prep',
+                title: 'Complete WAEC Mathematics Bundle',
+                subject: 'Mathematics',
+                level: 'SSS',
+                price: 2500,
+                badge: 'BESTSELLER',
+                description: 'Everything you need to excel in WAEC Mathematics - past papers, worked solutions, and revision notes.',
+                includes: ['5 Years Past Papers', 'Worked Solutions', 'Topic Revision Notes', 'Exam Tips'],
+                popular: true
+            },
+            {
+                id: 2,
+                category: 'exam-prep',
+                title: 'JAMB English Mastery Pack',
+                subject: 'English',
+                level: 'SSS',
+                price: 2000,
+                badge: 'POPULAR',
+                description: 'Master JAMB English with comprehension strategies, grammar rules, and practice tests.',
+                includes: ['50 Practice Tests', 'Grammar Guide', 'Comprehension Tips', 'Sample Questions'],
+                popular: true
+            },
+            {
+                id: 3,
+                category: 'exam-prep',
+                title: 'Science Subjects Triple Pack',
+                subject: 'Basic Science',
+                level: 'SSS',
+                price: 3500,
+                badge: 'BESTSELLER',
+                description: 'Physics, Chemistry & Biology - all in one complete package for WAEC/JAMB.',
+                includes: ['Biology Notes', 'Chemistry Formulas', 'Physics Problems', 'Lab Practicals'],
+                popular: true
+            },
+
+            // Subject Packs
+            {
+                id: 4,
+                category: 'subject',
+                title: 'JSS 1-3 Mathematics Complete',
+                subject: 'Mathematics',
+                level: 'JSS',
+                price: 1500,
+                description: 'All JSS mathematics topics with worked examples and practice problems.',
+                includes: ['All 3 Years Content', '100+ Problems', 'Solutions', 'Topic Tests']
+            },
+            {
+                id: 5,
+                category: 'subject',
+                title: 'Advanced English Language',
+                subject: 'English',
+                level: 'SSS',
+                price: 1800,
+                description: 'Advanced grammar, essay writing, and literature analysis for SSS students.',
+                includes: ['Grammar Rules', 'Essay Templates', 'Sample Essays', 'Literature Guide']
+            },
+            {
+                id: 6,
+                category: 'subject',
+                title: 'Biology: Living Systems',
+                subject: 'Basic Science',
+                level: 'JSS',
+                price: 1200,
+                description: 'Comprehensive biology notes covering cells, organisms, and ecosystems.',
+                includes: ['Cell Biology', 'Gen
   /* ---------------- SCROLL REVEAL ---------------- */
   .js-ready .level-card,
   .js-ready .panel,
@@ -966,6 +2969,2010 @@
       </ul><li><a href="quizzes.html">📚 Interactive Quizzes</a></li>
 <li><a href="dashboard.html">👤 My Dashboard</a></li>
 <li><a href="premium.html">⭐ Premium Packs</a></li>
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naija Study Hub - Interactive Quizzes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        /* Quiz List View */
+        .quiz-list {
+            display: grid;
+            gap: 20px;
+        }
+
+        .quiz-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .quiz-card h3 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .quiz-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .quiz-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .quiz-card p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+
+        .quiz-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Quiz Question View */
+        .quiz-container {
+            display: none;
+        }
+
+        .quiz-container.active {
+            display: block;
+        }
+
+        .quiz-progress {
+            margin-bottom: 30px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .progress-header h2 {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .question-counter {
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .question-text {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .option {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 15px;
+            color: #333;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            background: #f0f3ff;
+        }
+
+        .option.selected {
+            border-color: #667eea;
+            background: #e8ebff;
+        }
+
+        .option.correct {
+            border-color: #28a745;
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .option.incorrect {
+            border-color: #dc3545;
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .feedback {
+            background: #f0f3ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback h4 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .feedback p {
+            color: #333;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .quiz-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: #e9ecef;
+            color: #333;
+            flex: 1;
+        }
+
+        .btn-secondary:hover {
+            background: #dee2e6;
+        }
+
+        /* Results View */
+        .results-container {
+            display: none;
+            text-align: center;
+        }
+
+        .results-container.active {
+            display: block;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .score-circle .score-number {
+            font-size: 48px;
+            font-weight: 700;
+        }
+
+        .score-circle .score-text {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .results-message {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .results-details {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            text-align: left;
+        }
+
+        .detail-item h4 {
+            color: #667eea;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-item p {
+            color: #333;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-group .btn {
+            flex: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .content {
+                padding: 20px 15px;
+            }
+
+            .question-text {
+                font-size: 16px;
+            }
+
+            .results-details {
+                grid-template-columns: 1fr;
+            }
+
+            .quiz-meta {
+                flex-wrap: wrap;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Interactive Quizzes</h1>
+            <p>Test your knowledge and track your progress</p>
+        </div>
+
+        <div class="content">
+            <!-- Quiz List -->
+            <div class="quiz-list" id="quizList"></div>
+
+            <!-- Quiz Question Container -->
+            <div class="quiz-container" id="quizContainer">
+                <div class="quiz-progress">
+                    <div class="progress-header">
+                        <h2 id="quizTitle"></h2>
+                        <span class="question-counter"><span id="currentQuestion">1</span>/<span id="totalQuestions">10</span></span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="question-text" id="questionText"></div>
+
+                <div class="feedback" id="feedback">
+                    <h4 id="feedbackTitle"></h4>
+                    <p id="feedbackText"></p>
+                </div>
+
+                <div class="options" id="options"></div>
+
+                <div class="quiz-actions">
+                    <button class="btn btn-secondary" onclick="backToQuizList()">← Back</button>
+                    <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">Next →</button>
+                </div>
+            </div>
+
+            <!-- Results Container -->
+            <div class="results-container" id="resultsContainer">
+                <div class="score-circle">
+                    <div class="score-number" id="scorePercentage">0%</div>
+                    <div class="score-text">Score</div>
+                </div>
+
+                <div class="results-message" id="resultMessage"></div>
+
+                <div class="results-details">
+                    <div class="detail-item">
+                        <h4>Correct Answers</h4>
+                        <p id="correctCount">0</p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>Total Questions</h4>
+                        <p id="totalCount">0</p>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="retakeQuiz()">Retake Quiz</button>
+                    <button class="btn btn-secondary" onclick="backToQuizList()">Back to Quizzes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz Data
+        const quizzes = [
+            {
+                id: 1,
+                title: "Basic Science: Living Things",
+                subject: "Basic Science",
+                level: "JSS 1",
+                questions: 5,
+                difficulty: "Beginner",
+                questions_data: [
+                    {
+                        question: "Which of the following is NOT a characteristic of living things?",
+                        options: [
+                            "Respiration",
+                            "Movement",
+                            "Transparency",
+                            "Growth"
+                        ],
+                        correct: 2,
+                        explanation: "Transparency is not a characteristic of all living things. Living things have respiration, movement, and growth as universal features."
+                    },
+                    {
+                        question: "What is the basic unit of life?",
+                        options: [
+                            "Tissue",
+                            "Cell",
+                            "Organ",
+                            "Organism"
+                        ],
+                        correct: 1,
+                        explanation: "The cell is the basic unit of life. All living organisms are made up of one or more cells."
+                    },
+                    {
+                        question: "Which process do plants use to make their own food?",
+                        options: [
+                            "Respiration",
+                            "Photosynthesis",
+                            "Digestion",
+                            "Fermentation"
+                        ],
+                        correct: 1,
+                        explanation: "Plants use photosynthesis to convert sunlight into chemical energy (food). This happens in the chloroplasts of plant cells."
+                    },
+                    {
+                        question: "What do organisms need to survive?",
+                        options: [
+                            "Food only",
+                            "Water only",
+                            "Food, water, and oxygen",
+                            "Sunlight only"
+                        ],
+                        correct: 2,
+                        explanation: "All organisms need food (for energy and growth), water (for cellular functions), and oxygen (for respiration, though some anaerobic organisms don't)."
+                    },
+                    {
+                        question: "Which of these is an example of a unicellular organism?",
+                        options: [
+                            "Dog",
+                            "Bacteria",
+                            "Tree",
+                            "Human"
+                        ],
+                        correct: 1,
+                        explanation: "Bacteria are unicellular organisms (consisting of a single cell). Dogs, trees, and humans are multicellular organisms."
+                    }
+                ]
+            },
+            {
+                id: 2,
+                title: "Mathematics: Basic Algebra",
+                subject: "Mathematics",
+                level: "JSS 2",
+                questions: 5,
+                difficulty: "Intermediate",
+                questions_data: [
+                    {
+                        question: "Solve for x: 2x + 5 = 13",
+                        options: [
+                            "x = 4",
+                            "x = 5",
+                            "x = 6",
+                            "x = 9"
+                        ],
+                        correct: 0,
+                        explanation: "2x + 5 = 13 → 2x = 13 - 5 → 2x = 8 → x = 4. Subtract 5 from both sides, then divide by 2."
+                    },
+                    {
+                        question: "What is the value of 3² + 2³?",
+                        options: [
+                            "13",
+                            "17",
+                            "15",
+                            "19"
+                        ],
+                        correct: 1,
+                        explanation: "3² = 9 and 2³ = 8. So 9 + 8 = 17."
+                    },
+                    {
+                        question: "Simplify: 4a + 3a - 2a",
+                        options: [
+                            "5a",
+                            "7a",
+                            "9a",
+                            "3a"
+                        ],
+                        correct: 0,
+                        explanation: "Combine like terms: 4a + 3a - 2a = (4 + 3 - 2)a = 5a"
+                    },
+                    {
+                        question: "If y = 2x + 1, what is y when x = 3?",
+                        options: [
+                            "5",
+                            "7",
+                            "6",
+                            "8"
+                        ],
+                        correct: 1,
+                        explanation: "Substitute x = 3 into the equation: y = 2(3) + 1 = 6 + 1 = 7"
+                    },
+                    {
+                        question: "What is the solution to x/2 = 6?",
+                        options: [
+                            "x = 3",
+                            "x = 8",
+                            "x = 12",
+                            "x = 4"
+                        ],
+                        correct: 2,
+                        explanation: "x/2 = 6 → x = 6 × 2 → x = 12. Multiply both sides by 2."
+                    }
+                ]
+            },
+            {
+                id: 3,
+                title: "English Language: Parts of Speech",
+                subject: "English Language",
+                level: "JSS 1",
+                questions: 5,
+                difficulty: "Beginner",
+                questions_data: [
+                    {
+                        question: "Which word is a noun in this sentence: 'The cat sleeps peacefully'?",
+                        options: [
+                            "sleeps",
+                            "cat",
+                            "peacefully",
+                            "the"
+                        ],
+                        correct: 1,
+                        explanation: "A noun is a person, place, or thing. 'Cat' is a noun (an animal). 'Sleeps' is a verb, 'peacefully' is an adverb, and 'the' is an article."
+                    },
+                    {
+                        question: "Identify the verb in: 'She writes beautiful poems'",
+                        options: [
+                            "She",
+                            "beautiful",
+                            "writes",
+                            "poems"
+                        ],
+                        correct: 2,
+                        explanation: "A verb is an action word. 'Writes' is the action being performed. 'Beautiful' is an adjective, and 'poems' is a noun."
+                    },
+                    {
+                        question: "Which word is an adjective in this sentence: 'The old house is beautiful'?",
+                        options: [
+                            "is",
+                            "house",
+                            "old",
+                            "the"
+                        ],
+                        correct: 2,
+                        explanation: "An adjective describes a noun. Both 'old' and 'beautiful' are adjectives, but 'old' directly modifies 'house'."
+                    },
+                    {
+                        question: "What part of speech is 'quickly' in 'He ran quickly'?",
+                        options: [
+                            "Adjective",
+                            "Adverb",
+                            "Noun",
+                            "Verb"
+                        ],
+                        correct: 1,
+                        explanation: "An adverb modifies a verb and usually ends in -ly. 'Quickly' describes how he ran, so it's an adverb."
+                    },
+                    {
+                        question: "Which word is a pronoun in: 'I gave her the book'?",
+                        options: [
+                            "gave",
+                            "book",
+                            "her",
+                            "the"
+                        ],
+                        correct: 2,
+                        explanation: "A pronoun replaces a noun. 'I' and 'her' are pron
+                          <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naija Study Hub - Student Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+        }
+
+        /* Login Screen */
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .login-box h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .login-box p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 12px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .signup-link {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .signup-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Dashboard */
+        .dashboard {
+            display: none;
+        }
+
+        .dashboard.active {
+            display: block;
+        }
+
+        .top-nav {
+            background: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .user-menu {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .user-name {
+            color: #333;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .logout-btn {
+            background: #f5f7fa;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            color: #666;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: #e9ecef;
+            color: #333;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .welcome-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .welcome-section h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .welcome-section p {
+            font-size: 15px;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .streak-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border: 1px solid #e9ecef;
+        }
+
+        .card h3 {
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Stat Card */
+        .stat-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Progress Card */
+        .progress-section {
+            margin-bottom: 20px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .progress-header h4 {
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .progress-percent {
+            color: #667eea;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+
+        /* Achievement Grid */
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .achievement {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            opacity: 0.5;
+        }
+
+        .achievement.unlocked {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            opacity: 1;
+        }
+
+        .achievement-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .achievement-name {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Recommendations */
+        .recommendation-list {
+            list-style: none;
+        }
+
+        .recommendation-item {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid #667eea;
+        }
+
+        .recommendation-item:hover {
+            background: #e8ebff;
+            transform: translateX(5px);
+        }
+
+        .recommendation-text {
+            color: #333;
+            font-size: 13px;
+        }
+
+        .recommendation-difficulty {
+            background: #667eea;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* Study Calendar */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .calendar-day.studied {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .calendar-day.today {
+            border: 2px solid #667eea;
+        }
+
+        /* Full Width Section */
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .achievement-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .welcome-section h2 {
+                font-size: 22px;
+            }
+
+            .main-content {
+                padding: 20px 15px;
+            }
+
+            .login-box {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div class="login-container" id="loginContainer">
+        <div class="login-box">
+            <h1>Naija Study Hub</h1>
+            <p>Welcome back! Continue your learning journey</p>
+
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Student Name</label>
+                    <input type="text" id="studentName" placeholder="Enter your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email or Phone</label>
+                    <input type="text" id="studentEmail" placeholder="your@email.com or 0803xxxxxxx" required>
+                </div>
+
+                <button type="submit" class="login-btn">Login to Dashboard</button>
+            </form>
+
+            <div class="signup-link">
+                New student? <a onclick="toggleSignup()">Create Account</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="dashboard" id="dashboard">
+        <!-- Top Navigation -->
+        <div class="top-nav">
+            <div class="nav-content">
+                <div class="logo">📚 Naija Study Hub</div>
+                <div class="user-menu">
+                    <div class="user-name" id="navUserName"></div>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+                <h2>Welcome back, <span id="welcomeName"></span>! 👋</h2>
+                <p>You're on a great learning journey. Keep up the momentum!</p>
+                <div class="streak-badge">
+                    🔥 <span id="streakDays">0</span> day study streak
+                </div>
+            </div>
+
+            <!-- Main Grid -->
+            <div class="grid">
+                <!-- Progress Overview -->
+                <div class="card">
+                    <h3>📊 Overall Progress</h3>
+                    <div class="stat-value" id="overallProgress">0%</div>
+                    <div class="stat-label">Completion Rate</div>
+                    <div style="margin-top: 20px;">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="overallProgressBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quizzes Completed -->
+                <div class="card">
+                    <h3>✅ Quizzes Completed</h3>
+                    <div class="stat-value" id="quizzesCompleted">0</div>
+                    <div class="stat-label">This Month</div>
+                </div>
+
+                <!-- Average Score -->
+                <div class="card">
+                    <h3>⭐ Average Score</h3>
+                    <div class="stat-value" id="averageScore">0%</div>
+                    <div class="stat-label">All Quizzes</div>
+                </div>
+
+                <!-- Subject Progress -->
+                <div class="card full-width">
+                    <h3>📚 Subject Progress</h3>
+                    <div id="subjectProgress"></div>
+                </div>
+
+                <!-- Study Streak Calendar -->
+                <div class="card full-width">
+                    <h3>📅 Study Activity (Last 28 Days)</h3>
+                    <div class="calendar-grid" id="calendar"></div>
+                </div>
+
+                <!-- Achievements -->
+                <div class="card full-width">
+                    <h3>🏆 Achievements</h3>
+                    <div class="achievement-grid" id="achievements"></div>
+                </div>
+
+                <!-- Recommended Topics -->
+                <div class="card full-width">
+                    <h3>🎯 Recommended for You</h3>
+                    <ul class="recommendation-list" id="recommendations"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data Management
+        class StudentDashboard {
+            constructor() {
+                this.currentUser = this.loadUser();
+                this.quizData = this.loadQuizData();
+            }
+
+            loadUser() {
+                return JSON.parse(localStorage.getItem('currentStudent')) || null;
+            }
+
+            saveUser(user) {
+                localStorage.setItem('currentStudent', JSON.stringify(user));
+                this.currentUser = user;
+            }
+
+            loadQuizData() {
+                const data = {};
+                for (let i = 1; i <= 3; i++) {
+                    const saved = localStorage.getItem(`quiz_${i}`);
+                    if (saved) {
+                        data[i] = JSON.parse(saved);
+                    }
+                }
+                return data;
+            }
+
+            calculateProgress() {
+                let totalQuizzes = 3;
+                let completedQuizzes = Object.values(this.quizData).filter(q => q.completed).length;
+                return Math.round((completedQuizzes / totalQuizzes) * 100);
+            }
+
+            calculateAverageScore() {
+                const scores = Object.values(this.quizData)
+                    .filter(q => q.completed)
+                    .map(q => q.score);
+                
+                if (scores.length === 0) return 0;
+                return Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
+            }
+
+            getSubjectProgress() {
+                return [
+                    { name: 'Basic Science', progress: this.quizData[1]?.score || 0 },
+                    { name: 'Mathematics', progress: this.quizData[2]?.score || 0 },
+                    { name: 'English Language', progress: this.quizData[3]?.score || 0 }
+                ];
+            }
+
+            getRecommendations() {
+                const subjects = this.getSubjectProgress();
+                return subjects
+                    .filter(s => s.progress === 0)
+                    .map(s => ({
+                        subject: s.name,
+                        reason: 'Start learning this topic',
+                        difficulty: 'Beginner'
+                    }))
+                    .concat(
+                        subjects
+                            .filter(s => s.progress > 0 && s.progress < 80)
+                            .map(s => ({
+                                subject: s.name,
+                                reason: 'Keep practicing to improve',
+                                difficulty: 'Intermediate'
+                            }))
+                    );
+            }
+
+            getStreak() {
+                const lastStudy = localStorage.getItem('lastStudyDate');
+                if (!lastStudy) return 0;
+                
+                const lastDate = new Date(lastStudy);
+                const today = new Date();
+                const diffTime = today - lastDate;
+                const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+                
+                return diffDays <= 1 ? (parseInt(localStorage.getItem('streak')) || 0) + 1 : 0;
+            }
+
+            recordStudyActivity() {
+                const today = new Date().toISOString().split('T')[0];
+                localStorage.setItem('lastStudyDate', today);
+                localStorage.setItem('streak', this.getStreak());
+            }
+        }
+
+        const dashboard = new StudentDashboard();
+
+        // Login Handler
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('studentName').value.trim();
+            const email = document.getElementById('studentEmail').value.trim();
+
+            if (!name || !email) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            const user = {
+                id: Date.now(),
+                name: name,
+                email: email,
+                joinDate: new Date().toISOString()
+            };
+
+            dashboard.saveUser(user);
+            dashboard.recordStudyActivity();
+            showDashboard();
+        }
+
+        function showDashboard() {
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('dashboard').classList.add('active');
+            updateDashboard();
+        }
+
+        function updateDashboard() {
+            const user = dashboard.currentUser;
+            
+            // Update names
+            document.getElementById('welcomeName').textContent = user.name.split(' ')[0];
+            document.getElementById('navUserName').textContent = user.name;
+
+            // Update stats
+            const progress = dashboard.calculateProgress();
+            const avgScore = dashboard.calculateAverageScore();
+            const quizzesCompleted = Object.values(dashboard.quizData).filter(q => q.completed).length;
+
+            document.getElementById('overallProgress').textContent = progress + '%';
+            document.getElementById('overallProgressBar').style.width = progress + '%';
+            document.getElementById('averageScore').textContent = avgScore + '%';
+            document.getElementById('quizzesCompleted').textContent = quizzesCompleted;
+            document.getElementById('streakDays').textContent = dashboard.getStreak();
+
+            // Subject Progress
+            const subjectProgress = dashboard.getSubjectProgress();
+            document.getElementById('subjectProgress').innerHTML = subjectProgress.map(subject => `
+                <div class="progress-section">
+                    <div class="progress-header">
+                        <h4>${subject.name}</h4>
+                        <div class="progress-percent">${subject.progress}%</div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${subject.progress}%"></div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Calendar
+            updateCalendar();
+
+            // Achievements
+            updateAchievements(avgScore);
+
+            // Recommendations
+            const recommendations = 
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naija Study Hub - Premium Study Packs</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .header-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .header-btn:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .filter-group label {
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .filter-group select {
+            padding: 8px 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        .filter-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transform: translate(30%, -30%);
+        }
+
+        .badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #ff6b6b;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .badge.popular {
+            background: #ffd43b;
+            color: #333;
+        }
+
+        .product-content {
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-category {
+            color: #667eea;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .product-title {
+            color: #333;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .product-description {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            flex: 1;
+            line-height: 1.6;
+        }
+
+        .product-includes {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .product-includes h4 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .includes-list {
+            list-style: none;
+            color: #666;
+        }
+
+        .includes-list li {
+            padding: 4px 0;
+            font-size: 12px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .includes-list li:before {
+            content: '✓';
+            color: #28a745;
+            font-weight: 700;
+        }
+
+        .product-footer {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .product-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .product-price-label {
+            font-size: 12px;
+            color: #666;
+            display: block;
+        }
+
+        .buy-btn {
+            flex: 1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .buy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Bundle Grid */
+        .bundle-section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        /* Payment Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            margin-bottom: 25px;
+        }
+
+        .modal-header h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .modal-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .payment-method {
+            border: 2px solid #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .payment-method:hover {
+            border-color: #667eea;
+            background: #f0f3ff;
+        }
+
+        .payment-method.selected {
+            border-color: #667eea;
+            background: #e8ebff;
+            color: #667eea;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .checkout-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .order-summary {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .summary-total {
+            border-top: 2px solid #e9ecef;
+            padding-top: 10px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .success-message {
+            text-align: center;
+            color: #28a745;
+            padding: 20px;
+            background: #d4edda;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-group {
+                width: 100%;
+            }
+
+            .filter-group select {
+                width: 100%;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>📚 Premium Study Packs</h1>
+        <p>Ace your exams with our comprehensive study materials</p>
+        <div class="header-buttons">
+            <a href="#" class="header-btn">← Back to Home</a>
+            <a href="student-dashboard.html" class="header-btn">My Dashboard</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <div class="filter-group">
+                <label>Subject:</label>
+                <select id="subjectFilter" onchange="filterProducts()">
+                    <option value="">All Subjects</option>
+                    <option value="Basic Science">Basic Science</option>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="English">English Language</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Level:</label>
+                <select id="levelFilter" onchange="filterProducts()">
+                    <option value="">All Levels</option>
+                    <option value="Primary">Primary School</option>
+                    <option value="JSS">Junior Secondary</option>
+                    <option value="SSS">Senior Secondary</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Price Range:</label>
+                <select id="priceFilter" onchange="filterProducts()">
+                    <option value="">All Prices</option>
+                    <option value="0-1000">₦0 - ₦1,000</option>
+                    <option value="1000-3000">₦1,000 - ₦3,000</option>
+                    <option value="3000+">₦3,000+</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- JAMBWAEC Section -->
+        <div class="bundle-section">
+            <h2 class="section-title">🎓 JAMB & WAEC Prep Bundles</h2>
+            <p class="section-subtitle">Complete study packages to help you ace major exams</p>
+            <div class="products-grid" id="productsContainer"></div>
+        </div>
+
+        <!-- Subject Packs Section -->
+        <div class="bundle-section">
+            <h2 class="section-title">📖 Subject Study Packs</h2>
+            <p class="section-subtitle">Deep dive into individual subjects with comprehensive notes and past questions</p>
+            <div class="products-grid" id="subjectsContainer"></div>
+        </div>
+
+        <!-- School Packages Section -->
+        <div class="bundle-section">
+            <h2 class="section-title">🏫 School/Bulk Packages</h2>
+            <p class="section-subtitle">For teachers and schools - get licensing for your entire institution</p>
+            <div class="products-grid" id="schoolsContainer"></div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <h2>Complete Your Order</h2>
+                <p>Secure payment via Paystack or Flutterwave</p>
+            </div>
+
+            <div class="success-message" id="successMessage">
+                ✅ Payment successful! Your study pack is being prepared for download.
+            </div>
+
+            <div class="order-summary" id="orderSummary"></div>
+
+            <form onsubmit="processPayment(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="customerName" placeholder="Your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="customerEmail" placeholder="your@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="customerPhone" placeholder="0803xxxxxxx" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <div class="payment-methods">
+                        <div class="payment-method selected" data-method="paystack" onclick="selectPaymentMethod('paystack')">
+                            Paystack
+                        </div>
+                        <div class="payment-method" data-method="flutterwave" onclick="selectPaymentMethod('flutterwave')">
+                            Flutterwave
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="checkout-btn" id="checkoutBtn">
+                    Pay ₦<span id="totalPrice">0</span> Securely
+                </button>
+
+                <p style="text-align: center; font-size: 12px; color: #666; margin-top: 15px;">
+                    🔒 Your payment is 100% secure and encrypted
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Products Data
+        const products = [
+            // JAMB/WAEC
+            {
+                id: 1,
+                category: 'exam-prep',
+                title: 'Complete WAEC Mathematics Bundle',
+                subject: 'Mathematics',
+                level: 'SSS',
+                price: 2500,
+                badge: 'BESTSELLER',
+                description: 'Everything you need to excel in WAEC Mathematics - past papers, worked solutions, and revision notes.',
+                includes: ['5 Years Past Papers', 'Worked Solutions', 'Topic Revision Notes', 'Exam Tips'],
+                popular: true
+            },
+            {
+                id: 2,
+                category: 'exam-prep',
+                title: 'JAMB English Mastery Pack',
+                subject: 'English',
+                level: 'SSS',
+                price: 2000,
+                badge: 'POPULAR',
+                description: 'Master JAMB English with comprehension strategies, grammar rules, and practice tests.',
+                includes: ['50 Practice Tests', 'Grammar Guide', 'Comprehension Tips', 'Sample Questions'],
+                popular: true
+            },
+            {
+                id: 3,
+                category: 'exam-prep',
+                title: 'Science Subjects Triple Pack',
+                subject: 'Basic Science',
+                level: 'SSS',
+                price: 3500,
+                badge: 'BESTSELLER',
+                description: 'Physics, Chemistry & Biology - all in one complete package for WAEC/JAMB.',
+                includes: ['Biology Notes', 'Chemistry Formulas', 'Physics Problems', 'Lab Practicals'],
+                popular: true
+            },
+
+            // Subject Packs
+            {
+                id: 4,
+                category: 'subject',
+                title: 'JSS 1-3 Mathematics Complete',
+                subject: 'Mathematics',
+                level: 'JSS',
+                price: 1500,
+                description: 'All JSS mathematics topics with worked examples and practice problems.',
+                includes: ['All 3 Years Content', '100+ Problems', 'Solutions', 'Topic Tests']
+            },
+            {
+                id: 5,
+                category: 'subject',
+                title: 'Advanced English Language',
+                subject: 'English',
+                level: 'SSS',
+                price: 1800,
+                description: 'Advanced grammar, essay writing, and literature analysis for SSS students.',
+                includes: ['Grammar Rules', 'Essay Templates', 'Sample Essays', 'Literature Guide']
+            },
+            {
+                id: 6,
+                category: 'subject',
+                title: 'Biology: Living Systems',
+                subject: 'Basic Science',
+                level: 'JSS',
+                price: 1200,
+                description: 'Comprehensive biology notes covering cells, organisms, and ecosystems.',
+                includes: ['Cell Biology', 'Gen
     </nav>
     <a class="btn btn-cta" href="#contact">Contact</a>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
